@@ -16,6 +16,8 @@
 @property (nonatomic, strong) AGSMapView* mapView;
 @property (nonatomic, strong) AGSCredential* credential;
 
+@property (nonatomic, strong) Race* currentRace;
+
 @end
 
 @implementation MapViewController
@@ -50,17 +52,18 @@
     [races findRacesWithCompletion:^(NSArray* races, NSError* e) {
     
         Race* r = [races lastObject];
-        AGSMutableEnvelope* me = [r.graphic.geometry.envelope mutableCopy];
-        [me expandByFactor:1.4];
-        
-        [weakSelf.mapView zoomToEnvelope:me animated:YES];
+        [weakSelf showRace:r];
     }];
     
 }
 
 - (void)showRace:(Race*)race
 {
+    _currentRace = race;
     
+    AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
+    [me expandByFactor:1.4];
+    [self.mapView zoomToEnvelope:me animated:YES];
 }
 
 @end
