@@ -17,6 +17,8 @@
 		0F51B7AD1A58719E00471244 /* Race_DayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7AC1A58719E00471244 /* Race_DayTests.swift */; };
 		0F579A431A5875EF0043D31B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F579A421A5875EF0043D31B /* MapViewController.m */; };
 		11F74760FE5E36C1A8D8FFCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B78DFDFE183A01252B4EF100 /* libPods.a */; };
+		32D9EED41A587D7B00998A5B /* Races.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EED31A587D7B00998A5B /* Races.m */; };
+		32D9EED81A587E3000998A5B /* Race.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EED71A587E3000998A5B /* Race.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,10 @@
 		0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Race Day-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		0F579A411A5875EF0043D31B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0F579A421A5875EF0043D31B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		32D9EED21A587D7B00998A5B /* Races.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Races.h; sourceTree = "<group>"; };
+		32D9EED31A587D7B00998A5B /* Races.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Races.m; sourceTree = "<group>"; };
+		32D9EED61A587E3000998A5B /* Race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Race.h; sourceTree = "<group>"; };
+		32D9EED71A587E3000998A5B /* Race.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Race.m; sourceTree = "<group>"; };
 		B000BB9B71ECC88C713660F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B78DFDFE183A01252B4EF100 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE07BB706FAFF577EBA72D6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -92,6 +98,7 @@
 		0F51B7931A58719D00471244 /* Race Day */ = {
 			isa = PBXGroup;
 			children = (
+				32D9EED51A587E1100998A5B /* Models */,
 				0F327E341A587A9A00DDA422 /* APIManager.swift */,
 				0F327E361A587AB400DDA422 /* Constants.swift */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
@@ -130,6 +137,17 @@
 				0F51B7AB1A58719E00471244 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		32D9EED51A587E1100998A5B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				32D9EED21A587D7B00998A5B /* Races.h */,
+				32D9EED31A587D7B00998A5B /* Races.m */,
+				32D9EED61A587E3000998A5B /* Race.h */,
+				32D9EED71A587E3000998A5B /* Race.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		9BCAED718C980D035D361D09 /* Pods */ = {
@@ -284,6 +302,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32D9EED81A587E3000998A5B /* Race.m in Sources */,
+				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
 				0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */,
 				0F579A431A5875EF0043D31B /* MapViewController.m in Sources */,

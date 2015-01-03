@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "Races.h"
 #import <ArcGIS/ArcGIS.h>
 
 @interface MapViewController ()
@@ -35,38 +36,20 @@
 }
 
 
-/*
 - (void)viewDidAppear:(BOOL)animated
 {
-    _credential = [[AGSCredential alloc] initWithUser:@"scottsirowy" password:@"Crowded2000"];
-    
-    NSURL* pointsURL = [NSURL URLWithString:@"http://services1.arcgis.com/W4Noi4OZras42xbd/arcgis/rest
-    
-    [self.mapView addMapLayer:points];
-    
-    NSURL* linesURL = [NSURL URLWithString:@"http://services1.arcgis.com/W4Noi4OZras42xbd/arcgis/rest/services/Lines/FeatureServer/0"];
-    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:linesURL mode:AGSFeatureLayerModeSnapshot credential:self.credential];
+    Races* races = [Races sharedRaces];
+    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url mode:AGSFeatureLayerModeSnapshot credential:self.credential];
     
     [self.mapView addMapLayer:lines];
     
+    /*
     AGSEnvelope* redlands = [AGSEnvelope envelopeWithXmin:-13046781.151300
                                                      ymin:4032015.796770
                                                      xmax:-13042560.702336
                                                      ymax:4039522.568662
                                          spatialReference:[AGSSpatialReference webMercatorSpatialReference]];
-    [self.mapView zoomToEnvelope:redlands animated:YES];
-    
-    _queryTask = [[AGSQueryTask alloc] initWithURL:linesURL credential:self.credential];
-    AGSQuery* query = [AGSQuery query];
-    query.whereClause = @"1=1";
-    query.outFields = @[@"*"];
-    query.returnGeometry = YES;
-    query.outSpatialReference =  [AGSSpatialReference webMercatorSpatialReference];
-    
-    self.queryTask.delegate = self;
-    [self.queryTask executeWithQuery:query];
+    [self.mapView zoomToEnvelope:redlands animated:YES];  */
 }
- */
-
 
 @end
