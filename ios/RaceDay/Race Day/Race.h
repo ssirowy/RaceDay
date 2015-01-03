@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @class AGSGraphic;
+@class AGSGeometry;
+@class AGSPoint;
 
 @interface Race : NSObject
 
@@ -19,9 +21,15 @@
 @property (nonatomic, strong, readonly) NSDate*   startDate;
 @property (nonatomic, strong, readonly) NSDate*   endDate;
 
+@property (nonatomic, strong) AGSGeometry* startRaceGeofence;
+@property (nonatomic, strong) AGSGeometry* endRaceGeofence;
+
 // miles
 @property (nonatomic, assign) double totalDistance;
 
 - (id)initWithFeature:(AGSGraphic*)race;
+
+- (AGSPoint*)startPoint;
+- (AGSPoint*)endPoint;
 
 @end
