@@ -18,6 +18,9 @@
 @property (nonatomic, strong, readonly) NSDate*   startDate;
 @property (nonatomic, strong, readonly) NSDate*   endDate;
 
+// miles
+@property (nonatomic, assign) CGFloat totalDistance;
+
 - (id)initWithFeature:(AGSGraphic*)race;
 
 @end

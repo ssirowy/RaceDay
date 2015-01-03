@@ -11,6 +11,9 @@
 #import "Race.h"
 #import <ArcGIS/ArcGIS.h>
 
+#define kLightBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
+#define kDarkBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
+
 @interface MapViewController ()
 
 @property (nonatomic, strong) AGSMapView* mapView;
@@ -33,7 +36,7 @@
     [self.view addSubview:mapView];
     
     //Add a basemap tiled layer
-    NSURL* url = [NSURL URLWithString:@"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer"];
+    NSURL* url = [NSURL URLWithString:kLightBasemapURL];
     AGSTiledMapServiceLayer *tiledLayer = [AGSTiledMapServiceLayer tiledMapServiceLayerWithURL:url];
     [mapView addMapLayer:tiledLayer withName:@"Basemap"];
 }
