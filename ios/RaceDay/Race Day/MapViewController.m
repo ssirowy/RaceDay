@@ -41,12 +41,24 @@
     
     [self.view addSubview:self.mapView];
     
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTitle:@"Start race" forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 120, 40);
+    [button addTarget:self action:@selector(startRace) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
     //Add a basemap tiled layer
     NSURL* url = [NSURL URLWithString:kLightBasemapURL];
     AGSTiledMapServiceLayer *tiledLayer = [AGSTiledMapServiceLayer tiledMapServiceLayerWithURL:url];
     [self.mapView addMapLayer:tiledLayer withName:@"Basemap"];
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
+}
+
+- (void)startRace
+{
+    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedMedium];
 }
 
 - (void)viewDidAppear:(BOOL)animated

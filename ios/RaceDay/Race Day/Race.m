@@ -126,7 +126,7 @@ typedef enum {
     }
     
     AGSPolyline* densifiedLine = (AGSPolyline*)[engine densifyGeometry:self.raceLine withMaxSegmentLength:maxLength];
-    _lineToSimulate = (AGSPolyline*)[engine projectGeometry:densifiedLine toSpatialReference:[AGSSpatialReference wgs84SpatialReference]];
+    densifiedLine = (AGSPolyline*)[engine projectGeometry:densifiedLine toSpatialReference:[AGSSpatialReference wgs84SpatialReference]];
     
     AGSSimulatedLocationDisplayDataSource* dataSource = [[AGSSimulatedLocationDisplayDataSource alloc] init];
     [dataSource setLocationsFromPolyline:densifiedLine];
