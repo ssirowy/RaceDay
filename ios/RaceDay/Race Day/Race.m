@@ -105,6 +105,7 @@ typedef enum {
 #define kFast 60
 #define kMedium (kFast / 2)
 #define kSlow   (kMedium / 2)
+#define kLocationPath @"location"
 
 - (void)startRaceSimulatedSpeed:(RaceSimulatedSpeed)speed
 {
@@ -134,6 +135,8 @@ typedef enum {
     AGSLocationDisplay* display = [[RaceMapView sharedMapView] locationDisplay];
     display.dataSource = dataSource;
     [display startDataSource];
+    
+    [display addObserver:self forKeyPath:kLocationPath options:0 context:nil];
 }
 
 #pragma mark -
@@ -232,6 +235,18 @@ typedef enum {
     }
     
     return s;
+}
+
+#pragma mark -
+#pragma mark Key-Value Observing
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
+{
+    if ([keyPath isEqualToString:kLocationPath]) {
+        [self calculateRaceState];
+    }
 }
 
 @end
