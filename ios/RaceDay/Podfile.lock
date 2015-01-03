@@ -20,14 +20,20 @@ PODS:
   - AFNetworking/UIKit (2.5.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - ArcGIS-Runtime-SDK-iOS (10.2.4)
+  - couchbase-lite-ios (1.0.3.1)
   - MBProgressHUD (0.9)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.0)
+  - ArcGIS-Runtime-SDK-iOS
+  - couchbase-lite-ios
   - MBProgressHUD (~> 0.8)
 
 SPEC CHECKSUMS:
   AFNetworking: 0f54cb5d16ce38c1b76948faffb8d5fb705021c7
+  ArcGIS-Runtime-SDK-iOS: 2b40df5d486536c66fc20e3a944407a9cc945743
+  couchbase-lite-ios: ad77e90f129f0a2af730a8bb2487a3ec995c0578
   MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
 
 COCOAPODS: 0.35.0
