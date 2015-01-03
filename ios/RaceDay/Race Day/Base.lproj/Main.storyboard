@@ -165,7 +165,6 @@
         <!--Race View Controller-->
         <scene sceneID="auk-ky-F6Y">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cm4-15-rNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Iv-rv-okS"/>
@@ -175,7 +174,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8oF-hH-Ltp">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oF-hH-Ltp">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <connections>
                                     <segue destination="o6y-Va-GKj" kind="embed" identifier="embedSegue" id="PSP-cE-99k"/>
@@ -183,6 +182,12 @@
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bf8-0C-La6" firstAttribute="top" secondItem="8oF-hH-Ltp" secondAttribute="bottom" id="09g-hh-Z0S"/>
+                            <constraint firstAttribute="trailing" secondItem="8oF-hH-Ltp" secondAttribute="trailing" id="H3K-M1-Oqq"/>
+                            <constraint firstItem="8oF-hH-Ltp" firstAttribute="leading" secondItem="vr2-iN-f2Z" secondAttribute="leading" id="ROc-G5-pe3"/>
+                            <constraint firstItem="8oF-hH-Ltp" firstAttribute="top" secondItem="0Iv-rv-okS" secondAttribute="bottom" id="e3L-eP-3dA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VR9-bV-Avg">
                         <nil key="title"/>
@@ -202,6 +207,7 @@
                         <outlet property="segmentedControl" destination="6Pc-Zr-TVy" id="a7W-Fp-jiK"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cm4-15-rNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1715" y="500"/>
         </scene>

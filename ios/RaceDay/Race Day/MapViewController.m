@@ -58,13 +58,6 @@
     
     [self.mapView addMapLayer:lines];
     
-    __weak MapViewController* weakSelf = self;
-    [races findRacesWithCompletion:^(NSArray* races, NSError* e) {
-    
-        Race* r = [races lastObject];
-        [weakSelf showRace:r];
-    }];
-    
     [self.mapView removeMapLayer:self.geofenceLayer];
 }
 
@@ -79,8 +72,8 @@
 
 - (void)showRace:(Race*)race
 {
+    _currentRace = race;
     if (self.mapView.loaded) {
-        _currentRace = race;
         
         AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
         [me expandByFactor:1.4];
