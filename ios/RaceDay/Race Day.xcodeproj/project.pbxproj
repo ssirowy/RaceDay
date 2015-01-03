@@ -9,8 +9,13 @@
 /* Begin PBXBuildFile section */
 		0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E341A587A9A00DDA422 /* APIManager.swift */; };
 		0F327E371A587AB400DDA422 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E361A587AB400DDA422 /* Constants.swift */; };
+		0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E381A5893C900DDA422 /* LoginViewController.swift */; };
+		0F327E3D1A5894DB00DDA422 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3B1A5894DB00DDA422 /* User.m */; };
+		0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3C1A5894DB00DDA422 /* User-extension.swift */; };
+		0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3F1A58962F00DDA422 /* RacesViewController.swift */; };
+		0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E411A589DDC00DDA422 /* RaceViewController.swift */; };
+		0F327E441A589EE400DDA422 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E431A589EE400DDA422 /* DetailsViewController.swift */; };
 		0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7961A58719D00471244 /* AppDelegate.swift */; };
-		0F51B7991A58719D00471244 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7981A58719D00471244 /* ViewController.swift */; };
 		0F51B79C1A58719D00471244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79A1A58719D00471244 /* Main.storyboard */; };
 		0F51B79E1A58719D00471244 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79D1A58719D00471244 /* Images.xcassets */; };
 		0F51B7A11A58719D00471244 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79F1A58719D00471244 /* LaunchScreen.xib */; };
@@ -34,10 +39,16 @@
 /* Begin PBXFileReference section */
 		0F327E341A587A9A00DDA422 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		0F327E361A587AB400DDA422 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0F327E381A5893C900DDA422 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0F327E3A1A5894DB00DDA422 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		0F327E3B1A5894DB00DDA422 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		0F327E3C1A5894DB00DDA422 /* User-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User-extension.swift"; sourceTree = "<group>"; };
+		0F327E3F1A58962F00DDA422 /* RacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesViewController.swift; sourceTree = "<group>"; };
+		0F327E411A589DDC00DDA422 /* RaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
+		0F327E431A589EE400DDA422 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7961A58719D00471244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0F51B7981A58719D00471244 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0F51B79B1A58719D00471244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F51B79D1A58719D00471244 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F51B7A01A58719D00471244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -102,9 +113,12 @@
 				0F327E341A587A9A00DDA422 /* APIManager.swift */,
 				0F327E361A587AB400DDA422 /* Constants.swift */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
+				0F327E431A589EE400DDA422 /* DetailsViewController.swift */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
-				0F51B7981A58719D00471244 /* ViewController.swift */,
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
+				0F327E411A589DDC00DDA422 /* RaceViewController.swift */,
+				0F327E3F1A58962F00DDA422 /* RacesViewController.swift */,
+				0F327E381A5893C900DDA422 /* LoginViewController.swift */,
 				0F579A411A5875EF0043D31B /* MapViewController.h */,
 				0F579A421A5875EF0043D31B /* MapViewController.m */,
 				0F51B79D1A58719D00471244 /* Images.xcassets */,
@@ -142,6 +156,9 @@
 		32D9EED51A587E1100998A5B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0F327E3A1A5894DB00DDA422 /* User.h */,
+				0F327E3B1A5894DB00DDA422 /* User.m */,
+				0F327E3C1A5894DB00DDA422 /* User-extension.swift */,
 				32D9EED21A587D7B00998A5B /* Races.h */,
 				32D9EED31A587D7B00998A5B /* Races.m */,
 				32D9EED61A587E3000998A5B /* Race.h */,
@@ -302,13 +319,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F327E3D1A5894DB00DDA422 /* User.m in Sources */,
+				0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */,
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
+				0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
+				0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */,
 				0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */,
 				0F579A431A5875EF0043D31B /* MapViewController.m in Sources */,
-				0F51B7991A58719D00471244 /* ViewController.swift in Sources */,
 				0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */,
+				0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */,
+				0F327E441A589EE400DDA422 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

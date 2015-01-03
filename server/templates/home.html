@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class='no-js lt-ie9 lt-ie8 lt-ie7'> <![endif]-->
+<!--[if IE 7]>         <html class='no-js lt-ie9 lt-ie8'> <![endif]-->
+<!--[if IE 8]>         <html class='no-js lt-ie9'> <![endif]-->
+<!--[if gt IE 8]><!--> <html class='no-js'> <!--<![endif]-->
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+        <title>Race Day</title>
+
+       <link rel="stylesheet" href="http://js.arcgis.com/3.12/esri/css/esri.css">
+       <link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/claro/claro.css">
+       
+       <script src="http://js.arcgis.com/3.12/"></script>
+       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+       <style type="text/css">
+          body {
+             width: 100%;
+             height: 100%;
+
+             font-family: HelveticaNeue-Light;
+          }
+
+          h2 {
+             color: #576E91;
+          }
+           
+          #map {
+             position: absolute;
+             left:     0;
+             right:    30%;
+             bottom:   0;
+             top:      50px;
+          }
+          
+          .esriSignInDialog {
+              background-color: white;
+              padding: 10px;
+              border-radius: 10px;
+          }
+
+          #list {
+              position: absolute;
+              left: 70%;
+              right: 0;
+              top: 50px;
+              bottom: 0;
+              background-color: #CC6600;
+          }
+
+          .list-item {
+              border: 1px solid #5780A6;
+              cursor: pointer;
+              padding: 5px;
+          }
+
+          .list-title {
+              font-size: 20px;
+          }
+
+          .list-detail {
+              font-size: 14px;
+          }
+
+          #list h2 {
+              margin-left: 10px;
+          }
+       </style>
+
+        <script type="text/javascript">
+         require(["esri/map", "esri/layers/FeatureLayer","dojo/domReady!"], 
+                 function(Map, FeatureLayer) { 
+                     map = new Map("map", {
+                         center: [-118, 34.5],
+                         zoom: 8,
+                         basemap: "gray"
+                     });
+                     
+                     map.on("load", initOperationalLayer);
+
+                     function initOperationalLayer() {
+                         featureLayer = new FeatureLayer('http://services1.arcgis.com/W4Noi4OZras42xbd/arcgis/rest/services/Races/FeatureServer/0', {
+                             mode: FeatureLayer.MODE_SNAPSHOT,
+                             outFields: ["*"],
+                         });
+                         
+                         map.addLayer(featureLayer);
+
+                         setTimeout(function() {
+                             $('.dijitReset.dijitInputInner')[0].value = 'scottsirowy';
+                             $('.dijitReset.dijitInputInner')[1].value = 'Crowded2000';
+                             $($('.dijitReset.dijitInline.dijitButtonNode')[0]).click();
+
+                             setTimeout(function() {
+                                 renderRacesList();
+                             }, 2000);
+                         }, 1000);
+                     }
+                 });
+
+         function renderRacesList() {
+             var races = window.featureLayer.graphics.map(function(graphic) {
+                 var _graphic = graphic;
+                 return {
+                     title: graphic.attributes.title,
+                     detail: graphic.attributes.start_time,
+                     id: graphic.attributes.OBJECTID,
+                     callback: function() {
+                         map.setExtent(new esri.geometry.Extent(_graphic.geometry._extent));
+                     }
+                 };
+             });
+
+             renderList(races);
+         }
+
+         function renderUsersList() {
+             
+         }
+
+         /*
+           Each element is in this form:
+
+           {
+             title: '',
+             detail: '',
+             id: 123,
+             callback: function // called when element is clicked
+           }
+         */
+         function renderList(elements) {
+             // Render a list of all races.
+             var listHtml = '';
+             elements.forEach(function(element) {
+                 listHtml += '<div class="list-item" id="element' + element.id + '">'
+                 
+                 listHtml += '<div class="list-title">' + element.title + '</div>'
+                 listHtml += '<div class="list-detail">Start time: ' + element.detail + '</div>'
+                 
+                 listHtml += '</div>'
+             });
+
+             $('#list-elements').html(listHtml);
+
+             // Add click events to each race.
+             elements.forEach(function(element) {
+                 var _element = element;
+                 $('#element' + element.id).click(function() {
+                     _element.callback();
+                 });
+             });
+         }
+        </script>
+
+    </head>
+    <body>
+       <h2>Race day app</h2>
+       <div id="map"></div>
+       <div id="list">
+         <h2>Races</h2>
+         <div id="list-elements"></div>
+       </div>
+    </body>
+</html>
