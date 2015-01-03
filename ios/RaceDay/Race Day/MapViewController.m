@@ -1,4 +1,4 @@
-//
+8//
 //  MapViewController.m
 //  Race Day
 //
@@ -17,9 +17,12 @@
 @interface MapViewController ()
 
 @property (nonatomic, strong) AGSMapView* mapView;
-@property (nonatomic, strong) AGSCredential* credential;
+@property (nonatomic, strong) UIButton* toggleFencesButton;
 
 @property (nonatomic, strong) Race* currentRace;
+
+@property (nonatomic, strong) AGSGraphicsLayer* geofenceLayer;
+@property (nonatomic, assign) BOOL showingGeofences;
 
 @end
 
@@ -35,10 +38,28 @@
     
     [self.view addSubview:mapView];
     
+    _toggleFencesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_toggleFencesButton setTitle:@"Start" forState:UIControlStateNormal];
+    _toggleFencesButton.frame = CGRectMake(0, 0, 100, 50);
+    _toggleFencesButton.backgroundColor = [UIColor whiteColor];
+    [_toggleFencesButton addTarget:self action:@selector(goThroughRaces) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_toggleFencesButton];
+    
     //Add a basemap tiled layer
     NSURL* url = [NSURL URLWithString:kLightBasemapURL];
     AGSTiledMapServiceLayer *tiledLayer = [AGSTiledMapServiceLayer tiledMapServiceLayerWithURL:url];
     [mapView addMapLayer:tiledLayer withName:@"Basemap"];
+    
+    _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
+}
+
+- (void)goThroughRaces
+{
+    static NSUInteger numRace = 0;
+    NSArray* allRaces = [[Races sharedRaces] allRaces];
+    
+    Race* r = [allRaces objectAtIndex:(numRace++)%allRaces.count];
+    [self showRace:r];
 }
 
 
@@ -58,6 +79,7 @@
         [weakSelf showRace:r];
     }];
     
+    [self.mapView removeMapLayer:self.geofenceLayer];
 }
 
 - (void)showRace:(Race*)race
@@ -67,6 +89,51 @@
     AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
     [me expandByFactor:1.4];
     [self.mapView zoomToEnvelope:me animated:YES];
+    
+    if (race) {
+        _showingGeofences = NO;
+        [self toggleGeofences];
+    }
+}
+
+- (void)toggleGeofences
+{
+    [self.mapView removeMapLayer:self.geofenceLayer];
+    
+    // If not showing, add layer for visualization purposes
+    if (!self.showingGeofences) {
+        
+        AGSSimpleLineSymbol* sls1 = [AGSSimpleLineSymbol simpleLineSymbol];
+        sls1.color = [UIColor blueColor];
+        
+        AGSSimpleLineSymbol* sls2 = [AGSSimpleLineSymbol simpleLineSymbol];
+        sls2.color = [UIColor blueColor];
+        
+        
+        // Add geofences to map
+        AGSSimpleFillSymbol* sfs1 = [AGSSimpleFillSymbol simpleFillSymbol];
+        sfs1.color = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        sfs1.outline = sls1;
+        
+        AGSSimpleFillSymbol* sfs2 = [AGSSimpleFillSymbol simpleFillSymbol];
+        sfs2.color = [[UIColor blueColor] colorWithAlphaComponent:0.2];
+        sfs2.outline = sls2;
+        
+        AGSGraphic* fence1 = [AGSGraphic graphicWithGeometry:self.currentRace.startRaceGeofence
+                                                      symbol:sfs1
+                                                  attributes:nil];
+        
+        AGSGraphic* fence2 = [AGSGraphic graphicWithGeometry:self.currentRace.endRaceGeofence
+                                                      symbol:sfs2
+                                                  attributes:nil];
+        
+        [self.geofenceLayer removeAllGraphics];
+        [self.geofenceLayer addGraphics:@[fence1, fence2]];
+        
+        [self.mapView addMapLayer:self.geofenceLayer];
+    }
+    
+    _showingGeofences = !_showingGeofences;
 }
 
 @end

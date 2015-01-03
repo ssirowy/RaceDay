@@ -47,7 +47,7 @@
     return self;
 }
 
-#define kBufferFactor 800
+#define kBufferFactor 50
 - (AGSGeometry*)startRaceGeofence
 {
     if (_startRaceGeofence == nil) {
