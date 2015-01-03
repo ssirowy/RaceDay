@@ -65,21 +65,27 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 @app.route('/')
 def home():
+    
+    return render_template('home.html')
+
+@app.route('/run', methods=['POST'])
+def run_command():
     c = Couchbase.connect(bucket='default', host='http://104.131.187.45/')
 
-    daniel = { 'name' : 'Daniel de Haas',
-               'email' : 'daniel.andrew.dehaas@gmail.com',
-               'birthday': 123 }
-    c.set('daniel', daniel)
+    # daniel = { 'name' : 'Daniel de Haas',
+    #            'email' : 'daniel.andrew.dehaas@gmail.com',
+    #            'birthday': 123 }
+    # c.set('daniel', daniel)
 
-    try:
-        test = c.get('daniel')
-    except CouchbaseError as e:
-        return "Couldn't retrieve value for key " + str(e)
+    # try:
+    #     test = c.get('daniel')
+    # except CouchbaseError as e:
+    #     return "Couldn't retrieve value for key " + str(e)
 
-    print test
+    race = { 'title' : '' }
     
-    return 'hi there'
+    
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     port = os.getenv('VCAP_APP_PORT', '5000')
