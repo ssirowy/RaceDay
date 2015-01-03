@@ -101,9 +101,39 @@ typedef enum {
     return [self.raceLine pointOnPath:0 atIndex:(self.raceLine.numPoints - 1)];
 }
 
+
+#define kFast 60
+#define kMedium (kFast / 2)
+#define kSlow   (kMedium / 2)
+
 - (void)startRaceSimulatedSpeed:(RaceSimulatedSpeed)speed
 {
+    AGSGeometryEngine* engine = [AGSGeometryEngine defaultGeometryEngine];
     
+    double maxLength;
+    switch (speed) {
+        case RaceSimulatedSpeedFast:
+            maxLength = kFast;
+            break;
+        case RaceSimulatedSpeedMedium:
+            maxLength = kMedium;
+            break;
+        case RaceSimulatedSpeedSlow:
+            maxLength = kSlow;
+            break;
+        default:
+            break;
+    }
+    
+    AGSPolyline* densifiedLine = (AGSPolyline*)[engine densifyGeometry:self.raceLine withMaxSegmentLength:maxLength];
+    _lineToSimulate = (AGSPolyline*)[engine projectGeometry:densifiedLine toSpatialReference:[AGSSpatialReference wgs84SpatialReference]];
+    
+    AGSSimulatedLocationDisplayDataSource* dataSource = [[AGSSimulatedLocationDisplayDataSource alloc] init];
+    [dataSource setLocationsFromPolyline:densifiedLine];
+    
+    AGSLocationDisplay* display = [[RaceMapView sharedMapView] locationDisplay];
+    display.dataSource = dataSource;
+    [display startDataSource];
 }
 
 #pragma mark -
