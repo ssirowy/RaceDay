@@ -14,7 +14,7 @@
 #define kLightBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
 #define kDarkBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
 
-@interface MapViewController ()
+@interface MapViewController () <AGSMapViewLayerDelegate>
 
 @property (nonatomic, strong) AGSMapView* mapView;
 @property (nonatomic, strong) UIButton* toggleFencesButton;
@@ -23,6 +23,8 @@
 
 @property (nonatomic, strong) AGSGraphicsLayer* geofenceLayer;
 @property (nonatomic, assign) BOOL showingGeofences;
+
+@property (nonatomic, assign) BOOL needToLoadRace;
 
 @end
 
@@ -35,6 +37,7 @@
     AGSMapView* mapView = [[AGSMapView alloc] initWithFrame:self.view.bounds];
     mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _mapView = mapView;
+    self.mapView.layerDelegate = self;
     
     [self.view addSubview:mapView];
     
@@ -77,17 +80,31 @@
     [self.mapView removeMapLayer:self.geofenceLayer];
 }
 
+- (void)mapViewDidLoad:(AGSMapView *)mapView
+{
+    if (self.needToLoadRace) {
+        [self showRace:self.currentRace];
+    }
+    
+    self.needToLoadRace = NO;
+}
+
 - (void)showRace:(Race*)race
 {
-    _currentRace = race;
-    
-    AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
-    [me expandByFactor:1.4];
-    [self.mapView zoomToEnvelope:me animated:YES];
-    
-    if (race) {
-        _showingGeofences = NO;
-        [self toggleGeofences];
+    if (self.mapView.loaded) {
+        _currentRace = race;
+        
+        AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
+        [me expandByFactor:1.4];
+        [self.mapView zoomToEnvelope:me animated:YES];
+        
+        if (race) {
+            _showingGeofences = NO;
+            [self toggleGeofences];
+        }
+    }
+    else {
+        self.needToLoadRace = YES;
     }
 }
 
