@@ -12,6 +12,16 @@
 #define kFeetPerMeter 3.28084
 #define kFeetPerMile  5280
 
+typedef enum {
+    RaceStateUnknown = 0,
+    RaceStateNotStarted,
+    RaceStateAtStart,
+    RaceStateLeftStart,
+    RaceStateMiddleOfRace,
+    RaceStateAtFinish,
+    RaceStateFinishedRace
+} RaceState;
+
 @interface Race()
 
 @property (nonatomic, strong) AGSPolyline* raceLine;
