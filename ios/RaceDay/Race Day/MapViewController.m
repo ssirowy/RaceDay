@@ -1,4 +1,4 @@
-8//
+//
 //  MapViewController.m
 //  Race Day
 //
@@ -42,7 +42,7 @@
     [_toggleFencesButton setTitle:@"Start" forState:UIControlStateNormal];
     _toggleFencesButton.frame = CGRectMake(0, 0, 100, 50);
     _toggleFencesButton.backgroundColor = [UIColor whiteColor];
-    [_toggleFencesButton addTarget:self action:@selector(goThroughRaces) forControlEvents:UIControlEventTouchUpInside];
+    [_toggleFencesButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_toggleFencesButton];
     
     //Add a basemap tiled layer
@@ -53,15 +53,10 @@
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
 }
 
-- (void)goThroughRaces
+- (void)start
 {
-    static NSUInteger numRace = 0;
-    NSArray* allRaces = [[Races sharedRaces] allRaces];
-    
-    Race* r = [allRaces objectAtIndex:(numRace++)%allRaces.count];
-    [self showRace:r];
+    NSLog(@"Start");
 }
-
 
 - (void)viewDidAppear:(BOOL)animated
 {
