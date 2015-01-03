@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RaceViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class RaceViewController: UIViewController, UIPageViewControllerDelegate {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     var _race: Race!
@@ -36,23 +36,6 @@ class RaceViewController: UIViewController, UIPageViewControllerDataSource, UIPa
         if segue.identifier == "embedSegue" {
             self.pageViewController = segue.destinationViewController as UIPageViewController
             self.pageViewController.delegate = self
-            self.pageViewController.dataSource = self
-        }
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if viewController is DetailsViewController {
-            return self.mapPage
-        } else {
-            return nil
-        }
-    }
-    
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if viewController is MapViewController {
-            return self.detailsPage
-        } else {
-            return nil
         }
     }
 
