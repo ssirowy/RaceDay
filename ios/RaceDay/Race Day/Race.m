@@ -7,6 +7,7 @@
 //
 
 #import "Race.h"
+#import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
 
 #define kFeetPerMeter 3.28084
@@ -25,6 +26,8 @@ typedef enum {
 @interface Race()
 
 @property (nonatomic, strong) AGSPolyline* raceLine;
+
+@property (nonatomic, assign) RaceState raceState;
 
 @end
 
@@ -96,6 +99,109 @@ typedef enum {
 - (AGSPoint*)endPoint
 {
     return [self.raceLine pointOnPath:0 atIndex:(self.raceLine.numPoints - 1)];
+}
+
+- (void)startRaceSimulatedSpeed:(RaceSimulatedSpeed)speed
+{
+    
+}
+
+#pragma mark -
+#pragma mark Race State
+- (void)calculateRaceState
+{
+    AGSGeometryEngine* ge = [AGSGeometryEngine defaultGeometryEngine];
+    AGSLocationDisplay* gps = [[RaceMapView sharedMapView] locationDisplay];
+    AGSPoint* location = (AGSPoint*)[ge projectGeometry:gps.location.point
+                                     toSpatialReference:[AGSSpatialReference webMercatorSpatialReference]];
+    
+    
+    AGSPoint* intersectionP1 = (AGSPoint*)[ge intersectionOfGeometry:self.startRaceGeofence andGeometry:location];
+    AGSPoint* intersectionP2 = (AGSPoint*)[ge intersectionOfGeometry:self.endRaceGeofence andGeometry:location];
+    
+    BOOL start = !(isnan(intersectionP1.x) && isnan(intersectionP1.y));
+    BOOL finish = !(isnan(intersectionP2.x) && isnan(intersectionP2.y));
+    
+    // Actions
+    switch (self.raceState) {
+        case RaceStateUnknown:
+            break;
+        case RaceStateNotStarted:
+            break;
+        case RaceStateAtStart:
+            break;
+        case RaceStateLeftStart:
+            break;
+        case RaceStateMiddleOfRace:
+            break;
+        case RaceStateAtFinish:
+            break;
+        case RaceStateFinishedRace:
+            break;
+        default:
+            break;
+    }
+    
+    // Transitions
+    switch (self.raceState) {
+        case RaceStateUnknown:
+            if (start) {
+                self.raceState = RaceStateAtStart;
+            }
+            break;
+        case RaceStateAtStart:
+            if (!start) {
+                self.raceState = RaceStateLeftStart;
+            }
+            break;
+        case RaceStateLeftStart:
+            self.raceState = RaceStateMiddleOfRace;
+            break;
+        case RaceStateMiddleOfRace:
+            if (finish) {
+                self.raceState = RaceStateAtFinish;
+            }
+            break;
+        case RaceStateAtFinish:
+            self.raceState = RaceStateFinishedRace;
+            break;
+        default:
+            break;
+    }
+    
+    NSLog(@"%@", [self stringFromState:self.raceState]);
+}
+
+- (NSString*)stringFromState:(RaceState)state
+{
+    NSString* s;
+    switch (state) {
+        case RaceStateUnknown:
+            s = @"Unknown";
+            break;
+        case RaceStateNotStarted:
+            s = @"Not started";
+            break;
+        case RaceStateAtStart:
+            s = @"At start of race";
+            break;
+        case RaceStateLeftStart:
+            s = @"Left start";
+            break;
+        case RaceStateMiddleOfRace:
+            s = @"Middle of race";
+            break;
+        case RaceStateAtFinish:
+            s = @"Arrived P1";
+            break;
+        case RaceStateFinishedRace:
+            s = @"At P2";
+            break;
+        default:
+            break;
+    }
+    
+    return s;
 }
 
 @end

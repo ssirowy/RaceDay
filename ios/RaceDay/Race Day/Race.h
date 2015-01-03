@@ -12,6 +12,12 @@
 @class AGSGeometry;
 @class AGSPoint;
 
+typedef enum {
+    RaceSimulatedSpeedSlow,
+    RaceSimulatedSpeedMedium,
+    RaceSimulatedSpeedFast
+} RaceSimulatedSpeed;
+
 @interface Race : NSObject
 
 @property (nonatomic, strong, readonly) AGSGraphic* graphic;
@@ -31,5 +37,7 @@
 
 - (AGSPoint*)startPoint;
 - (AGSPoint*)endPoint;
+
+- (void)startRaceSimulatedSpeed:(RaceSimulatedSpeed)speed;
 
 @end
