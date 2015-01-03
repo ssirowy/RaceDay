@@ -7,6 +7,10 @@
 //
 
 #import "Race.h"
+#import <ArcGIS/ArcGIS.h>
+
+#define kFeetPerMeter 3.28084
+#define kFeetPerMile  5280
 
 @implementation Race
 
@@ -26,6 +30,10 @@
         
         double startDateVal = [[allAttributes objectForKey:@"start_time"] doubleValue] /1000;
         _startDate = [NSDate dateWithTimeIntervalSince1970:startDateVal];
+        
+        AGSGeometryEngine* ge = [AGSGeometryEngine defaultGeometryEngine];
+        double lengthInMeters = [ge lengthOfGeometry:race.geometry];
+        _totalDistance = (lengthInMeters * kFeetPerMeter)/kFeetPerMile;
     }
     
     return self;

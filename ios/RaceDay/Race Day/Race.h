@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ArcGIS/ArcGIS.h>
+
+@class AGSGraphic;
 
 @interface Race : NSObject
 
@@ -19,7 +20,7 @@
 @property (nonatomic, strong, readonly) NSDate*   endDate;
 
 // miles
-@property (nonatomic, assign) CGFloat totalDistance;
+@property (nonatomic, assign) double totalDistance;
 
 - (id)initWithFeature:(AGSGraphic*)race;
 
