@@ -15,29 +15,20 @@
     self = [super init];
     if (self) {
         _graphic = race;
+        
+        NSDictionary* allAttributes = [race allAttributes];
+        _raceID    = [allAttributes objectForKey:@"OBJECTID"];
+        _title     = [allAttributes objectForKey:@"title"];
+        
+        double endDateVal = [[allAttributes objectForKey:@"end_time"] doubleValue] /1000;
+        _endDate   = [NSDate dateWithTimeIntervalSince1970:endDateVal];
+        
+        
+        double startDateVal = [[allAttributes objectForKey:@"start_time"] doubleValue] /1000;
+        _startDate = [NSDate dateWithTimeIntervalSince1970:startDateVal];
     }
     
     return self;
-}
-
-- (NSString*)raceId
-{
-    return nil;
-}
-
-- (NSString*)title
-{
-    return nil;
-}
-
-- (NSDate*)startTime
-{
-    return nil;
-}
-
-- (NSDate*)endDate
-{
-    return nil;
 }
 
 @end

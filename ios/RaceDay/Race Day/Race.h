@@ -13,12 +13,11 @@
 
 @property (nonatomic, strong, readonly) AGSGraphic* graphic;
 
+@property (nonatomic, strong, readonly) NSNumber* raceID;
+@property (nonatomic, strong, readonly) NSString* title;
+@property (nonatomic, strong, readonly) NSDate*   startDate;
+@property (nonatomic, strong, readonly) NSDate*   endDate;
+
 - (id)initWithFeature:(AGSGraphic*)race;
-
-- (NSString*)raceId;
-
-- (NSString*)title;
-- (NSDate*)startTime;
-- (NSDate*)endDate;
 
 @end

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Race;
+
 @interface MapViewController : UIViewController
+
+- (void)showRace:(Race*)race;
 
 @end
