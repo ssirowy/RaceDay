@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E341A587A9A00DDA422 /* APIManager.swift */; };
+		0F327E371A587AB400DDA422 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E361A587AB400DDA422 /* Constants.swift */; };
 		0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7961A58719D00471244 /* AppDelegate.swift */; };
 		0F51B7991A58719D00471244 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7981A58719D00471244 /* ViewController.swift */; };
 		0F51B79C1A58719D00471244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79A1A58719D00471244 /* Main.storyboard */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F327E341A587A9A00DDA422 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		0F327E361A587AB400DDA422 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7961A58719D00471244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		0F51B7931A58719D00471244 /* Race Day */ = {
 			isa = PBXGroup;
 			children = (
+				0F327E341A587A9A00DDA422 /* APIManager.swift */,
+				0F327E361A587AB400DDA422 /* Constants.swift */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
 				0F51B7981A58719D00471244 /* ViewController.swift */,
@@ -278,6 +284,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
+				0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */,
 				0F579A431A5875EF0043D31B /* MapViewController.m in Sources */,
 				0F51B7991A58719D00471244 /* ViewController.swift in Sources */,
 				0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */,
