@@ -10,4 +10,34 @@
 
 @implementation Race
 
+- (id)initWithFeature:(AGSGraphic*)race
+{
+    self = [super init];
+    if (self) {
+        _graphic = race;
+    }
+    
+    return self;
+}
+
+- (NSString*)raceId
+{
+    return nil;
+}
+
+- (NSString*)title
+{
+    return nil;
+}
+
+- (NSDate*)startTime
+{
+    return nil;
+}
+
+- (NSDate*)endDate
+{
+    return nil;
+}
+
 @end

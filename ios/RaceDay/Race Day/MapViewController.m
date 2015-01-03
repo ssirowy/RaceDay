@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "Races.h"
+#import "Race.h"
 #import <ArcGIS/ArcGIS.h>
 
 @interface MapViewController ()
@@ -39,17 +40,22 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     Races* races = [Races sharedRaces];
-    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url mode:AGSFeatureLayerModeSnapshot credential:self.credential];
+    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url
+                                                             mode:AGSFeatureLayerModeSnapshot
+                                                       credential:races.credential];
     
     [self.mapView addMapLayer:lines];
     
-    /*
-    AGSEnvelope* redlands = [AGSEnvelope envelopeWithXmin:-13046781.151300
-                                                     ymin:4032015.796770
-                                                     xmax:-13042560.702336
-                                                     ymax:4039522.568662
-                                         spatialReference:[AGSSpatialReference webMercatorSpatialReference]];
-    [self.mapView zoomToEnvelope:redlands animated:YES];  */
+    __weak MapViewController* weakSelf = self;
+    [races findRacesWithCompletion:^(NSArray* races, NSError* e) {
+    
+        Race* r = [races lastObject];
+        AGSMutableEnvelope* me = [r.graphic.geometry.envelope mutableCopy];
+        [me expandByFactor:1.4];
+        
+        [weakSelf.mapView zoomToEnvelope:me animated:YES];
+    }];
+    
 }
 
 @end

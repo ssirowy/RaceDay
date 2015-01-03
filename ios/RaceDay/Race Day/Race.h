@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ArcGIS/ArcGIS.h>
 
 @interface Race : NSObject
+
+@property (nonatomic, strong, readonly) AGSGraphic* graphic;
+
+- (id)initWithFeature:(AGSGraphic*)race;
+
+- (NSString*)raceId;
+
+- (NSString*)title;
+- (NSDate*)startTime;
+- (NSDate*)endDate;
 
 @end

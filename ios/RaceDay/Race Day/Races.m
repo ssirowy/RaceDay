@@ -7,6 +7,7 @@
 //
 
 #import "Races.h"
+#import "Race.h"
 #import <ArcGIS/ArcGIS.h>
 
 static Races* sharedRaces = nil;
@@ -14,6 +15,7 @@ static Races* sharedRaces = nil;
 @interface Races() <AGSQueryTaskDelegate>
 
 @property (nonatomic, strong) AGSQueryTask* queryTask;
+@property (nonatomic, copy) void (^completion)(NSArray*, NSError*);
 
 @end
 @implementation Races
@@ -38,7 +40,7 @@ static Races* sharedRaces = nil;
     return sharedRaces;
 }
 
-- (void)findRaces
+- (void)findRacesWithCompletion:(void (^)(NSArray*, NSError*))completion
 {
     _queryTask = [[AGSQueryTask alloc] initWithURL:self.url credential:self.credential];
     AGSQuery* query = [AGSQuery query];
@@ -49,11 +51,30 @@ static Races* sharedRaces = nil;
     
     self.queryTask.delegate = self;
     [self.queryTask executeWithQuery:query];
+    
+    _completion = completion;
 }
 
 - (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation*)op didExecuteWithFeatureSetResult:(AGSFeatureSet *)featureSet
 {
-    NSLog(@"Found some races");
+    NSMutableArray* races = [NSMutableArray array];
+    for (AGSGraphic* g in featureSet.features) {
+        Race* r = [[Race alloc] initWithFeature:g];
+        [races addObject:r];
+    }
+    
+    _allRaces = races;
+    if (self.completion) {
+        self.completion(races, nil);
+        self.completion = nil;
+    }
+}
+
+- (void)queryTask:(AGSQueryTask *)queryTask operation:(NSOperation *)op didFailWithError:(NSError *)error {
+    if (self.completion) {
+        self.completion(nil, error);
+        self.completion = nil;
+    }
 }
 
 @end

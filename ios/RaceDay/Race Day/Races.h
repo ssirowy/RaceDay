@@ -16,9 +16,9 @@
 @property (nonatomic, strong, readonly) AGSCredential* credential;
 @property (nonatomic, strong, readonly) NSURL* url;
 
-@property (nonatomic, strong) NSArray* myRaces;
+@property (nonatomic, strong, readonly) NSArray* allRaces;
 
-- (void)findRaces;
+- (void)findRacesWithCompletion:(void (^)(NSArray*, NSError*))completion;
 
 + (Races*)sharedRaces;
 
