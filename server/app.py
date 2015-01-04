@@ -68,13 +68,9 @@ def crossdomain(origin=None, methods=None, headers=None,
 @app.route('/')
 def home():
     
-    # Get M2X data.
-    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams',
-                     headers={ 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' })
-    pp.pprint(r.json())
-
-    
-    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams/ssirowy_race4/stats',
+    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams/ssirowy_race4/sampling',
+                     params={ 'type' : 'nth',
+                              'interval' : '2' },
                      headers={ 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' })
     pp.pprint(r.json())
     
@@ -114,17 +110,25 @@ def get_race(race_id):
         stream_name = user['user']['email'] + '_race' + race_id
 
         # Get statistics for this stream.
-        r = requests.get(m2x_host + '/streams/' + stream_name + '/stats').json()
+        r = requests.get(m2x_host + '/streams/' + stream_name + '/stats', headers=m2x_headers).json()
         
         try:
             stats = { 'current' : streams[stream_name],
                       'max' : float(r['stats']['max']),
                       'average' : float(r['stats']['avg']) }
             user['stats'] = stats
+
+            # Get a sampling of this stream.
+            r = requests.get(m2x_host + '/streams/' + stream_name + '/sampling',
+                             headers=m2x_headers,
+                             params={ 'type' : 'nth',
+                                      'interval' : '4' }).json()
+            user['sampling'] = r['values']
         except:
             user['stats'] = { 'current' : 0,
                               'max' : 0,
                               'average' : 0 }
+            user['sampling'] = []
 
     return jsonify(users=users)
 

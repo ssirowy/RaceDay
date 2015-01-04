@@ -11,8 +11,10 @@
        <link rel="stylesheet" href="http://js.arcgis.com/3.12/esri/css/esri.css">
        <link rel="stylesheet" href="http://js.arcgis.com/3.12/dijit/themes/claro/claro.css">
        
+       <script src="/static/Chart.min.js"></script>
        <script src="http://js.arcgis.com/3.12/"></script>
        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+       
 
        <style type="text/css">
          body {
@@ -22,6 +24,10 @@
              height: 100%;
              
              font-family: HelveticaNeue-Light;
+         }
+
+         .chart-canvas {
+             display: none;
          }
 
          img {
@@ -263,6 +269,8 @@
                      
                      map.infoWindow.setFeatures([user.graphic]);
                      map.infoWindow.show(infoPoint);
+
+                     
                  }
              });
          }
@@ -280,7 +288,7 @@
                  if (window.selectedRaceId) {
                      updateRace(window.selectedRaceId);
                  }
-             }, 3000);
+             }, 20000);
 
              $('#race-title').text(raceGraphic.attributes.title);
              $('#app-title').hide();
@@ -329,6 +337,7 @@
          function renderUsersList(users) {
              var userElements = users.map(function(user, index) {
                  var _user = user;
+                 var _index = index;
                  user = user.user;
                  return {
                      title: user.name,
@@ -347,6 +356,63 @@
                          map.infoWindow.show(infoPoint);
 
                          map.centerAt(infoPoint);
+
+                         $('.chart-canvas').hide();
+                         
+                         if (_user.sampling.length === 0) {
+                             return;
+                         }
+
+                         var labels = _user.sampling.map(function(sample) {
+                             var date = new Date(sample.timestamp);
+                             var hours = date.getHours();
+                             var minutes = date.getMinutes();
+                             var suffix = '';
+                             if (hours === 0) {
+                                 hours = '12';
+                                 suffix = 'am';
+                             } else if (hours < 10) {
+                                 hours = '0' + hours;
+                                 suffix = 'am';
+                             } else if (hours > 12) {
+                                 suffix = 'pm';
+                                 hours = hours - 12;
+                                 if (hours < 10) {
+                                     hours = '0' + hours;
+                                 }
+                             }
+                             if (minutes < 10) {
+                                 minutes = '0' + minutes;
+                             }
+                             
+                             return hours + ':' + minutes;
+                         });
+
+                         var data = _user.sampling.map(function(sample) {
+                             return sample.value;
+                         });
+                         
+                         var data = {
+                             labels: labels,
+                             datasets: [
+                                 {
+                                     label: "Speed",
+                                     fillColor: "rgba(220,220,220,0.2)",
+                                     strokeColor: "rgba(220,220,220,1)",
+                                     pointColor: "rgba(220,220,220,1)",
+                                     pointStrokeColor: "#fff",
+                                     pointHighlightFill: "#fff",
+                                     pointHighlightStroke: "rgba(220,220,220,1)",
+                                     data: data
+                                 }
+                             ]
+                         };
+
+                         var context = $('#element' + _index + ' .chart-canvas')[0].getContext('2d');
+                         var chart = new Chart(context).Line(data, {});
+
+                         
+                         $('#element' + _index + ' .chart-canvas').show();
                      }
                  }
              });
@@ -384,6 +450,8 @@
                  if (element.currentSpeed) {
                      listHtml += '<div class="list-current-speed">' + element.currentSpeed.toFixed(1) + ' mph</div>';
                  }
+
+                 listHtml += '<canvas class="chart-canvas" width="400" height="200"></canvas>';
                  
                  listHtml += '</div>'
              });
