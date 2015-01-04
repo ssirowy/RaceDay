@@ -149,6 +149,18 @@
          function updateRace(raceId) {
              // Pull the list of users for that race.
              $.get('/race/' + raceId, {}, function(data) {
+                 // No longer a selected race, so return immediately.
+                 if (!window.selectedRaceId) {
+                     return;
+                 }
+
+                 // Track if the info window is currently showing.
+                 var infoWindowCurrentUser = null;
+                 
+                 if (map.infoWindow.isShowing) {
+                     infoWindowCurrentUser = map.infoWindow.features[0].attributes.email;
+                 }
+                 
                  // Sort each user's data according to timestamp;
                  data.users.forEach(function(user) {
                      user.data.sort(function(a, b) {
@@ -161,6 +173,10 @@
                  
                  // Render each user's location on the map.
                  data.users.forEach(function(user) {
+                     if (!user.data[0]) {
+                         return;
+                     }
+                     
                      var userPoint = new esri.geometry.Point(user.data[0].location.longitude, 
                                                              user.data[0].location.latitude, 
                                                              new esri.SpatialReference({ wkid: 3857 }))
@@ -187,6 +203,23 @@
                  
                  // Render each user in the user list.
                  renderUsersList(data.users);
+                 
+                 // If necessary, re-render the info window.
+                 if (infoWindowCurrentUser) {
+                     var user = data.users.filter(function(user) {
+                         return user.user.email === infoWindowCurrentUser;
+                     })[0];
+                     var graphicGeometry = user.graphic.geometry;
+                     var infoPoint = new esri.geometry.Point(graphicGeometry.x, 
+                                                             graphicGeometry.y, 
+                                                             new esri.SpatialReference({ wkid: 3857 }));
+                     
+                     map.infoWindow.hide();
+                     map.infoWindow.clearFeatures();
+                     
+                     map.infoWindow.setFeatures([user.graphic]);
+                     map.infoWindow.show(infoPoint);
+                 }
              });
          }
          
@@ -243,8 +276,6 @@
 
                          map.infoWindow.setFeatures([_user.graphic]);
                          map.infoWindow.show(infoPoint);
-
-                         
                      }
                  }
              });
