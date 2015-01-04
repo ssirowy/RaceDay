@@ -63,14 +63,29 @@
               font-size: 14px;
           }
 
+          .list-number {
+              float: left;
+              font-size: 20px;
+              margin-right: 10px;
+          }
+
           #list h2 {
               margin-left: 10px;
           }
        </style>
 
         <script type="text/javascript">
-         require(["esri/map", "esri/layers/FeatureLayer","dojo/domReady!"], 
+         require(["esri/map", "esri/layers/FeatureLayer","dojo/domReady!", "esri/geometry/Point", 
+                  "esri/symbols/SimpleMarkerSymbol", "esri/graphic", "esri/layers/GraphicsLayer", 
+                  "esri/SpatialReference", "esri/renderers/SimpleRenderer", "esri/Color", "esri/InfoTemplate"], 
                  function(Map, FeatureLayer) { 
+                     var infoTemplate = new esri.InfoTemplate();
+                     infoTemplate.setTitle("${name}");
+                     infoTemplate.setContent('<b>Distance: </b> ${distance}<br>' +
+                                             '<b>Latitude: </b> ${latitude}<br>' +
+                                             '<b>Longitude: </b> ${longitude}<br>');
+
+                     
                      map = new Map("map", {
                          center: [-118, 34.5],
                          zoom: 8,
@@ -79,10 +94,17 @@
                      
                      map.on("load", initOperationalLayer);
 
+                     graphicsLayer = new esri.layers.GraphicsLayer({
+                         outFields: ['*'],
+                         infoTemplate: infoTemplate
+                     });
+                     // graphicsLayer.setInfoTemplate(infoTemplate);
+                     map.addLayer(graphicsLayer);
+                     
                      function initOperationalLayer() {
                          featureLayer = new FeatureLayer('http://services1.arcgis.com/W4Noi4OZras42xbd/arcgis/rest/services/Races/FeatureServer/0', {
                              mode: FeatureLayer.MODE_SNAPSHOT,
-                             outFields: ["*"],
+                             outFields: ["*"]
                          });
                          
                          map.addLayer(featureLayer);
@@ -94,7 +116,7 @@
 
                              setTimeout(function() {
                                  renderRacesList();
-                             }, 2000);
+                             }, 1000);
                          }, 1000);
                      }
                  });
@@ -104,19 +126,80 @@
                  var _graphic = graphic;
                  return {
                      title: graphic.attributes.title,
+                     detailLabel: 'Start time',
                      detail: graphic.attributes.start_time,
                      id: graphic.attributes.OBJECTID,
                      callback: function() {
-                         map.setExtent(new esri.geometry.Extent(_graphic.geometry._extent));
+                         // Zoom the map to the race.
+                         var extent = new esri.geometry.Extent(_graphic.geometry._extent);
+                         extent = extent.expand(1.4);
+                         map.setExtent(extent);
+
+                         // Pull the list of users for that race.
+                         $.get('/race/' + _graphic.attributes.OBJECTID, {}, function(data) {
+                             // Sort each user's data according to distance.
+                             data.users.forEach(function(user) {
+                                 user.data.sort(function(a, b) {
+                                     return b.distance - a.distance;
+                                 });
+                             });
+                             
+                             // Render each user's location on the map.
+                             data.users.forEach(function(user) {
+                                 var userPoint = new esri.geometry.Point(user.data[0].location.longitude, 
+                                                                         user.data[0].location.latitude, 
+                                                                         new esri.SpatialReference({ wkid: 3857 }))
+                                 symbol = new esri.symbol.SimpleMarkerSymbol();
+                                 
+                                 symbol.setColor(new esri.Color('#FF0000'));
+                                 
+                                 user.graphic = new esri.Graphic(userPoint, symbol);
+                                 user.graphic.attr('name', 'THIS IS A TEST');
+                                 user.graphic.setAttributes({
+                                     name: user.user.name,
+                                     email: user.user.email,
+                                     distance: user.data[0].distance,
+                                     latitude: user.data[0].location.latitude,
+                                     longitude: user.data[0].location.longitude
+                                 });
+
+                                 console.log(user.graphic);
+
+                                 // map.graphics.add(user.graphic);
+                                 graphicsLayer.add(user.graphic);
+                             });
+
+                             // Sort users according to distance.
+                             data.users.sort(function(a, b) {
+                                 return b.data[0].distance - a.data[0].distance;
+                             });
+
+                             // Render each user in the user list.
+                             renderUsersList(data.users);
+                         });
                      }
                  };
              });
 
-             renderList(races);
+             renderList(races, 'Races', false);
          }
 
-         function renderUsersList() {
+         function renderUsersList(users) {
+             var userElements = users.map(function(user, index) {
+                 var _user = user;
+                 user = user.user;
+                 return {
+                     title: user.name,
+                     detailLabel: 'Email',
+                     detail: user.email,
+                     id: index,
+                     callback: function() {
+                         map.graphics.remove(_user.graphic);
+                     }
+                 }
+             });
              
+             renderList(userElements, 'Users', true);
          }
 
          /*
@@ -129,19 +212,24 @@
              callback: function // called when element is clicked
            }
          */
-         function renderList(elements) {
+         function renderList(elements, header, numbered) {
              // Render a list of all races.
              var listHtml = '';
-             elements.forEach(function(element) {
+             elements.forEach(function(element, index) {
                  listHtml += '<div class="list-item" id="element' + element.id + '">'
+
+                 if (numbered) {
+                     listHtml += '<div class="list-number">' + (index + 1) + '</div>';
+                 }
                  
                  listHtml += '<div class="list-title">' + element.title + '</div>'
-                 listHtml += '<div class="list-detail">Start time: ' + element.detail + '</div>'
+                 listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>'
                  
                  listHtml += '</div>'
              });
 
              $('#list-elements').html(listHtml);
+             $('#list > h2').html(header);
 
              // Add click events to each race.
              elements.forEach(function(element) {

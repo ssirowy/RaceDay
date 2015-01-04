@@ -3,11 +3,10 @@ from flask import Flask
 from flask import (flash, g, session, redirect, url_for, request, abort, make_response, 
                    current_app, jsonify, render_template, after_this_request)
 
-from couchbase import Couchbase
-from couchbase.exceptions import CouchbaseError
 import traceback
 import os
 import pprint
+import requests
 import datetime
 import json
 from datetime import timedelta
@@ -86,6 +85,36 @@ def run_command():
     
     
     return jsonify(success=True)
+
+@app.route('/race/<int:race_id>')
+def get_race(race_id):
+    race_id = str(race_id)
+
+    c = Couchbase.connect(bucket='default', host='104.131.187.45')
+
+    # Query couchbase for the race.
+    try:
+        race = c.get(race_id)
+    except CouchbaseError as e:
+        return jsonify(success=False)
+
+    race = race.value
+
+    users = []
+    for user in race['users']:
+        try:
+            user_metadata = c.get(user['email'])
+        except CouchbaseError as e:
+            continue
+
+        user_metadata = user_metadata.value
+
+        del user_metadata['password']
+
+        users.append({ 'user' : user_metadata,
+                       'data' : user['data'] })
+
+    return jsonify(users=users)
 
 if __name__ == '__main__':
     port = os.getenv('VCAP_APP_PORT', '5000')
