@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class Race;
+
 @interface DetailsViewController : UIViewController
 
+@property (nonatomic, strong) Race* race;
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 
 @end

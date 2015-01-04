@@ -23,6 +23,8 @@ class RaceViewController: UIViewController, UIPageViewControllerDelegate {
         self.mapPage.showRace(self._race)
         self.detailsPage = storyboard!.instantiateViewControllerWithIdentifier("detailsViewController") as DetailsViewController
         
+        self.detailsPage.race = self._race
+        
         self.pageViewController.setViewControllers([self.detailsPage], direction: UIPageViewControllerNavigationDirection.Reverse, animated: false, completion: nil)
         // Do any additional setup after loading the view.
     }

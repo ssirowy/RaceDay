@@ -83,24 +83,7 @@
 }
 
 - (void)showRace:(Race*)race
-{
-    if (self.currentRace) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:kRaceStartedNotification object:self.currentRace];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:kRaceEndedNotification object:self.currentRace];
-    }
-    
-    if (race) {
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(startTimer)
-                                                     name:kRaceStartedNotification
-                                                   object:race];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(stopTimer)
-                                                     name:kRaceEndedNotification
-                                                   object:race];
-    }
-    
+{    
     _currentRace = race;
     if (self.mapView.loaded) {
         

@@ -7,6 +7,7 @@
 //
 
 #import "DetailsViewController.h"
+#import "Race.h"
 
 @interface DetailsViewController ()
 
@@ -19,7 +20,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
     self.timeLabel.text = @"";
 }
 
@@ -57,6 +57,28 @@
 - (void)stopTimer
 {
     self.running = NO;
+}
+
+- (void)setRace:(Race *)race
+{
+    if (_race) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kRaceStartedNotification object:_race];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kRaceEndedNotification object:_race];
+    }
+    
+    if (race) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(startTimer)
+                                                     name:kRaceStartedNotification
+                                                   object:race];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(stopTimer)
+                                                     name:kRaceEndedNotification
+                                                   object:race];
+    }
+    
+    _race = race;
 }
 
 @end
