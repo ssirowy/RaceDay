@@ -43,6 +43,15 @@
               border-radius: 10px;
           }
 
+          #create-new-race > a {
+              position: absolute;
+              right: 9px;
+              font-size: 16px;
+              text-decoration: none;
+              color: #5780A6;
+              top: 26px;
+          }
+
           #list {
               position: absolute;
               left: 70%;
@@ -242,10 +251,33 @@
          function renderRacesList() {
              var races = window.featureLayer.graphics.map(function(graphic) {
                  var _graphic = graphic;
+
+                 var startDate = new Date(graphic.attributes.start_time * 1000);
+                 var hours = startDate.getHours();
+                 var suffix = '';
+                 if (hours === 0) {
+                     hours = '12';
+                     suffix = 'am';
+                 } else if (hours < 10) {
+                     hours = '0' + hours;
+                     suffix = 'am';
+                 } else if (hours > 12) {
+                     suffix = 'pm';
+                     hours = hours - 12;
+                     if (hours < 10) {
+                         hours = '0' + hours;
+                     }
+                 }
+                 var minutes = startDate.getMinutes();
+                 if (minutes < 10) {
+                     minutes = '0' + minutes;
+                 }
+                 startDate = startDate.getMonth() + '/' + startDate.getDate() + ' ' + hours + ':' + minutes + suffix;
+                 
                  return {
                      title: graphic.attributes.title,
                      detailLabel: 'Start time',
-                     detail: graphic.attributes.start_time,
+                     detail: startDate,
                      id: graphic.attributes.OBJECTID,
                      callback: function() {
                          selectRace(_graphic);
@@ -262,8 +294,6 @@
                  user = user.user;
                  return {
                      title: user.name,
-                     detailLabel: 'Email',
-                     detail: user.email,
                      id: index,
                      callback: function() {
                          var graphicGeometry = _user.graphic.geometry;
@@ -304,7 +334,11 @@
                  }
                  
                  listHtml += '<div class="list-title">' + element.title + '</div>'
-                 listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>'
+                 if (element.detail) {
+                     listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>'
+                 } else {
+                     listHtml += '<div class="list-detail"></div>'
+                 }
                  
                  listHtml += '</div>'
              });
@@ -322,8 +356,10 @@
 
              if (showBack) {
                  $('#back-to-races').show();
+                 $('#create-new-race').hide();
              } else {
                  $('#back-to-races').hide();
+                 $('#create-new-race').show();
              }
          }
         </script>
@@ -334,6 +370,7 @@
        <div id="map"></div>
        <div id="list">
          <div id="back-to-races">Back to races</div>
+         <div id="create-new-race"><a href="http://scottsirowy.maps.arcgis.com/home/webmap/viewer.html?webmap=dd436e74c5e541e6869c977594ccfe90" target="_blank">Create new race</a></div>
          <h2>Races</h2>
          <div id="list-elements"></div>
        </div>
