@@ -24,7 +24,7 @@
     _graphView = [[BEMSimpleLineGraphView alloc] initWithFrame:self.view.bounds];
     _graphView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     _graphView.dataSource = self;
-    _graphView.colorTop = [UIColor whiteColor];
+    _graphView.colorTop = [UIColor lightOrange];
     _graphView.colorBottom = [[UIColor darkBlue] colorWithAlphaComponent:0.7f];
     _graphView.colorLine = [UIColor darkBlue];
     _graphView.widthLine = 4.0f;

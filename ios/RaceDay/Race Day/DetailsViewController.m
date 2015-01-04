@@ -11,14 +11,17 @@
 #import "GraphViewController.h"
 #import <CouchbaseLite/CouchbaseLite.h>
 #import <RaceDay-Swift.h>
+#import "UIColor+Additions.h"
 
 @interface DetailsViewController ()
 
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, assign) NSTimeInterval startTime;
+@property (nonatomic, assign) int currentPage;
 @property (nonatomic, retain) UIPageViewController* pageViewController;
 @property (nonatomic, retain) MapViewController* mapPage;
 @property (nonatomic, retain) GraphViewController* graphPage;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @end
 
@@ -31,6 +34,8 @@
     
     self.title = self.race.title;
     
+    self.view.backgroundColor = [UIColor lightOrange];
+    
     self.mapPage = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
 
     [self.mapPage showRace:self.race];
@@ -40,6 +45,9 @@
     self.graphPage.race = self.race;
     
     [self.pageViewController setViewControllers:@[self.mapPage] direction:UIPageViewControllerNavigationDirectionForward animated:false completion:NULL];
+    
+    self.pageControl.numberOfPages = 2;
+    self.pageControl.currentPage = 1;
     
     
 }
@@ -62,6 +70,12 @@
         return self.graphPage;
     }
 }
+
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
+    self.pageControl.currentPage = previousViewControllers[0] == self.graphPage ? 1 : 0;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

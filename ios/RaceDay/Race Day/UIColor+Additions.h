@@ -10,7 +10,10 @@
 
 @interface UIColor (Additions)
 
++ (UIColor*)darkGreenColor;
++ (UIColor*)darkRedColor;
 + (UIColor*)darkOrange;
 + (UIColor*)darkBlue;
++ (UIColor*)lightOrange;
 
 @end
