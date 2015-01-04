@@ -39,7 +39,7 @@
     
     _mapView = [RaceMapView sharedMapView];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.mapView.frame = CGRectMake(self.view.bounds.origin.x, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
+    self.mapView.frame = CGRectMake(self.view.bounds.origin.x, self.small ? 0 : 64, self.view.bounds.size.width, self.small ? self.view.bounds.size.height : self.view.bounds.size.height-64);
     self.mapView.layerDelegate = self;
     
     [self.view addSubview:self.mapView];

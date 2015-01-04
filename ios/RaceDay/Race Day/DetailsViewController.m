@@ -29,6 +29,8 @@
     
     self.distanceLabel.text = @"";
     
+    self.title = self.race.title;
+    
     self.mapPage = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
 
     [self.mapPage showRace:self.race];
@@ -111,7 +113,7 @@
     
     self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.race.distanceCovered];
     
-    [self performSelector:@selector(updateDistance) withObject:self afterDelay:1.0];
+    [self performSelector:@selector(updateDistance) withObject:self afterDelay:3.0];
 }
 
 - (void)updatePlace
@@ -146,6 +148,7 @@
                     inserted = true;
                     break;
                 }
+                j++;
             }
             if (!inserted) {
                 [places addObject:distance];
@@ -155,7 +158,7 @@
     
     NSUInteger place = [places indexOfObject:userDistance];
     
-    if (place == 1) {
+    if (!place || place == 1) {
         self.overallLabel.text = @"1st";
         self.ageGroupLabel.text = @"1st";
     } else if (place == 2) {
