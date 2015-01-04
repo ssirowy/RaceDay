@@ -10,10 +10,12 @@ import UIKit
 
 class JoinRaceViewController: UIViewController {
 
+    @IBOutlet weak var joinLabel: UILabel!
     var race: Race!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.joinLabel.text = "Sign up for the \(self.race.title)"
         // Do any additional setup after loading the view.
     }
 

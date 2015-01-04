@@ -7,9 +7,10 @@
 //
 
 #import "GraphViewController.h"
+#import "UIColor+Additions.h"
 #import <BEMSimpleLineGraph/BEMSimpleLineGraphView.h>
 
-@interface GraphViewController ()
+@interface GraphViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property (nonatomic, strong) BEMSimpleLineGraphView* graphView;
 
@@ -22,12 +23,35 @@
 
     _graphView = [[BEMSimpleLineGraphView alloc] initWithFrame:self.view.bounds];
     _graphView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _graphView.dataSource = self;
+    _graphView.colorTop = [UIColor whiteColor];
+    _graphView.colorBottom = [[UIColor darkBlue] colorWithAlphaComponent:0.7f];
+    _graphView.colorLine = [UIColor darkBlue];
+    _graphView.widthLine = 4.0f;
+    
     [self.view addSubview:self.graphView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self.graphView
+                                             selector:@selector(reloadGraph)
+                                                 name:kM2XDataPointsChanged
+                                               object:self.race];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return self.race.dataPoints.count;
+}
+
+
+- (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
+{
+    NSNumber* number = [self.race.dataPoints objectAtIndex:index];
+    return [number floatValue];
 }
 
 /*
