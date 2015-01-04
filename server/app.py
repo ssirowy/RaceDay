@@ -68,11 +68,6 @@ def crossdomain(origin=None, methods=None, headers=None,
 @app.route('/')
 def home():
     
-    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams/ssirowy_race4/sampling',
-                     params={ 'type' : 'nth',
-                              'interval' : '2' },
-                     headers={ 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' })
-    pp.pprint(r.json())
     
     return render_template('home.html')
 
@@ -119,10 +114,9 @@ def get_race(race_id):
             user['stats'] = stats
 
             # Get a sampling of this stream.
-            r = requests.get(m2x_host + '/streams/' + stream_name + '/sampling',
+            r = requests.get(m2x_host + '/streams/' + stream_name + '/values',
                              headers=m2x_headers,
-                             params={ 'type' : 'nth',
-                                      'interval' : '4' }).json()
+                             params={ 'limit' : '20' }).json()
             user['sampling'] = r['values']
         except:
             user['stats'] = { 'current' : 0,
