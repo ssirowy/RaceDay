@@ -104,7 +104,7 @@
     }
     
     
-    [self performSelector:@selector(updateCouch) withObject:self afterDelay:1];
+    [self performSelector:@selector(updateCouch) withObject:self afterDelay:5];
 }
 
 - (void)stopTimer
