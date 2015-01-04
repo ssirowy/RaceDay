@@ -39,10 +39,17 @@
     
     _mapView = [RaceMapView sharedMapView];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.mapView.frame = CGRectMake(self.view.bounds.origin.x, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
+    
+    /*
+    self.mapView.frame = CGRectMake(self.view.bounds.origin.x, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);  */
+    
+    self.mapView.frame = self.view.bounds;
+    
     self.mapView.layerDelegate = self;
     
     [self.view addSubview:self.mapView];
+    
+    [self.mapView reset];
     
     //Add a basemap tiled layer
     NSURL* url = [NSURL URLWithString:kLightBasemapURL];
@@ -100,13 +107,14 @@
     if (self.mapView.loaded) {
         
         AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
-        [me expandByFactor:1.8];
+        [me expandByFactor:self.small ? 1.8 : 1.4];
         [self.mapView zoomToEnvelope:me animated:YES];
         
+        /*
         if (race) {
             _showingGeofences = NO;
             [self toggleGeofences];
-        }
+        }  */
     }
     else {
         self.needToLoadRace = YES;
