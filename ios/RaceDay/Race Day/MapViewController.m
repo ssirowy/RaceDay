@@ -51,6 +51,14 @@
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
     
+    Races* races = [Races sharedRaces];
+    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url
+                                                             mode:AGSFeatureLayerModeSnapshot
+                                                       credential:races.credential];
+    
+    [self.mapView addMapLayer:lines];
+    
+    
     if (self.small) {
         self.mapView.userInteractionEnabled = false;
     }
@@ -79,13 +87,6 @@
 
 - (void)mapViewDidLoad:(AGSMapView *)mapView
 {
-    Races* races = [Races sharedRaces];
-    AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url
-                                                             mode:AGSFeatureLayerModeSnapshot
-                                                       credential:races.credential];
-    
-    [self.mapView addMapLayer:lines];
-    
     if (self.needToLoadRace) {
         [self showRace:self.currentRace];
     }
@@ -99,7 +100,7 @@
     if (self.mapView.loaded) {
         
         AGSMutableEnvelope* me = [race.graphic.geometry.envelope mutableCopy];
-        [me expandByFactor:1.4];
+        [me expandByFactor:1.8];
         [self.mapView zoomToEnvelope:me animated:YES];
         
         if (race) {

@@ -10,8 +10,7 @@ import UIKit
 
 class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var nearbyRacesTableView: UITableView!
-    @IBOutlet weak var myRacesTableView: UITableView!
+    @IBOutlet weak var racesTableView: UITableView!
     var _myRaces: [Race] = []
     var _nearRaces: [Race] = []
     
@@ -27,13 +26,30 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidAppear(animated)
         User.storedUser().getMyRaces({ races, err in
             self._myRaces = races
-            self.myRacesTableView.reloadData()
             
             User.storedUser().getNearbyRaces({ races, err in
                 self._nearRaces = races
-                self.nearbyRacesTableView.reloadData()
+                self.racesTableView.reloadData()
             })
         })
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.Default
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34;
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        var cell = tableView.dequeueReusableCellWithIdentifier("Header") as RaceTableViewHeaderCell
+        if section == 0 {
+            cell.titleLabel!.text = "My Races"
+        } else {
+            cell.titleLabel!.text = "Nearby Races"
+        }
+        return cell.contentView
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,22 +58,24 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as RaceTableViewCell
         var race: Race!
-        if tableView == self.myRacesTableView {
+        if indexPath.section == 0 {
             race = self._myRaces[indexPath.row]
+            cell.joinButton.hidden = true
         } else {
             race = self._nearRaces[indexPath.row]
+            cell.joinButton.hidden = false
         }
-        cell.textLabel!.text = race.title
+        cell.titleLabel!.text = race.title
         let formatter = NSDateFormatter()
         formatter.dateFormat = "dd/MM/yyyy h:mm a"
-        cell.detailTextLabel!.text = formatter.stringFromDate(race.startDate)
+        cell.dateLabel!.text = formatter.stringFromDate(race.startDate)
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView == self.myRacesTableView {
+        if indexPath.section == 0 {
             self.performSegueWithIdentifier("mapSegue", sender: self._myRaces[indexPath.row])
         } else {
             self.performSegueWithIdentifier("joinRaceSegue", sender: self._nearRaces[indexPath.row])
@@ -65,7 +83,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.myRacesTableView {
+        if section == 0 {
             return self._myRaces.count
         } else {
             return self._nearRaces.count
@@ -73,7 +91,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
