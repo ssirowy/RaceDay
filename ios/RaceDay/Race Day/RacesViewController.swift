@@ -56,7 +56,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if tableView == self.myRacesTableView {
-            self.performSegueWithIdentifier("myRaceSegue", sender: self._myRaces[indexPath.row])
+            self.performSegueWithIdentifier("mapSegue", sender: self._myRaces[indexPath.row])
         } else {
             self.performSegueWithIdentifier("joinRaceSegue", sender: self._nearRaces[indexPath.row])
         }
@@ -78,9 +78,9 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // set dst race from sender
         let race = sender! as Race
-        if segue.identifier == "myRaceSegue" {
-            let dst = segue.destinationViewController as RaceViewController
-            dst._race = race
+        if segue.identifier == "mapSegue" {
+            let dst = segue.destinationViewController as MapViewController
+            dst.showRace(race)
         } else {
             let dst = segue.destinationViewController as JoinRaceViewController
             dst.race = race

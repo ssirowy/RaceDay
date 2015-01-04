@@ -155,8 +155,8 @@
                     <connections>
                         <outlet property="myRacesTableView" destination="Uh8-FC-p2h" id="xux-vY-pNM"/>
                         <outlet property="nearbyRacesTableView" destination="QBc-x2-fbO" id="Emq-dG-6l2"/>
-                        <segue destination="5kS-bk-nCs" kind="show" identifier="myRaceSegue" id="rjZ-K2-JkN"/>
                         <segue destination="gAA-7l-eTT" kind="presentation" identifier="joinRaceSegue" id="X2s-lp-ELl"/>
+                        <segue destination="DoL-IV-sCJ" kind="show" identifier="mapSegue" id="LzJ-ne-tn5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1h-LZ-P0n" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -201,68 +201,6 @@
             </objects>
             <point key="canvasLocation" x="912" y="1227"/>
         </scene>
-        <!--Race View Controller-->
-        <scene sceneID="auk-ky-F6Y">
-            <objects>
-                <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Iv-rv-okS"/>
-                        <viewControllerLayoutGuide type="bottom" id="bf8-0C-La6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vr2-iN-f2Z">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oF-hH-Ltp">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <connections>
-                                    <segue destination="o6y-Va-GKj" kind="embed" identifier="embedSegue" id="PSP-cE-99k"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="bf8-0C-La6" firstAttribute="top" secondItem="8oF-hH-Ltp" secondAttribute="bottom" id="09g-hh-Z0S"/>
-                            <constraint firstAttribute="trailing" secondItem="8oF-hH-Ltp" secondAttribute="trailing" id="H3K-M1-Oqq"/>
-                            <constraint firstItem="8oF-hH-Ltp" firstAttribute="leading" secondItem="vr2-iN-f2Z" secondAttribute="leading" id="ROc-G5-pe3"/>
-                            <constraint firstItem="8oF-hH-Ltp" firstAttribute="top" secondItem="0Iv-rv-okS" secondAttribute="bottom" id="e3L-eP-3dA"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="VR9-bV-Avg">
-                        <nil key="title"/>
-                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="6Pc-Zr-TVy">
-                            <rect key="frame" x="96" y="7" width="128" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <segments>
-                                <segment title="Map"/>
-                                <segment title="Results"/>
-                            </segments>
-                            <connections>
-                                <action selector="segmentedControlChanged:" destination="5kS-bk-nCs" eventType="valueChanged" id="81b-tw-xpr"/>
-                            </connections>
-                        </segmentedControl>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="segmentedControl" destination="6Pc-Zr-TVy" id="a7W-Fp-jiK"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cm4-15-rNt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1715" y="500"/>
-        </scene>
-        <!--Page View Controller-->
-        <scene sceneID="Xtx-jL-U9T">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="o6y-Va-GKj" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="DoL-IV-sCJ" kind="show" id="nSn-1v-P7o"/>
-                        <segue destination="W1h-Mh-bOM" kind="show" id="ZpQ-uV-bt4"/>
-                    </connections>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gHT-t1-Qes" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2345" y="505"/>
-        </scene>
         <!--Map View Controller-->
         <scene sceneID="F55-u5-TdS">
             <objects>
@@ -284,10 +222,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="W1h-Mh-bOM" kind="show" identifier="showDetailsSegue" id="1UN-as-zk4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JbD-td-8AY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2786" y="255"/>
+            <point key="canvasLocation" x="1443" y="459"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="6JE-Dw-5Y0">
@@ -298,17 +239,17 @@
                         <viewControllerLayoutGuide type="bottom" id="pOi-bO-tMT"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Kkh-ez-ZhQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olk-OA-Zli">
-                                <rect key="frame" x="11" y="20" width="298" height="138"/>
+                                <rect key="frame" x="11" y="64" width="298" height="138"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="78"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="distance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPN-6P-hdU">
-                                <rect key="frame" x="16" y="137" width="288" height="21"/>
+                                <rect key="frame" x="16" y="181" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -323,7 +264,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jmu-Kh-juV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2779" y="862"/>
+            <point key="canvasLocation" x="2213" y="583"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5xg-WP-eXT">
@@ -345,6 +286,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="zEF-yB-FiY"/>
+        <segue reference="LzJ-ne-tn5"/>
     </inferredMetricsTieBreakers>
 </document>
