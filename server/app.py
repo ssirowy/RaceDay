@@ -6,9 +6,12 @@ from flask import (flash, g, session, redirect, url_for, request, abort, make_re
 import traceback
 import os
 import pprint
-import requests
+
 import datetime
 import json
+
+import requests
+
 from datetime import timedelta
 from functools import wraps, update_wrapper
 
@@ -65,6 +68,16 @@ def crossdomain(origin=None, methods=None, headers=None,
 @app.route('/')
 def home():
     
+    # Get M2X data.
+    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams',
+                     headers={ 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' })
+    pp.pprint(r.json())
+
+    
+    r = requests.get('http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e/streams/ssirowy_race4/stats',
+                     headers={ 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' })
+    pp.pprint(r.json())
+    
     return render_template('home.html')
 
 @app.route('/race/<int:race_id>')
@@ -72,6 +85,7 @@ def get_race(race_id):
     race_id = str(race_id)
 
     couchbase_host = 'http://104.131.187.45:4984'
+    m2x_host = 'http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e'
 
     r = requests.get(couchbase_host + '/default/' + race_id)
 
@@ -86,6 +100,9 @@ def get_race(race_id):
 
         users.append({ 'user' : user_metadata,
                        'data' : user['data'] })
+
+    # Gather M2X info for each racer.
+    
 
     return jsonify(users=users)
 
