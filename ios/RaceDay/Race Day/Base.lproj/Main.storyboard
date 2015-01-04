@@ -398,7 +398,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.59999999999999998" green="0.20000000000000001" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                             </pageControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="CPN-6P-hdU" firstAttribute="centerX" secondItem="olk-OA-Zli" secondAttribute="centerX" id="5Na-UZ-VED"/>
                             <constraint firstItem="V5l-NV-3Ez" firstAttribute="centerX" secondItem="0sW-GI-Zei" secondAttribute="centerX" id="79y-w6-JLS"/>

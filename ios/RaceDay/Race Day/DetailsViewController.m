@@ -11,6 +11,7 @@
 #import "GraphViewController.h"
 #import <CouchbaseLite/CouchbaseLite.h>
 #import <RaceDay-Swift.h>
+#import "UIColor+Additions.h"
 
 @interface DetailsViewController ()
 
@@ -32,6 +33,8 @@
     self.distanceLabel.text = @"";
     
     self.title = self.race.title;
+    
+    self.view.backgroundColor = [UIColor lightOrange];
     
     self.mapPage = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
 
