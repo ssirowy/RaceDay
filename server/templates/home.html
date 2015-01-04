@@ -15,97 +15,119 @@
        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
        <style type="text/css">
-          body {
-              background-color: #AB4600;
-              
+         body {
+             background-color: #AB4600;
+             
              width: 100%;
              height: 100%;
-
+             
              font-family: HelveticaNeue-Light;
-          }
+         }
 
-          h2 {
+         img {
+             width: 79px;
+             height: 61px;
+             position: absolute;
+             top: -7px;
+             left: 0;
+             cursor: pointer;
+         }
+         
+         h2 {
              color: white;
              font-weight: normal;
-          }
-           
-          #map {
+         }
+
+         #app-title {
+             margin-top: 11px;
+             position: absolute;
+             position: absolute;
+             top: 2px;
+             left: 80px;
+             cursor: pointer;
+         }
+
+         #race-title {
+             pointer-events: none;
+             text-align: center;
+             position: absolute;
+             top: -10px;
+             left: 0;
+             right: 0;
+         }
+         
+         #map {
+             background-color: #EFEFEF;
              position: absolute;
              left:     0;
              right:    30%;
              bottom:   0;
              top:      50px;
-          }
-          
-          .esriSignInDialog {
-              background-color: white;
-              padding: 10px;
-              border-radius: 10px;
-          }
+         }
+         
+         .esriSignInDialog {
+             background-color: white;
+             padding: 10px;
+             border-radius: 10px;
+         }
+         
+         #create-new-race > a {
+             position: absolute;
+             right: 9px;
+             font-size: 16px;
+             text-decoration: none;
+             color: #5780A6;
+             top: 26px;
+         }
+         
+         #list {
+             position: absolute;
+             left: 70%;
+             right: 0;
+             top: 50px;
+             bottom: 0;
+             background-color: #F2F2F2;
+             
+             border-left: 2px solid #CCCCCC;
+         }
+         
+         #list h2 {
+             color: #5780A6;
+         }
+         
+         .list-item {
+             cursor: pointer;
+             padding: 10px;
+             position: relative;
+         }
 
-          #create-new-race > a {
-              position: absolute;
-              right: 9px;
-              font-size: 16px;
-              text-decoration: none;
-              color: #5780A6;
-              top: 26px;
-          }
-
-          #list {
-              position: absolute;
-              left: 70%;
-              right: 0;
-              top: 50px;
-              bottom: 0;
-              background-color: #F2F2F2;
-
-              border-left: 2px solid #CCCCCC;
-          }
-
-          #back-to-races {
-              cursor: pointer;
-              display: none;
-              position: absolute;
-              font-size: 12px;
-              left: 10px;
-              top: 2px;
-          }
-
-          #list h2 {
-              color: #5780A6;
-          }
-
-          .list-item {
-              border: 1px solid #5780A6;
-              cursor: pointer;
-              padding: 5px;
-              position: relative;
-          }
-
-          .list-current-speed {
-              position: absolute;
-              right: 10px;
-              top: 8px;
-          }
-
-          .list-title {
-              font-size: 20px;
-          }
-
-          .list-detail {
-              font-size: 14px;
-          }
-
-          .list-number {
-              float: left;
-              font-size: 20px;
-              margin-right: 10px;
-          }
-
-          #list h2 {
-              margin-left: 10px;
-          }
+         .list-item:not(:last-of-type) {
+             border-bottom: 1px solid #CCCCCC;
+         }
+         
+         .list-current-speed {
+             position: absolute;
+             right: 10px;
+             top: 8px;
+         }
+         
+         .list-title {
+             font-size: 20px;
+         }
+         
+         .list-detail {
+             font-size: 14px;
+         }
+         
+         .list-number {
+             float: left;
+             font-size: 20px;
+             margin-right: 10px;
+         }
+         
+         #list h2 {
+             margin-left: 10px;
+         }
        </style>
 
         <script type="text/javascript">
@@ -116,10 +138,11 @@
                      infoTemplate = new esri.InfoTemplate();
                      infoTemplate.setTitle("${name}");
                      infoTemplate.setContent('<b>Distance: </b> ${distance}<br>' +
-                                             '<b>Latitude: </b> ${latitude}<br>' +
-                                             '<b>Longitude: </b> ${longitude}<br>' +
                                              '<b>Current speed: </b> ${currentSpeed}<br>' +
-                                             '<b>Average speed: </b> ${averageSpeed}<br>');
+                                             '<b>Average speed: </b> ${averageSpeed}<br>' + 
+                                             '<b>Max speed: </b> ${maxSpeed}<br>' + 
+                                             '<b>Latitude: </b> ${latitude}<br>' +
+                                             '<b>Longitude: </b> ${longitude}<br>');
                      
                      map = new Map("map", {
                          center: [-118, 34.5],
@@ -155,11 +178,12 @@
                          }, 1000);
                      }
 
-                     $('#back-to-races').click(function() {
+                     $('#app-title, img').click(function() {
                          window.selectedRaceId = null;
                          renderRacesList();
-                         $('#back-to-races').hide();
                          clearInterval(window.intervalId);
+                         $('#race-title').text('');
+                         $('#app-title').show();
                      });
                  });
 
@@ -205,11 +229,12 @@
                      user.graphic.setAttributes({
                          name: user.user.name,
                          email: user.user.email,
-                         distance: user.data[0].distance,
+                         distance: user.data[0].distance.toFixed(2),
                          latitude: user.data[0].location.latitude,
                          longitude: user.data[0].location.longitude,
                          currentSpeed: user.stats.current ? user.stats.current.toFixed(1) + ' mph' : '0 mph',
-                         averageSpeed: user.stats.average ? user.stats.average.toFixed(1) + ' mph' : '0 mph'
+                         averageSpeed: user.stats.average ? user.stats.average.toFixed(1) + ' mph' : '0 mph',
+                         maxSpeed: user.stats.max ? user.stats.max.toFixed(1) + ' mph' : '0 mph'
                      });
                      
                      graphicsLayer.add(user.graphic);
@@ -256,6 +281,9 @@
                      updateRace(window.selectedRaceId);
                  }
              }, 3000);
+
+             $('#race-title').text(raceGraphic.attributes.title);
+             $('#app-title').hide();
          }
 
          function renderRacesList() {
@@ -317,6 +345,8 @@
 
                          map.infoWindow.setFeatures([_user.graphic]);
                          map.infoWindow.show(infoPoint);
+
+                         map.centerAt(infoPoint);
                      }
                  }
              });
@@ -370,10 +400,8 @@
              });
 
              if (showBack) {
-                 $('#back-to-races').show();
                  $('#create-new-race').hide();
              } else {
-                 $('#back-to-races').hide();
                  $('#create-new-race').show();
              }
          }
@@ -381,10 +409,11 @@
 
     </head>
     <body>
-      <h2>Race Day</h2>
+      <img src="https://s3.amazonaws.com/uploads.hipchat.com/97907/717421/KEodgdOxmA7VwDA/icon.png" />
+      <h2 id="app-title">Race Day</h2>
+      <h2 id="race-title"></h2>
        <div id="map"></div>
        <div id="list">
-         <div id="back-to-races">Back to races</div>
          <div id="create-new-race"><a href="http://scottsirowy.maps.arcgis.com/home/webmap/viewer.html?webmap=dd436e74c5e541e6869c977594ccfe90" target="_blank">Create new race</a></div>
          <h2>Races</h2>
          <div id="list-elements"></div>
