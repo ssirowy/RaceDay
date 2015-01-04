@@ -326,10 +326,10 @@
             </objects>
             <point key="canvasLocation" x="3115" y="615.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Graph View Controller-->
         <scene sceneID="DN9-gR-e0T">
             <objects>
-                <viewController storyboardIdentifier="graphViewController" id="ZeE-jR-Z0o" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="graphViewController" id="ZeE-jR-Z0o" customClass="GraphViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cr5-nR-hgP"/>
                         <viewControllerLayoutGuide type="bottom" id="0tP-2L-cg3"/>
