@@ -67,25 +67,6 @@ def home():
     
     return render_template('home.html')
 
-@app.route('/run', methods=['POST'])
-def run_command():
-    c = Couchbase.connect(bucket='default', host='http://104.131.187.45/')
-
-    # daniel = { 'name' : 'Daniel de Haas',
-    #            'email' : 'daniel.andrew.dehaas@gmail.com',
-    #            'birthday': 123 }
-    # c.set('daniel', daniel)
-
-    # try:
-    #     test = c.get('daniel')
-    # except CouchbaseError as e:
-    #     return "Couldn't retrieve value for key " + str(e)
-
-    race = { 'title' : '' }
-    
-    
-    return jsonify(success=True)
-
 @app.route('/race/<int:race_id>')
 def get_race(race_id):
     race_id = str(race_id)
