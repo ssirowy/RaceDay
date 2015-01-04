@@ -14,7 +14,6 @@
 		0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3C1A5894DB00DDA422 /* User-extension.swift */; };
 		0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3F1A58962F00DDA422 /* RacesViewController.swift */; };
 		0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E411A589DDC00DDA422 /* RaceViewController.swift */; };
-		0F327E441A589EE400DDA422 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E431A589EE400DDA422 /* DetailsViewController.swift */; };
 		0F327E461A58E8BB00DDA422 /* JoinRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */; };
 		0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7961A58719D00471244 /* AppDelegate.swift */; };
 		0F51B79C1A58719D00471244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79A1A58719D00471244 /* Main.storyboard */; };
@@ -25,6 +24,8 @@
 		11F74760FE5E36C1A8D8FFCC /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B78DFDFE183A01252B4EF100 /* libPods.a */; };
 		32D9EED41A587D7B00998A5B /* Races.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EED31A587D7B00998A5B /* Races.m */; };
 		32D9EED81A587E3000998A5B /* Race.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EED71A587E3000998A5B /* Race.m */; };
+		32D9EEDD1A58AF6000998A5B /* RaceMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEDC1A58AF6000998A5B /* RaceMapView.m */; };
+		32D9EEE01A58C70900998A5B /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEDF1A58C70900998A5B /* DetailsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,6 @@
 		0F327E3C1A5894DB00DDA422 /* User-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User-extension.swift"; sourceTree = "<group>"; };
 		0F327E3F1A58962F00DDA422 /* RacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesViewController.swift; sourceTree = "<group>"; };
 		0F327E411A589DDC00DDA422 /* RaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
-		0F327E431A589EE400DDA422 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinRaceViewController.swift; sourceTree = "<group>"; };
 		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +64,10 @@
 		32D9EED31A587D7B00998A5B /* Races.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Races.m; sourceTree = "<group>"; };
 		32D9EED61A587E3000998A5B /* Race.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Race.h; sourceTree = "<group>"; };
 		32D9EED71A587E3000998A5B /* Race.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Race.m; sourceTree = "<group>"; };
+		32D9EEDB1A58AF6000998A5B /* RaceMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RaceMapView.h; sourceTree = "<group>"; };
+		32D9EEDC1A58AF6000998A5B /* RaceMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaceMapView.m; sourceTree = "<group>"; };
+		32D9EEDE1A58C70900998A5B /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		32D9EEDF1A58C70900998A5B /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		B000BB9B71ECC88C713660F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B78DFDFE183A01252B4EF100 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE07BB706FAFF577EBA72D6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,7 +119,6 @@
 				0F327E341A587A9A00DDA422 /* APIManager.swift */,
 				0F327E361A587AB400DDA422 /* Constants.swift */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
-				0F327E431A589EE400DDA422 /* DetailsViewController.swift */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
 				0F327E411A589DDC00DDA422 /* RaceViewController.swift */,
@@ -127,6 +130,10 @@
 				0F51B79D1A58719D00471244 /* Images.xcassets */,
 				0F51B79F1A58719D00471244 /* LaunchScreen.xib */,
 				0F51B7941A58719D00471244 /* Supporting Files */,
+				32D9EEDB1A58AF6000998A5B /* RaceMapView.h */,
+				32D9EEDC1A58AF6000998A5B /* RaceMapView.m */,
+				32D9EEDE1A58C70900998A5B /* DetailsViewController.h */,
+				32D9EEDF1A58C70900998A5B /* DetailsViewController.m */,
 			);
 			path = "Race Day";
 			sourceTree = "<group>";
@@ -327,14 +334,15 @@
 				0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */,
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
+				32D9EEE01A58C70900998A5B /* DetailsViewController.m in Sources */,
 				0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
 				0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */,
 				0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */,
+				32D9EEDD1A58AF6000998A5B /* RaceMapView.m in Sources */,
 				0F579A431A5875EF0043D31B /* MapViewController.m in Sources */,
 				0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */,
 				0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */,
-				0F327E441A589EE400DDA422 /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

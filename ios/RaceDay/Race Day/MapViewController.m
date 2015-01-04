@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import "Races.h"
 #import "Race.h"
+#import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
 
 #define kLightBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
@@ -16,8 +17,7 @@
 
 @interface MapViewController () <AGSMapViewLayerDelegate>
 
-@property (nonatomic, strong) AGSMapView* mapView;
-@property (nonatomic, strong) UIButton* toggleFencesButton;
+@property (nonatomic, strong) RaceMapView* mapView;
 
 @property (nonatomic, strong) Race* currentRace;
 
@@ -34,34 +34,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    AGSMapView* mapView = [[AGSMapView alloc] initWithFrame:self.view.bounds];
-    mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    _mapView = mapView;
+    _mapView = [RaceMapView sharedMapView];
+    self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.mapView.frame = self.view.bounds;
     self.mapView.layerDelegate = self;
     
-    [self.view addSubview:mapView];
+    [self.view addSubview:self.mapView];
     
-    _toggleFencesButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [_toggleFencesButton setTitle:@"Start" forState:UIControlStateNormal];
-    _toggleFencesButton.frame = CGRectMake(0, 0, 100, 50);
-    _toggleFencesButton.backgroundColor = [UIColor whiteColor];
-    [_toggleFencesButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_toggleFencesButton];
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.backgroundColor = [UIColor whiteColor];
+    [button setTitle:@"Start race" forState:UIControlStateNormal];
+    button.frame = CGRectMake(0, 0, 120, 40);
+    [button addTarget:self action:@selector(startRace) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
     
     //Add a basemap tiled layer
     NSURL* url = [NSURL URLWithString:kLightBasemapURL];
     AGSTiledMapServiceLayer *tiledLayer = [AGSTiledMapServiceLayer tiledMapServiceLayerWithURL:url];
-    [mapView addMapLayer:tiledLayer withName:@"Basemap"];
+    [self.mapView addMapLayer:tiledLayer withName:@"Basemap"];
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
 }
 
-- (void)start
+- (void)startRace
 {
-    NSLog(@"Start");
+    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedFast];
 }
 
 - (void)viewDidAppear:(BOOL)animated
+{
+    [self.mapView removeMapLayer:self.geofenceLayer];
+}
+
+- (void)mapViewDidLoad:(AGSMapView *)mapView
 {
     Races* races = [Races sharedRaces];
     AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url
@@ -70,11 +75,6 @@
     
     [self.mapView addMapLayer:lines];
     
-    [self.mapView removeMapLayer:self.geofenceLayer];
-}
-
-- (void)mapViewDidLoad:(AGSMapView *)mapView
-{
     if (self.needToLoadRace) {
         [self showRace:self.currentRace];
     }
@@ -83,7 +83,7 @@
 }
 
 - (void)showRace:(Race*)race
-{
+{    
     _currentRace = race;
     if (self.mapView.loaded) {
         

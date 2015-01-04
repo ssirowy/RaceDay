@@ -9,3 +9,4 @@
 #import "Races.h"
 #import "Race.h"
 #import "MapViewController.h"
+#import "DetailsViewController.h"
