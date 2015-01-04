@@ -137,6 +137,8 @@
        </style>
 
         <script type="text/javascript">
+         active_chart = '';
+  
          require(["esri/map", "esri/layers/FeatureLayer","dojo/domReady!", "esri/geometry/Point", 
                   "esri/symbols/SimpleMarkerSymbol", "esri/graphic", "esri/layers/GraphicsLayer", 
                   "esri/SpatialReference", "esri/renderers/SimpleRenderer", "esri/Color", "esri/InfoTemplate"], 
@@ -180,7 +182,7 @@
 
                              setTimeout(function() {
                                  renderRacesList();
-                             }, 1000);
+                             }, 1700);
                          }, 1000);
                      }
 
@@ -192,7 +194,8 @@
                          $('#app-title').show();
                          $('#chart-canvas').hide();
                          $('#chart-title').text('');
-                         $('.list-item').attr('chart', false);
+                         // $('.list-item').attr('chart', false);
+                         active_chart = '';
                      });
                  });
 
@@ -297,6 +300,8 @@
              var extent = new esri.geometry.Extent(raceGraphic.geometry._extent);
              extent = extent.expand(1.4);
              map.setExtent(extent);
+
+             graphicsLayer.clear();
 
              $('#list-elements').html('<h2>Loading racers...</h2>');
              
@@ -449,8 +454,10 @@
                          currentChart = new Chart(context).Line(data, { datasetStrokeWidth: 4, pointDotRadius: 1 });
                          
                          $('#chart-canvas').show();
-                         $('.list-item').attr('chart', false);
-                         $('#element' + _email).attr('chart', true);
+                         // $('.list-item').attr('chart', false);
+                         active_chart = '';
+                         // $('#element' + _email).attr('chart', true);
+                         active_chart = _email;
 
                          $('#chart-title').text(_user.user.name + '\'s speed');
                      }
@@ -465,22 +472,16 @@
                      usersExist = true;
                  }
              }
-             
-             if (usersExist) {
-                 // Update each users's values manually.
-                 userElements.forEach(function(element) {
-                     if (element.currentSpeed) {
-                         $('#element' + element.id + ' .list-current-speed').text(element.sampling[element.sampling.length - 1].value.toFixed(1) + ' mph');
-                     }
-                     if ($('#element' + element.id).attr('chart') === 'true') {
-                         // This user has a chart, so update with the latest data.
-                         currentChart.removeData();
-                         currentChart.addData([element.sampling[0].value], '');
-                     }
-                 });
-             } else {
-                 renderList(userElements, 'Racers', true, true);
-             }
+
+             renderList(userElements, 'Racers', true, true);
+
+             userElements.forEach(function(element) {
+                 if (element.id === active_chart) {
+                     // This user has a chart, so update with the latest data.
+                     currentChart.removeData();
+                     currentChart.addData([element.sampling[0].value], '');
+                 }
+             });
          }
 
          /*
