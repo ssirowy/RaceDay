@@ -26,7 +26,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.timeLabel.text = @"";
     self.distanceLabel.text = @"";
     
     self.mapPage = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
