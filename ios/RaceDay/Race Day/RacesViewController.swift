@@ -82,7 +82,8 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let dst = segue.destinationViewController as RaceViewController
             dst._race = race
         } else {
-            
+            let dst = segue.destinationViewController as JoinRaceViewController
+            dst.race = race
         }
     }
 

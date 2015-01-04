@@ -12,6 +12,8 @@
 #import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
 
+#import "M2X.h"
+
 #define kLightBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
 #define kDarkBasemapURL @"http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
 
@@ -55,7 +57,7 @@
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
 }
-
+     
 - (void)startRace
 {
     [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedFast];

@@ -9,9 +9,14 @@
 #import "Race.h"
 #import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
+#import "M2X.h"
+#import "User.h"
 
 #define kFeetPerMeter 3.28084
 #define kFeetPerMile  5280
+
+#define kM2X_API_KEY @"f778c23e3d8e5dec33674dd2fa21c5b1"
+#define kM2X_DEVICE_ID  @"22e4f54c8e379e17f89e7adc2ecebf9e"
 
 @interface Race()
 
@@ -20,6 +25,12 @@
 @property (nonatomic, strong) AGSMutablePolyline* myProgress;
 
 @property (nonatomic) double distanceInMiles;
+
+@property (nonatomic, strong) M2XClient* m2xClient;
+@property (nonatomic, strong) M2XDevice* device;
+@property (nonatomic, strong) M2XStream* stream;
+
+@property (nonatomic, assign) BOOL racing;
 
 @end
 
@@ -94,7 +105,7 @@
 }
 
 
-#define kFast 120
+#define kFast 90
 #define kMedium (kFast / 2)
 #define kSlow   (kMedium / 2)
 #define kLocationPath @"location"
@@ -129,6 +140,8 @@
     [display startDataSource];
     
     [display addObserver:self forKeyPath:kLocationPath options:0 context:nil];
+    
+    _racing = YES;
 }
 
 - (void)endRace
@@ -139,6 +152,8 @@
     [display stopDataSource];
     
     self.myProgress = nil;
+    
+    _racing = NO;
 }
 
 #pragma mark -
@@ -166,11 +181,7 @@
         case RaceStateAtStart:
             break;
         case RaceStateLeftStart:
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRaceStartedNotification object:self];
-            
-            _myProgress = [[AGSMutablePolyline alloc] init];
-            [_myProgress addPathToPolyline];
-            
+            [self startRaceInternal];
             break;
         case RaceStateMiddleOfRace:
             [self updateAndPostProgress];
@@ -215,6 +226,66 @@
     if (self.raceState != RaceStateMiddleOfRace) {
         NSLog(@"%@", [self stringFromState:self.raceState]);
     }
+}
+
+- (void)startRaceInternal
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRaceStartedNotification object:self];
+    
+    _myProgress = [[AGSMutablePolyline alloc] init];
+    [_myProgress addPathToPolyline];
+    
+    
+    _m2xClient = [[M2XClient alloc] initWithApiKey:kM2X_API_KEY];
+    _device = [[M2XDevice alloc] initWithClient:self.m2xClient
+                                     attributes:@{@"id": kM2X_DEVICE_ID}
+               ];
+    
+    
+    int raceId = (int)[self.raceID integerValue];
+    NSString* email = [[User storedUser] email].length ? [[User storedUser] email] : @"danielgmail";
+    
+    NSString* streamName = [NSString stringWithFormat:@"%@_race%d", email, raceId];
+    NSDictionary* units = @{@"label": @"speed", @"symbol": @"miles/hr"};
+    __weak Race* weakSelf = self;
+    [self.device updateStreamWithName:streamName
+                           parameters:@{@"unit": units, @"type": @"numeric"}
+                    completionHandler:^(M2XStream* s, M2XResponse* r) {
+                        weakSelf.stream = s;
+                        [weakSelf updateM2XStream];
+                    }];
+    
+}
+
+- (void)updateM2XStream
+{
+    if (!self.racing) {
+        return;
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    [dateFormatter setLocale:enUSPOSIXLocale];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    
+    NSDate *now = [NSDate date];
+    NSString *iso8601String = [dateFormatter stringFromDate:now];
+    NSLog(@"%@", iso8601String);
+    
+    
+    float low = 7.4;
+    float high = 8.7;
+    float diff = high - low;
+    CGFloat value = (((float) rand() / RAND_MAX) * diff) + low;
+    NSLog(@"%f", value);
+    
+    [self.stream updateValue:[NSNumber numberWithFloat:value]
+                   timestamp:iso8601String
+           completionHandler:^(M2XResponse* response){
+               NSLog(@"Posted something");
+           }];
+    
+    [self performSelector:@selector(updateM2XStream) withObject:nil afterDelay:4.0];
 }
 
 - (void)updateAndPostProgress

@@ -7,7 +7,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -67,7 +67,7 @@
         <!--Races View Controller-->
         <scene sceneID="ghP-hO-d74">
             <objects>
-                <viewController id="iXT-hG-b2v" customClass="RacesViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iXT-hG-b2v" customClass="RacesViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bu9-rH-KGt"/>
                         <viewControllerLayoutGuide type="bottom" id="oo5-ue-fYb"/>
@@ -156,16 +156,55 @@
                         <outlet property="myRacesTableView" destination="Uh8-FC-p2h" id="xux-vY-pNM"/>
                         <outlet property="nearbyRacesTableView" destination="QBc-x2-fbO" id="Emq-dG-6l2"/>
                         <segue destination="5kS-bk-nCs" kind="show" identifier="myRaceSegue" id="rjZ-K2-JkN"/>
+                        <segue destination="gAA-7l-eTT" kind="presentation" identifier="joinRaceSegue" id="X2s-lp-ELl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y1h-LZ-P0n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="877" y="473"/>
         </scene>
+        <!--Join Race View Controller-->
+        <scene sceneID="FPv-fj-DEc">
+            <objects>
+                <viewController id="gAA-7l-eTT" customClass="JoinRaceViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UpQ-5n-VNg"/>
+                        <viewControllerLayoutGuide type="bottom" id="CrV-3m-maP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rjn-7d-FeA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U2y-9f-cUt">
+                                <rect key="frame" x="46" y="436" width="30" height="30"/>
+                                <state key="normal" title="ok">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="okButtonPressed:" destination="gAA-7l-eTT" eventType="touchUpInside" id="w3T-Vl-rsp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5W-Nu-yES">
+                                <rect key="frame" x="137" y="436" width="45" height="30"/>
+                                <state key="normal" title="cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonPressed:" destination="gAA-7l-eTT" eventType="touchUpInside" id="zf8-Ni-Mwk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iDc-LR-dCC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="912" y="1227"/>
+        </scene>
         <!--Race View Controller-->
         <scene sceneID="auk-ky-F6Y">
             <objects>
-                <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Iv-rv-okS"/>
                         <viewControllerLayoutGuide type="bottom" id="bf8-0C-La6"/>
@@ -233,7 +272,7 @@
                         <viewControllerLayoutGuide type="bottom" id="10N-24-2iH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ikm-hd-lQl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ot-rB-2oY">
@@ -306,6 +345,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nSn-1v-P7o"/>
+        <segue reference="zEF-yB-FiY"/>
     </inferredMetricsTieBreakers>
 </document>
