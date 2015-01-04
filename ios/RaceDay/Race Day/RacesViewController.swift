@@ -36,7 +36,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self._nearRaces = races
                 self.racesTableView.reloadData()
                 
-                self.sdata.hidden = !Races.sharedRaces().usingSponsoredData;
+                self.sdata.hidden = Races.sharedRaces().usingSponsoredData;
                 hud.hide(true)
             })
         })
