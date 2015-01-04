@@ -388,15 +388,26 @@
                                 <color key="textColor" red="0.27058823529999998" green="0.34901960780000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="0sW-GI-Zei">
+                                <rect key="frame" x="168" y="622" width="39" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="Im9-uh-au6"/>
+                                    <constraint firstAttribute="width" constant="39" id="i10-EO-FmE"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.85098039215686272" green="0.51372549019607838" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.59999999999999998" green="0.20000000000000001" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="CPN-6P-hdU" firstAttribute="centerX" secondItem="olk-OA-Zli" secondAttribute="centerX" id="5Na-UZ-VED"/>
+                            <constraint firstItem="V5l-NV-3Ez" firstAttribute="centerX" secondItem="0sW-GI-Zei" secondAttribute="centerX" id="79y-w6-JLS"/>
                             <constraint firstItem="s33-7t-SoV" firstAttribute="top" secondItem="Vgn-aB-a4m" secondAttribute="bottom" constant="220" id="9sW-jw-h3Z"/>
                             <constraint firstItem="V5l-NV-3Ez" firstAttribute="leading" secondItem="Kkh-ez-ZhQ" secondAttribute="leading" id="Exx-HJ-4D4"/>
                             <constraint firstItem="RLK-HD-cJi" firstAttribute="top" secondItem="s33-7t-SoV" secondAttribute="bottom" constant="-9" id="Hge-Zh-14g"/>
                             <constraint firstItem="olk-OA-Zli" firstAttribute="width" secondItem="Kkh-ez-ZhQ" secondAttribute="width" id="QYE-TX-0ko"/>
                             <constraint firstItem="CPN-6P-hdU" firstAttribute="top" secondItem="olk-OA-Zli" secondAttribute="bottom" constant="19" id="VNJ-07-doW"/>
+                            <constraint firstItem="0sW-GI-Zei" firstAttribute="top" secondItem="V5l-NV-3Ez" secondAttribute="bottom" constant="-45" id="Z1K-By-Uq3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="s33-7t-SoV" secondAttribute="trailing" constant="7" id="ap3-n4-Jdy"/>
                             <constraint firstAttribute="centerX" secondItem="olk-OA-Zli" secondAttribute="centerX" id="b5F-c4-EEr"/>
                             <constraint firstItem="olk-OA-Zli" firstAttribute="top" secondItem="Vgn-aB-a4m" secondAttribute="bottom" constant="16" id="efT-z9-K7b"/>
@@ -411,6 +422,7 @@
                         <outlet property="ageGroupLabel" destination="s33-7t-SoV" id="xJd-uc-VHf"/>
                         <outlet property="distanceLabel" destination="CPN-6P-hdU" id="XB0-yQ-Px9"/>
                         <outlet property="overallLabel" destination="2XW-lo-4lV" id="s4b-5y-SfF"/>
+                        <outlet property="pageControl" destination="0sW-GI-Zei" id="ZFq-0w-v5u"/>
                         <outlet property="timeLabel" destination="olk-OA-Zli" id="80j-z9-xKT"/>
                     </connections>
                 </viewController>
