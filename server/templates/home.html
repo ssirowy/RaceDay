@@ -26,8 +26,9 @@
              font-family: HelveticaNeue-Light;
          }
 
-         .chart-canvas {
+         #chart-canvas {
              display: none;
+             margin-left: 15px;
          }
 
          img {
@@ -187,6 +188,7 @@
                          clearInterval(window.intervalId);
                          $('#race-title').text('');
                          $('#app-title').show();
+                         $('#chart-canvas').hide();
                      });
                  });
 
@@ -247,7 +249,19 @@
                  
                  // Sort users according to distance.
                  data.users.sort(function(a, b) {
-                     return b.data[0].distance - a.data[0].distance;
+                     var ad;
+                     var bd;
+                     if (a.data[0]) {
+                         ad = a.data[0].distance || 0;
+                     } else {
+                         ad = 0;
+                     }
+                     if (b.data[0]) {
+                         bd = b.data[0].distance || 0;
+                     } else {
+                         bd = 0;
+                     }
+                     return bd - ad;
                  });
                  
                  // Render each user in the user list.
@@ -359,7 +373,7 @@
 
                          map.centerAt(infoPoint);
 
-                         $('.chart-canvas').hide();
+                         $('#chart-canvas').hide();
                          
                          if (_user.sampling.length === 0) {
                              return;
@@ -390,8 +404,9 @@
                          }
 
                          var labels = _user.sampling.map(function(sample) {
-                             var date = new Date(sample.timestamp);
-                             return getTime(date);
+                             // var date = new Date(sample.timestamp);
+                             return '';
+                             // return getTime(date);
                          });
 
                          var data = _user.sampling.map(function(sample) {
@@ -401,7 +416,7 @@
                          if (data.length < 20) {
                              while (data.length < 20) {
                                  data.push(0);
-                                 labels.push('-');
+                                 labels.push('');
                              }
                          }
 
@@ -413,21 +428,21 @@
                              datasets: [
                                  {
                                      label: "Speed",
-                                     fillColor: "rgba(220,220,220,0.2)",
-                                     strokeColor: "rgba(220,220,220,1)",
-                                     pointColor: "rgba(220,220,220,1)",
-                                     pointStrokeColor: "#fff",
-                                     pointHighlightFill: "#fff",
+                                     fillColor: "rgba(87, 128, 166, 0.7)",
+                                     strokeColor: "rgba(87, 128, 166, 1)",
+                                     pointColor: "rgba(87, 128, 166, 1)",
+                                     pointStrokeColor: "rgba(87, 128, 166, 1)",
+                                     pointHighlightFill: "rgba(87, 128, 166, 1)",
                                      pointHighlightStroke: "rgba(220,220,220,1)",
                                      data: data
                                  }
                              ]
                          };
 
-                         var context = $('#element' + _email + ' .chart-canvas')[0].getContext('2d');
-                         currentChart = new Chart(context).Line(data, {});
+                         var context = $('#chart-canvas')[0].getContext('2d');
+                         currentChart = new Chart(context).Line(data, { datasetStrokeWidth: 4, pointDotRadius: 1 });
                          
-                         $('#element' + _email + ' .chart-canvas').show();
+                         $('#chart-canvas').show();
                      }
                  }
              });
@@ -452,17 +467,6 @@
                          currentChart.removeData();
                          currentChart.addData([element.sampling[0].value], getTime(new Date(element.sampling[0].timestamp)));
                      }
-                 });
-
-                 // Reorder divs.
-                 var newTop = 70;
-                 userElements.forEach(function(element) {
-                     $('#element' + element.id).css('position', 'absolute');
-                     $('#element' + element.id).css('left', '0');
-                     $('#element' + element.id).css('right', '0');
-                     $('#element' + element.id).css('top', newTop + 'px');
-
-                     newTop += 45;
                  });
              } else {
                  renderList(userElements, 'Racers', true, true);
@@ -500,7 +504,7 @@
                      listHtml += '<div class="list-current-speed">' + element.currentSpeed.toFixed(1) + ' mph</div>';
                  }
 
-                 listHtml += '<canvas class="chart-canvas" width="400" height="200"></canvas>';
+                 // listHtml += '<canvas class="chart-canvas" width="400" height="200"></canvas>';
                  
                  listHtml += '</div>'
              });
@@ -534,6 +538,7 @@
          <div id="create-new-race"><a href="http://scottsirowy.maps.arcgis.com/home/webmap/viewer.html?webmap=dd436e74c5e541e6869c977594ccfe90" target="_blank">Create new race</a></div>
          <h2>Races</h2>
          <div id="list-elements"></div>
+         <canvas id="chart-canvas" width="400" height="200"></canvas>
        </div>
     </body>
 </html>
