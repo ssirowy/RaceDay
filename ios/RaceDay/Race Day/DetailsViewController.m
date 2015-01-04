@@ -89,12 +89,15 @@
             
             NSDictionary* event = @{
                                     @"status": @"update",
+                                    @"distance": [[NSNumber alloc] initWithDouble:self.race.distanceCovered],
                                     @"timestamp": [[NSNumber alloc] initWithDouble:[[[NSDate alloc] init] timeIntervalSince1970]],
                                     @"location": @{
                                             @"latitude": [[NSNumber alloc] initWithDouble:self.race.currentLocation.y],
                                             @"longitude": [[NSNumber alloc] initWithDouble:self.race.currentLocation.x]
                                             }
                                     };
+            
+            [evts removeAllObjects];
             
             [evts addObject:event];
             NSError* error;
@@ -104,7 +107,7 @@
     }
     
     
-    [self performSelector:@selector(updateCouch) withObject:self afterDelay:5];
+    [self performSelector:@selector(updateCouch) withObject:self afterDelay:2];
 }
 
 - (void)stopTimer
