@@ -195,8 +195,8 @@
                             <rect key="frame" x="96" y="7" width="128" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
-                                <segment title="details"/>
-                                <segment title="map"/>
+                                <segment title="Map"/>
+                                <segment title="Results"/>
                             </segments>
                             <connections>
                                 <action selector="segmentedControlChanged:" destination="5kS-bk-nCs" eventType="valueChanged" id="81b-tw-xpr"/>

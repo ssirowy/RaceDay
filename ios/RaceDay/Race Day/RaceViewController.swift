@@ -25,7 +25,7 @@ class RaceViewController: UIViewController, UIPageViewControllerDelegate {
         
         self.detailsPage.race = self._race
         
-        self.pageViewController.setViewControllers([self.detailsPage], direction: UIPageViewControllerNavigationDirection.Reverse, animated: false, completion: nil)
+        self.pageViewController.setViewControllers([self.mapPage], direction: UIPageViewControllerNavigationDirection.Reverse, animated: false, completion: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -42,7 +42,7 @@ class RaceViewController: UIViewController, UIPageViewControllerDelegate {
     }
 
     @IBAction func segmentedControlChanged(sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+        if sender.selectedSegmentIndex == 1 {
             self.pageViewController.setViewControllers([self.detailsPage], direction: UIPageViewControllerNavigationDirection.Reverse, animated: true, completion: nil)
         } else {
             
