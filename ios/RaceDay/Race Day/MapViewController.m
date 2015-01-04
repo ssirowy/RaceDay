@@ -26,9 +26,6 @@
 
 @property (nonatomic, assign) BOOL needToLoadRace;
 
-@property (nonatomic, assign) BOOL running;
-@property (nonatomic, assign) NSTimeInterval startTime;
-
 @end
 
 @implementation MapViewController
@@ -159,37 +156,6 @@
     }
     
     _showingGeofences = !_showingGeofences;
-}
-
-- (void)startTimer
-{
-    _startTime = [NSDate timeIntervalSinceReferenceDate];
-    _running = YES;
-    [self updateTime];
-}
-
-- (void)updateTime
-{
-    if (!self.running) return;
-    
-    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    NSTimeInterval elapsed = currentTime - self.startTime;
-    
-    int mins = (int)(elapsed / 60.0);
-    elapsed -= mins* 60;
-    int secs = (int)elapsed;
-    elapsed -= secs;
-    int fraction = elapsed * 10.0f;
-    
-    NSString* formattedString = [NSString stringWithFormat:@"%u:%02u.%u", mins, secs, fraction];
-    NSLog(@"%@", formattedString);
-    
-    [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
-}
-
-- (void)stopTimer
-{
-    self.running = NO;
 }
 
 @end
