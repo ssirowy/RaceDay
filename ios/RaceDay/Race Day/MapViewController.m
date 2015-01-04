@@ -28,7 +28,6 @@
 
 @property (nonatomic, assign) BOOL needToLoadRace;
 
-
 @property (nonatomic, strong) M2XClient* m2xClient;
 @property (nonatomic, strong) M2XDevice* device;
 @property (nonatomic, strong) M2XStream* stream;
