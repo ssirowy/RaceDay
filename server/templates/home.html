@@ -105,9 +105,6 @@
              cursor: pointer;
              padding: 10px;
              position: relative;
-         }
-
-         .list-item:not(:last-of-type) {
              border-bottom: 1px solid #CCCCCC;
          }
          
@@ -195,7 +192,9 @@
 
          function updateRace(raceId) {
              // Pull the list of users for that race.
+             intervalReady = false;
              $.get('/race/' + raceId, {}, function(data) {
+                 intervalReady = true;
                  // No longer a selected race, so return immediately.
                  if (!window.selectedRaceId) {
                      return;
@@ -284,11 +283,12 @@
              updateRace(raceGraphic.attributes.OBJECTID);
              window.selectedRaceId = raceGraphic.attributes.OBJECTID;
 
+             window.intervalReady = true;
              window.intervalId = setInterval(function() {
-                 if (window.selectedRaceId) {
+                 if (window.selectedRaceId && intervalReady) {
                      updateRace(window.selectedRaceId);
                  }
-             }, 1000);
+             }, 5000);
 
              $('#race-title').text(raceGraphic.attributes.title);
              $('#app-title').hide();
@@ -445,13 +445,24 @@
                  // Update each users's values manually.
                  userElements.forEach(function(element) {
                      if (element.currentSpeed) {
-                         $('#element' + element.id + ' .list-current-speed').text(element.currentSpeed.toFixed(1) + ' mph');
+                         $('#element' + element.id + ' .list-current-speed').text(element.sampling[element.sampling.length - 1].value.toFixed(1) + ' mph');
                      }
                      if ($('#element' + element.id + ' .chart-canvas:visible').length !== 0) {
                          // This user has a chart, so update with the latest data.
                          currentChart.removeData();
-                         currentChart.addData([element.sampling[element.sampling.length - 1].value], getTime(new Date(element.sampling[element.sampling.length - 1].timestamp)));
+                         currentChart.addData([element.sampling[0].value], getTime(new Date(element.sampling[0].timestamp)));
                      }
+                 });
+
+                 // Reorder divs.
+                 var newTop = 70;
+                 userElements.forEach(function(element) {
+                     $('#element' + element.id).css('position', 'absolute');
+                     $('#element' + element.id).css('left', '0');
+                     $('#element' + element.id).css('right', '0');
+                     $('#element' + element.id).css('top', newTop + 'px');
+
+                     newTop += 45;
                  });
              } else {
                  renderList(userElements, 'Racers', true, true);
