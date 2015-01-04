@@ -90,24 +90,16 @@ def run_command():
 def get_race(race_id):
     race_id = str(race_id)
 
-    c = Couchbase.connect(bucket='default', host='104.131.187.45')
+    couchbase_host = 'http://104.131.187.45:4984'
 
-    # Query couchbase for the race.
-    try:
-        race = c.get(race_id)
-    except CouchbaseError as e:
-        return jsonify(success=False)
+    r = requests.get(couchbase_host + '/default/' + race_id)
 
-    race = race.value
+    race = r.json()
 
     users = []
     for user in race['users']:
-        try:
-            user_metadata = c.get(user['email'])
-        except CouchbaseError as e:
-            continue
-
-        user_metadata = user_metadata.value
+        r = requests.get(couchbase_host + '/default/' + user['email'])
+        user_metadata = r.json()
 
         del user_metadata['password']
 
