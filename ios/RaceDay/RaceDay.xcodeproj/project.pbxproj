@@ -10,6 +10,8 @@
 		0F1564EE1A591E9100DC08F0 /* UnderlinedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1564EB1A591E9100DC08F0 /* UnderlinedButton.swift */; };
 		0F1564EF1A591E9100DC08F0 /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1564EC1A591E9100DC08F0 /* BorderedButton.swift */; };
 		0F1564F01A591E9100DC08F0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1564ED1A591E9100DC08F0 /* RoundedButton.swift */; };
+		0F1564F21A598DCD00DC08F0 /* RaceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1564F11A598DCD00DC08F0 /* RaceTableViewCell.swift */; };
+		0F1564F41A5992ED00DC08F0 /* RaceTableViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1564F31A5992ED00DC08F0 /* RaceTableViewHeaderCell.swift */; };
 		0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E341A587A9A00DDA422 /* APIManager.swift */; };
 		0F327E371A587AB400DDA422 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E361A587AB400DDA422 /* Constants.swift */; };
 		0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E381A5893C900DDA422 /* LoginViewController.swift */; };
@@ -58,6 +60,8 @@
 		0F1564EB1A591E9100DC08F0 /* UnderlinedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnderlinedButton.swift; sourceTree = "<group>"; };
 		0F1564EC1A591E9100DC08F0 /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 		0F1564ED1A591E9100DC08F0 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		0F1564F11A598DCD00DC08F0 /* RaceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceTableViewCell.swift; sourceTree = "<group>"; };
+		0F1564F31A5992ED00DC08F0 /* RaceTableViewHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceTableViewHeaderCell.swift; sourceTree = "<group>"; };
 		0F327E341A587A9A00DDA422 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		0F327E361A587AB400DDA422 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0F327E381A5893C900DDA422 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -170,11 +174,13 @@
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
+				0F1564F31A5992ED00DC08F0 /* RaceTableViewHeaderCell.swift */,
 				0F1564EB1A591E9100DC08F0 /* UnderlinedButton.swift */,
 				0F1564EC1A591E9100DC08F0 /* BorderedButton.swift */,
 				0F1564ED1A591E9100DC08F0 /* RoundedButton.swift */,
 				0F327E411A589DDC00DDA422 /* RaceViewController.swift */,
 				0F327E3F1A58962F00DDA422 /* RacesViewController.swift */,
+				0F1564F11A598DCD00DC08F0 /* RaceTableViewCell.swift */,
 				0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */,
 				0F327E381A5893C900DDA422 /* LoginViewController.swift */,
 				0F579A411A5875EF0043D31B /* MapViewController.h */,
@@ -425,7 +431,9 @@
 				32D9EEF71A58D53A00998A5B /* M2XClient+HTTP.m in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
 				0F1564F01A591E9100DC08F0 /* RoundedButton.swift in Sources */,
+				0F1564F21A598DCD00DC08F0 /* RaceTableViewCell.swift in Sources */,
 				0F1564EF1A591E9100DC08F0 /* BorderedButton.swift in Sources */,
+				0F1564F41A5992ED00DC08F0 /* RaceTableViewHeaderCell.swift in Sources */,
 				0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */,
 				32D9EEFB1A58D53A00998A5B /* M2XKey.m in Sources */,
 				32D9EEFF1A58D53A00998A5B /* M2XTrigger.m in Sources */,

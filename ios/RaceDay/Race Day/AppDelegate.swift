@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if !setupDatabase() {
             return false
         }
+        
+        UIBarButtonItem.appearance().setTitleTextAttributes([
+            NSForegroundColorAttributeName: UIColor.whiteColor()], forState: UIControlState.Normal)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        
         startSync()
         return true
     }
