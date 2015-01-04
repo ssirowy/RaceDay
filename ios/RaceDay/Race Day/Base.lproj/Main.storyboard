@@ -16,27 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-mh-0g5">
-                                <rect key="frame" x="137" y="452" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="DoL-IV-sCJ" kind="presentation" id="zEF-yB-FiY"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launch-screen" translatesAutoresizingMaskIntoConstraints="NO" id="wx0-Gg-EVn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Nf-Tk-MiA">
-                                <rect key="frame" x="112" y="82" width="97" height="30"/>
+                                <rect key="frame" x="16" y="82" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O2q-PE-0Au">
-                                <rect key="frame" x="112" y="127" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GGl-Er-H8B">
-                                <rect key="frame" x="112" y="166" width="97" height="30"/>
+                                <rect key="frame" x="16" y="127" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -55,7 +44,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="emailTextField" destination="3Nf-Tk-MiA" id="cTP-5o-8NW"/>
-                        <outlet property="nameTextFeild" destination="GGl-Er-H8B" id="vzN-AN-tf8"/>
                         <outlet property="passwordTextField" destination="O2q-PE-0Au" id="usY-tt-An1"/>
                         <segue destination="zrO-mH-jiJ" kind="presentation" identifier="loginSegue" modalTransitionStyle="crossDissolve" id="08z-5k-3H0"/>
                     </connections>
@@ -272,7 +260,7 @@
                         <viewControllerLayoutGuide type="bottom" id="10N-24-2iH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ikm-hd-lQl">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="map" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ot-rB-2oY">
@@ -344,7 +332,7 @@
             <point key="canvasLocation" x="454" y="489"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="zEF-yB-FiY"/>
-    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="launch-screen" width="320" height="568"/>
+    </resources>
 </document>
