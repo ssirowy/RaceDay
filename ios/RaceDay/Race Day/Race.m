@@ -13,22 +13,13 @@
 #define kFeetPerMeter 3.28084
 #define kFeetPerMile  5280
 
-typedef enum {
-    RaceStateUnknown = 0,
-    RaceStateNotStarted,
-    RaceStateAtStart,
-    RaceStateLeftStart,
-    RaceStateMiddleOfRace,
-    RaceStateAtFinish,
-    RaceStateFinishedRace
-} RaceState;
-
 @interface Race()
 
 @property (nonatomic, strong) AGSPolyline* raceLine;
-@property (nonatomic, assign) RaceState raceState;
 
 @property (nonatomic, strong) AGSMutablePolyline* myProgress;
+
+@property (nonatomic) double distanceInMiles;
 
 @end
 
@@ -239,9 +230,9 @@ typedef enum {
     
     AGSGeometryEngine* ge = [AGSGeometryEngine defaultGeometryEngine];
     double lengthInMeters = [ge lengthOfGeometry:self.myProgress];
-    double lengthInMiles = (lengthInMeters * kFeetPerMeter)/kFeetPerMile;
+    _distanceInMiles = (lengthInMeters * kFeetPerMeter)/kFeetPerMile;
     
-    NSLog(@"Lat:%f  Long:%f  Progress:  %.2f miles", newLocation.y, newLocation.x, lengthInMiles);
+    NSLog(@"Lat:%f  Long:%f  Progress:  %.2f miles", newLocation.y, newLocation.x, _distanceInMiles);
 }
 
 - (NSString*)stringFromState:(RaceState)state
@@ -286,6 +277,26 @@ typedef enum {
     if ([keyPath isEqualToString:kLocationPath]) {
         [self calculateRaceState];
     }
+}
+
+// ONly make sense when race is being run
+- (double)distanceCovered
+{
+    if (self.raceState == RaceStateNotStarted ||  self.raceState == RaceStateUnknown) {
+        return 0;
+    }
+    
+    return self.distanceInMiles;
+}
+
+- (double)percentageComplete
+{
+    return (self.distanceInMiles / self.totalDistance)*100.0;
+}
+
+- (AGSPoint*)currentLocation
+{
+    return [[[RaceMapView sharedMapView] locationDisplay] mapLocation];
 }
 
 @end

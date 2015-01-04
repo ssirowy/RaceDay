@@ -21,6 +21,16 @@ typedef enum {
     RaceSimulatedSpeedFast
 } RaceSimulatedSpeed;
 
+typedef enum {
+    RaceStateUnknown = 0,
+    RaceStateNotStarted,
+    RaceStateAtStart,
+    RaceStateLeftStart,
+    RaceStateMiddleOfRace,
+    RaceStateAtFinish,
+    RaceStateFinishedRace
+} RaceState;
+
 @interface Race : NSObject
 
 @property (nonatomic, strong, readonly) AGSGraphic* graphic;
@@ -36,11 +46,18 @@ typedef enum {
 // miles
 @property (nonatomic, assign) double totalDistance;
 
+@property (nonatomic, assign) RaceState raceState;
+
 - (id)initWithFeature:(AGSGraphic*)race;
 
 - (AGSPoint*)startPoint;
 - (AGSPoint*)endPoint;
 
 - (void)startRaceSimulatedSpeed:(RaceSimulatedSpeed)speed;
+
+// ONly make sense when race is being run
+- (double)distanceCovered;
+- (double)percentageComplete;
+- (AGSPoint*)currentLocation;
 
 @end
