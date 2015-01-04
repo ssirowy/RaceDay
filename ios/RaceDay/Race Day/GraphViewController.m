@@ -30,6 +30,11 @@
     _graphView.widthLine = 4.0f;
     
     [self.view addSubview:self.graphView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self.graphView
+                                             selector:@selector(reloadGraph)
+                                                 name:kM2XDataPointsChanged
+                                               object:self.race];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,13 +44,14 @@
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph
 {
-    return 5;
+    return self.race.dataPoints.count;
 }
 
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index
 {
-    return index*2;
+    NSNumber* number = [self.race.dataPoints objectAtIndex:index];
+    return [number floatValue];
 }
 
 /*
