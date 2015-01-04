@@ -15,6 +15,7 @@
 		0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3F1A58962F00DDA422 /* RacesViewController.swift */; };
 		0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E411A589DDC00DDA422 /* RaceViewController.swift */; };
 		0F327E441A589EE400DDA422 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E431A589EE400DDA422 /* DetailsViewController.swift */; };
+		0F327E461A58E8BB00DDA422 /* JoinRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */; };
 		0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7961A58719D00471244 /* AppDelegate.swift */; };
 		0F51B79C1A58719D00471244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79A1A58719D00471244 /* Main.storyboard */; };
 		0F51B79E1A58719D00471244 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79D1A58719D00471244 /* Images.xcassets */; };
@@ -46,6 +47,7 @@
 		0F327E3F1A58962F00DDA422 /* RacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesViewController.swift; sourceTree = "<group>"; };
 		0F327E411A589DDC00DDA422 /* RaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
 		0F327E431A589EE400DDA422 /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinRaceViewController.swift; sourceTree = "<group>"; };
 		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7961A58719D00471244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
 				0F327E411A589DDC00DDA422 /* RaceViewController.swift */,
 				0F327E3F1A58962F00DDA422 /* RacesViewController.swift */,
+				0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */,
 				0F327E381A5893C900DDA422 /* LoginViewController.swift */,
 				0F579A411A5875EF0043D31B /* MapViewController.h */,
 				0F579A421A5875EF0043D31B /* MapViewController.m */,
@@ -320,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F327E3D1A5894DB00DDA422 /* User.m in Sources */,
+				0F327E461A58E8BB00DDA422 /* JoinRaceViewController.swift in Sources */,
 				0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */,
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
