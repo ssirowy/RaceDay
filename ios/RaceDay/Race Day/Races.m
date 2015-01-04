@@ -30,10 +30,7 @@ static Races* sharedRaces = nil;
         _credential = [[AGSCredential alloc] initWithUser:@"scottsirowy" password:@"Crowded2000"];
         _url   = [NSURL URLWithString:kRaceServerURL];
         
-        
-        /*
         _result = [SmiSdk getSDAuth:kRaceServerURL userId:@"ssirowy" appId:@"RaceDay"];
-        
         
         // get sponsored data url
         NSString* sdUrl =  self.result.url;
@@ -44,7 +41,7 @@ static Races* sharedRaces = nil;
             _url = [NSURL URLWithString:sdUrl];
             //1. use 'http://s3.amazonaws.com/sdmsg/sponsored/msg.png' logo to display sponsored message
             //2. use the 'sdUrl' for requesting the content } else if(sr.state == SD_NOT_AVAILABLE) {
-        }   */
+        }
         
     }
     

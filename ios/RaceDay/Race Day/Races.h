@@ -16,6 +16,8 @@
 @property (nonatomic, strong, readonly) AGSCredential* credential;
 @property (nonatomic, strong, readonly) NSURL* url;
 
+@property (nonatomic) BOOL usingSponsoredData;
+
 @property (nonatomic, strong, readonly) NSArray* allRaces;
 
 - (void)findRacesWithCompletion:(void (^)(NSArray*, NSError*))completion;
