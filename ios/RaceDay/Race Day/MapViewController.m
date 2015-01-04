@@ -67,6 +67,26 @@
     
     /*  test */
     
+    _m2xClient = [[M2XClient alloc] initWithApiKey:kM2X_API_KEY];
+    _device = [[M2XDevice alloc] initWithClient:self.m2xClient
+                                     attributes:@{@"id": kM2X_DEVICE_ID}
+               ];
+    
+    NSString* streamName = @"scottsirowy1";
+    
+    
+    NSDictionary* units = @{@"label": @"speed", @"symbol": @"miles/hr"};
+    __weak MapViewController* weakSelf = self;
+    [self.device updateStreamWithName:streamName
+                           parameters:@{@"unit": units, @"type": @"numeric"}
+                    completionHandler:^(M2XStream* s, M2XResponse* r) {
+                        weakSelf.stream = s;
+                        [weakSelf updateStream];
+                    }];
+}
+     
+- (void)updateStream
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSLocale *enUSPOSIXLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     [dateFormatter setLocale:enUSPOSIXLocale];
@@ -76,16 +96,7 @@
     NSString *iso8601String = [dateFormatter stringFromDate:now];
     NSLog(@"%@", iso8601String);
     
-    _m2xClient = [[M2XClient alloc] initWithApiKey:kM2X_API_KEY];
-    _device = [[M2XDevice alloc] initWithClient:self.m2xClient
-                                     attributes:@{@"id": kM2X_DEVICE_ID}
-               ];
-    
-    NSString* streamName = @"numbers";
-    _stream = [[M2XStream alloc] initWithClient:self.m2xClient
-                                         device:self.device attributes:@{@"name": streamName}];
-    
-    [self.stream updateValue:[NSNumber numberWithFloat:1067.8f]
+    [self.stream updateValue:[NSNumber numberWithFloat:54.0f]
                    timestamp:iso8601String
            completionHandler:^(M2XResponse* response){
                NSLog(@"Something");
