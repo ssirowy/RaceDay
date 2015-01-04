@@ -52,7 +52,7 @@
     elapsed -= secs;
     int fraction = elapsed * 10.0f;
     
-    NSString* formattedString = [NSString stringWithFormat:@"%u:%02u.%u", mins, secs, fraction];
+    NSString* formattedString = [NSString stringWithFormat:@"%02u:%02u.%02u", mins, secs, fraction];
     self.timeLabel.text = formattedString;
     
     [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];

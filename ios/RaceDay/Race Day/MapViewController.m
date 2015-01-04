@@ -63,6 +63,11 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self.mapView removeMapLayer:self.geofenceLayer];
+}
+
+- (void)mapViewDidLoad:(AGSMapView *)mapView
+{
     Races* races = [Races sharedRaces];
     AGSFeatureLayer* lines = [[AGSFeatureLayer alloc] initWithURL:races.url
                                                              mode:AGSFeatureLayerModeSnapshot
@@ -70,11 +75,6 @@
     
     [self.mapView addMapLayer:lines];
     
-    [self.mapView removeMapLayer:self.geofenceLayer];
-}
-
-- (void)mapViewDidLoad:(AGSMapView *)mapView
-{
     if (self.needToLoadRace) {
         [self showRace:self.currentRace];
     }
