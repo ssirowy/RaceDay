@@ -57,6 +57,10 @@
     [self.mapView addMapLayer:tiledLayer withName:@"Basemap"];
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
+    
+    if (self.small) {
+        self.mapView.userInteractionEnabled = false;
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

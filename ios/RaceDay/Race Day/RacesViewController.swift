@@ -80,6 +80,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let race = sender! as Race
         if segue.identifier == "mapSegue" {
             let dst = segue.destinationViewController as MapViewController
+            dst.small = false;
             dst.showRace(race)
         } else {
             let dst = segue.destinationViewController as JoinRaceViewController

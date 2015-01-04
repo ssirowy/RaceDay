@@ -3,11 +3,10 @@ from flask import Flask
 from flask import (flash, g, session, redirect, url_for, request, abort, make_response, 
                    current_app, jsonify, render_template, after_this_request)
 
-from couchbase import Couchbase
-from couchbase.exceptions import CouchbaseError
 import traceback
 import os
 import pprint
+import requests
 import datetime
 import json
 from datetime import timedelta
@@ -68,24 +67,27 @@ def home():
     
     return render_template('home.html')
 
-@app.route('/run', methods=['POST'])
-def run_command():
-    c = Couchbase.connect(bucket='default', host='http://104.131.187.45/')
+@app.route('/race/<int:race_id>')
+def get_race(race_id):
+    race_id = str(race_id)
 
-    # daniel = { 'name' : 'Daniel de Haas',
-    #            'email' : 'daniel.andrew.dehaas@gmail.com',
-    #            'birthday': 123 }
-    # c.set('daniel', daniel)
+    couchbase_host = 'http://104.131.187.45:4984'
 
-    # try:
-    #     test = c.get('daniel')
-    # except CouchbaseError as e:
-    #     return "Couldn't retrieve value for key " + str(e)
+    r = requests.get(couchbase_host + '/default/' + race_id)
 
-    race = { 'title' : '' }
-    
-    
-    return jsonify(success=True)
+    race = r.json()
+
+    users = []
+    for user in race['users']:
+        r = requests.get(couchbase_host + '/default/' + user['email'])
+        user_metadata = r.json()
+
+        del user_metadata['password']
+
+        users.append({ 'user' : user_metadata,
+                       'data' : user['data'] })
+
+    return jsonify(users=users)
 
 if __name__ == '__main__':
     port = os.getenv('VCAP_APP_PORT', '5000')
