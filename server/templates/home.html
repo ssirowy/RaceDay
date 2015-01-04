@@ -300,7 +300,7 @@
          function selectRace(raceGraphic) {
              // Zoom the map to the race.
              var extent = new esri.geometry.Extent(raceGraphic.geometry._extent);
-             extent = extent.expand(1.4);
+             extent = extent.expand(1.8);
              map.setExtent(extent);
 
              graphicsLayer.clear();
