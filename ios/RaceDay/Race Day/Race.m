@@ -9,9 +9,15 @@
 #import "Race.h"
 #import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
+#import "M2X.h"
 
 #define kFeetPerMeter 3.28084
 #define kFeetPerMile  5280
+
+/*
+#define kM2X_API_KEY @"7553e56ea444371828dd78ccf7ff58c8"
+#define kM2X_DEVICE_ID  @"2b31a57e778cbed2339ae9e34d4642f6"
+ */
 
 @interface Race()
 
@@ -20,6 +26,10 @@
 @property (nonatomic, strong) AGSMutablePolyline* myProgress;
 
 @property (nonatomic) double distanceInMiles;
+
+@property (nonatomic, strong) M2XClient* m2xClient;
+@property (nonatomic, strong) M2XDevice* device;
+@property (nonatomic, strong) M2XStream* stream;
 
 @end
 
@@ -166,11 +176,7 @@
         case RaceStateAtStart:
             break;
         case RaceStateLeftStart:
-            [[NSNotificationCenter defaultCenter] postNotificationName:kRaceStartedNotification object:self];
-            
-            _myProgress = [[AGSMutablePolyline alloc] init];
-            [_myProgress addPathToPolyline];
-            
+            [self startRaceInternal];
             break;
         case RaceStateMiddleOfRace:
             [self updateAndPostProgress];
@@ -215,6 +221,25 @@
     if (self.raceState != RaceStateMiddleOfRace) {
         NSLog(@"%@", [self stringFromState:self.raceState]);
     }
+}
+
+- (void)startRaceInternal
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRaceStartedNotification object:self];
+    
+    _myProgress = [[AGSMutablePolyline alloc] init];
+    [_myProgress addPathToPolyline];
+    
+    /*
+    _m2xClient = [[M2XClient alloc] initWithApiKey:kM2X_API_KEY];
+    _device = [[M2XDevice alloc] initWithClient:self.m2xClient
+                                               attributes:@{@"id": kM2X_DEVICE_ID}
+                         ];
+    
+    NSString* streamName = @"numbers";
+    _stream = [[M2XStream alloc] initWithClient:self.m2xClient
+                                         device:self.device attributes:@{@"name": streamName}];
+     */
 }
 
 - (void)updateAndPostProgress
