@@ -13,6 +13,8 @@
 @interface DetailsViewController : UIViewController
 
 @property (nonatomic, strong) Race* race;
+
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
+@property (nonatomic, strong) IBOutlet UILabel* distanceLabel;
 
 @end

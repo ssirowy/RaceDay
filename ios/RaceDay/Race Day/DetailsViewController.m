@@ -20,7 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.timeLabel.text = @"";
+    self.distanceLabel.text = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +35,8 @@
     _startTime = [NSDate timeIntervalSinceReferenceDate];
     _running = YES;
     [self updateTime];
+    
+    [self updateDistance];
 }
 
 - (void)updateTime
@@ -52,6 +56,15 @@
     self.timeLabel.text = formattedString;
     
     [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
+}
+
+- (void)updateDistance
+{
+    if (!self.running) return;
+    
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f miles. %.1f percent complete", self.race.distanceCovered, self.race.percentageComplete];
+    
+    [self performSelector:@selector(updateDistance) withObject:self afterDelay:1.0];
 }
 
 - (void)stopTimer
