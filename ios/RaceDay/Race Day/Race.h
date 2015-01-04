@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define kRaceStartedNotification @"kRaceStartedNotification"
+#define kRaceEndedNotification @"kRaceEndedNotification"
+
 @class AGSGraphic;
 @class AGSGeometry;
 @class AGSPoint;

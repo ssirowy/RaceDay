@@ -26,8 +26,9 @@ typedef enum {
 @interface Race()
 
 @property (nonatomic, strong) AGSPolyline* raceLine;
-
 @property (nonatomic, assign) RaceState raceState;
+
+@property (nonatomic, strong) AGSMutablePolyline* myProgress;
 
 @end
 
@@ -102,7 +103,7 @@ typedef enum {
 }
 
 
-#define kFast 60
+#define kFast 120
 #define kMedium (kFast / 2)
 #define kSlow   (kMedium / 2)
 #define kLocationPath @"location"
@@ -139,6 +140,16 @@ typedef enum {
     [display addObserver:self forKeyPath:kLocationPath options:0 context:nil];
 }
 
+- (void)endRace
+{
+    AGSLocationDisplay* display = [[RaceMapView sharedMapView] locationDisplay];
+    [display removeObserver:self forKeyPath:kLocationPath];
+    self.raceState = RaceStateNotStarted;
+    [display stopDataSource];
+    
+    self.myProgress = nil;
+}
+
 #pragma mark -
 #pragma mark Race State
 - (void)calculateRaceState
@@ -164,10 +175,18 @@ typedef enum {
         case RaceStateAtStart:
             break;
         case RaceStateLeftStart:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRaceStartedNotification object:self];
+            
+            _myProgress = [[AGSMutablePolyline alloc] init];
+            [_myProgress addPathToPolyline];
+            
             break;
         case RaceStateMiddleOfRace:
+            [self updateAndPostProgress];
             break;
         case RaceStateAtFinish:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRaceEndedNotification object:self];
+            [self endRace];
             break;
         case RaceStateFinishedRace:
             break;
@@ -202,7 +221,27 @@ typedef enum {
             break;
     }
     
-    NSLog(@"%@", [self stringFromState:self.raceState]);
+    if (self.raceState != RaceStateMiddleOfRace) {
+        NSLog(@"%@", [self stringFromState:self.raceState]);
+    }
+}
+
+- (void)updateAndPostProgress
+{
+    if (self.raceState != RaceStateMiddleOfRace) {
+        return;
+    }
+    
+    AGSLocationDisplay* display = [[RaceMapView sharedMapView] locationDisplay];
+    AGSPoint* newLocation = [display.mapLocation copy];
+    
+    [self.myProgress addPointToPath:newLocation];
+    
+    AGSGeometryEngine* ge = [AGSGeometryEngine defaultGeometryEngine];
+    double lengthInMeters = [ge lengthOfGeometry:self.myProgress];
+    double lengthInMiles = (lengthInMeters * kFeetPerMeter)/kFeetPerMile;
+    
+    NSLog(@"Lat:%f  Long:%f  Progress:  %.2f miles", newLocation.y, newLocation.x, lengthInMiles);
 }
 
 - (NSString*)stringFromState:(RaceState)state
@@ -225,10 +264,10 @@ typedef enum {
             s = @"Middle of race";
             break;
         case RaceStateAtFinish:
-            s = @"Arrived P1";
+            s = @"Arrived at finish line";
             break;
         case RaceStateFinishedRace:
-            s = @"At P2";
+            s = @"Done with race";
             break;
         default:
             break;

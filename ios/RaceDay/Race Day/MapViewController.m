@@ -58,7 +58,7 @@
 
 - (void)startRace
 {
-    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedMedium];
+    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedFast];
 }
 
 - (void)viewDidAppear:(BOOL)animated
