@@ -17,6 +17,8 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Races"
 
         // Do any additional setup after loading the view.
     }
