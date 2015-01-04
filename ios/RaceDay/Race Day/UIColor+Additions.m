@@ -37,4 +37,9 @@ alpha:       1.0]
     return UIColorFromRGB(0x576E91);
 }
 
++ (UIColor*)lightOrange
+{
+    return UIColorFromRGB(0xFAF7F7);
+}
+
 @end
