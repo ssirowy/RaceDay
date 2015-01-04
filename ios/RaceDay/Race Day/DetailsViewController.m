@@ -82,6 +82,8 @@
     [self updateDistance];
     
     [self updateCouch];
+    
+    [self updatePlace];
 }
 
 - (void)updateTime
@@ -94,10 +96,8 @@
     int mins = (int)(elapsed / 60.0);
     elapsed -= mins* 60;
     int secs = (int)elapsed;
-    elapsed -= secs;
-    int fraction = elapsed * 10.0f;
     
-    NSString* formattedString = [NSString stringWithFormat:@"%02u:%02u.%02u", mins, secs, fraction];
+    NSString* formattedString = [NSString stringWithFormat:@"%02u:%02u", mins, secs];
     self.timeLabel.text = formattedString;
     
     [self performSelector:@selector(updateTime) withObject:self afterDelay:0.1];
@@ -107,9 +107,64 @@
 {
     if (!self.running) return;
     
-    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f miles. %.1f percent complete", self.race.distanceCovered, self.race.percentageComplete];
+    self.distanceLabel.text = [NSString stringWithFormat:@"%.2f mi", self.race.distanceCovered];
     
     [self performSelector:@selector(updateDistance) withObject:self afterDelay:1.0];
+}
+
+- (void)updatePlace
+{
+    if (!self.running) return;
+    
+    AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+    CBLDatabase* db = delegate.database;
+    
+    CBLDocument* doc = [db documentWithID: self.race.raceID.stringValue];
+    NSMutableDictionary* p = CFBridgingRelease(CFPropertyListCreateDeepCopy(kCFAllocatorDefault, (CFDictionaryRef)doc.properties, kCFPropertyListMutableContainers));
+    NSMutableArray* users = p[@"users"];
+    NSNumber* userDistance = [[NSNumber alloc] init];
+    NSMutableArray* places = [[NSMutableArray alloc] init];
+    for (int i = 0; i < users.count; i++) {
+        NSDictionary* user = users[i];
+        NSArray* evts = user[@"data"];
+        if (evts.count == 0) {
+            continue;
+        } else {
+            NSDictionary* evt = evts[0];
+            NSNumber* distance = evt[@"distance"];
+            if ([[[User storedUser] email] isEqualToString:user[@"email"]]) {
+                userDistance = distance;
+            }
+            int j = 0;
+            bool inserted = false;
+            while (j < places.count) {
+                NSNumber* place = places[j];
+                if (place > distance) {
+                    [places insertObject:distance atIndex:j];
+                    inserted = true;
+                    break;
+                }
+            }
+            if (!inserted) {
+                [places addObject:distance];
+            }
+        }
+    }
+    
+    NSUInteger place = [places indexOfObject:userDistance];
+    
+    if (place == 1) {
+        self.overallLabel.text = @"1st";
+        self.ageGroupLabel.text = @"1st";
+    } else if (place == 2) {
+        self.overallLabel.text = @"2nd";
+        self.ageGroupLabel.text = @"2nd";
+    } else if (place == 3) {
+        self.overallLabel.text = @"3rd";
+        self.ageGroupLabel.text = @"3rd";
+    }
+    
+    [self performSelector:@selector(updatePlace) withObject:self afterDelay:1.0];
 }
 
 - (void)updateCouch
