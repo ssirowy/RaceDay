@@ -12,10 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var database: CBLDatabase!
+    private let kSyncUrl = NSURL(string: "http://104.131.187.45:4984/default")
+    private var _pull: CBLReplication!
+    private var _push: CBLReplication!
+    private var _lastSyncError: NSError?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        if !setupDatabase() {
+            return false
+        }
+        startSync()
         return true
     }
 
@@ -41,6 +49,62 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    private func setupDatabase() -> Bool {
+        // Step 3: Setup 'kitchen-sync' database
+        var error: NSError?
+        database = CBLManager.sharedInstance().databaseNamed("default", error: &error)
+        if database == nil {
+            NSLog("Cannot get kitchen-sync database with error: %@", error!)
+            return false
+        }
+        
+        database.viewNamed("viewByType").setMapBlock({ doc, emit in
+            if let type = doc["type"] as? String {
+                emit(type, doc)
+            }
+        }, version: "1.0")
+        
+        
+        
+        return true
+    }
+    
+    private func startSync() {
+        if kSyncUrl == nil {
+            return
+        }
+        
+        _pull = database.createPullReplication(kSyncUrl)
+        _push = database.createPushReplication(kSyncUrl)
+        
+        _pull.continuous = true
+        _push.continuous = true
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "replicationProgress:",
+            name: kCBLReplicationChangeNotification, object: _pull)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "replicationProgress:",
+            name: kCBLReplicationChangeNotification, object: _push)
+        
+        _pull.start()
+        _push.start()
+    }
+    
+    func replicationProgress(notification: NSNotification) {
+        if _pull.status == CBLReplicationStatus.Active ||
+            _push.status == CBLReplicationStatus.Active {
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        } else {
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        }
+        
+        let error = _pull.lastError ?? _push.lastError
+        if error != _lastSyncError {
+            _lastSyncError = error
+            if error != nil {
+                NSLog("Replication Error: %@", error!)
+            }
+        }
+    }
 
 }
 

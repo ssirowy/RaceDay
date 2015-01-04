@@ -14,6 +14,7 @@
 		0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3C1A5894DB00DDA422 /* User-extension.swift */; };
 		0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E3F1A58962F00DDA422 /* RacesViewController.swift */; };
 		0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E411A589DDC00DDA422 /* RaceViewController.swift */; };
+		0F327E461A58E8BB00DDA422 /* JoinRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */; };
 		0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F51B7961A58719D00471244 /* AppDelegate.swift */; };
 		0F51B79C1A58719D00471244 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79A1A58719D00471244 /* Main.storyboard */; };
 		0F51B79E1A58719D00471244 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F51B79D1A58719D00471244 /* Images.xcassets */; };
@@ -57,13 +58,14 @@
 		0F327E3C1A5894DB00DDA422 /* User-extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User-extension.swift"; sourceTree = "<group>"; };
 		0F327E3F1A58962F00DDA422 /* RacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesViewController.swift; sourceTree = "<group>"; };
 		0F327E411A589DDC00DDA422 /* RaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
-		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinRaceViewController.swift; sourceTree = "<group>"; };
+		0F51B7911A58719D00471244 /* RaceDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaceDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7961A58719D00471244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F51B79B1A58719D00471244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F51B79D1A58719D00471244 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0F51B7A01A58719D00471244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		0F51B7A61A58719E00471244 /* Race DayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Race DayTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F51B7A61A58719E00471244 /* RaceDayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RaceDayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7AB1A58719E00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7AC1A58719E00471244 /* Race_DayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race_DayTests.swift; sourceTree = "<group>"; };
 		0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Race Day-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -138,8 +140,8 @@
 		0F51B7921A58719D00471244 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F51B7911A58719D00471244 /* Race Day.app */,
-				0F51B7A61A58719E00471244 /* Race DayTests.xctest */,
+				0F51B7911A58719D00471244 /* RaceDay.app */,
+				0F51B7A61A58719E00471244 /* RaceDayTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -158,6 +160,7 @@
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
 				0F327E411A589DDC00DDA422 /* RaceViewController.swift */,
 				0F327E3F1A58962F00DDA422 /* RacesViewController.swift */,
+				0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */,
 				0F327E381A5893C900DDA422 /* LoginViewController.swift */,
 				0F579A411A5875EF0043D31B /* MapViewController.h */,
 				0F579A421A5875EF0043D31B /* MapViewController.m */,
@@ -259,9 +262,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F51B7901A58719D00471244 /* Race Day */ = {
+		0F51B7901A58719D00471244 /* RaceDay */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F51B7B01A58719E00471244 /* Build configuration list for PBXNativeTarget "Race Day" */;
+			buildConfigurationList = 0F51B7B01A58719E00471244 /* Build configuration list for PBXNativeTarget "RaceDay" */;
 			buildPhases = (
 				72DD20ECB2F8CF0466C868FB /* Check Pods Manifest.lock */,
 				0F51B78D1A58719D00471244 /* Sources */,
@@ -273,14 +276,14 @@
 			);
 			dependencies = (
 			);
-			name = "Race Day";
+			name = RaceDay;
 			productName = "Race Day";
-			productReference = 0F51B7911A58719D00471244 /* Race Day.app */;
+			productReference = 0F51B7911A58719D00471244 /* RaceDay.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0F51B7A51A58719E00471244 /* Race DayTests */ = {
+		0F51B7A51A58719E00471244 /* RaceDayTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0F51B7B31A58719E00471244 /* Build configuration list for PBXNativeTarget "Race DayTests" */;
+			buildConfigurationList = 0F51B7B31A58719E00471244 /* Build configuration list for PBXNativeTarget "RaceDayTests" */;
 			buildPhases = (
 				0F51B7A21A58719E00471244 /* Sources */,
 				0F51B7A31A58719E00471244 /* Frameworks */,
@@ -291,9 +294,9 @@
 			dependencies = (
 				0F51B7A81A58719E00471244 /* PBXTargetDependency */,
 			);
-			name = "Race DayTests";
+			name = RaceDayTests;
 			productName = "Race DayTests";
-			productReference = 0F51B7A61A58719E00471244 /* Race DayTests.xctest */;
+			productReference = 0F51B7A61A58719E00471244 /* RaceDayTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -314,7 +317,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0F51B78C1A58719D00471244 /* Build configuration list for PBXProject "Race Day" */;
+			buildConfigurationList = 0F51B78C1A58719D00471244 /* Build configuration list for PBXProject "RaceDay" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -327,8 +330,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0F51B7901A58719D00471244 /* Race Day */,
-				0F51B7A51A58719E00471244 /* Race DayTests */,
+				0F51B7901A58719D00471244 /* RaceDay */,
+				0F51B7A51A58719E00471244 /* RaceDayTests */,
 			);
 		};
 /* End PBXProject section */
@@ -392,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F327E3D1A5894DB00DDA422 /* User.m in Sources */,
+				0F327E461A58E8BB00DDA422 /* JoinRaceViewController.swift in Sources */,
 				0F327E391A5893C900DDA422 /* LoginViewController.swift in Sources */,
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
@@ -431,7 +435,7 @@
 /* Begin PBXTargetDependency section */
 		0F51B7A81A58719E00471244 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0F51B7901A58719D00471244 /* Race Day */;
+			target = 0F51B7901A58719D00471244 /* RaceDay */;
 			targetProxy = 0F51B7A71A58719E00471244 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -543,7 +547,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Race Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RaceDay;
 				SWIFT_OBJC_BRIDGING_HEADER = "Race Day-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -557,7 +561,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Race Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RaceDay;
 				SWIFT_OBJC_BRIDGING_HEADER = "Race Day-Bridging-Header.h";
 			};
 			name = Release;
@@ -576,7 +580,7 @@
 				);
 				INFOPLIST_FILE = "Race DayTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RaceDayTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Race Day.app/Race Day";
 			};
 			name = Debug;
@@ -591,7 +595,7 @@
 				);
 				INFOPLIST_FILE = "Race DayTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = RaceDayTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Race Day.app/Race Day";
 			};
 			name = Release;
@@ -599,7 +603,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0F51B78C1A58719D00471244 /* Build configuration list for PBXProject "Race Day" */ = {
+		0F51B78C1A58719D00471244 /* Build configuration list for PBXProject "RaceDay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F51B7AE1A58719E00471244 /* Debug */,
@@ -608,7 +612,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F51B7B01A58719E00471244 /* Build configuration list for PBXNativeTarget "Race Day" */ = {
+		0F51B7B01A58719E00471244 /* Build configuration list for PBXNativeTarget "RaceDay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F51B7B11A58719E00471244 /* Debug */,
@@ -617,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0F51B7B31A58719E00471244 /* Build configuration list for PBXNativeTarget "Race DayTests" */ = {
+		0F51B7B31A58719E00471244 /* Build configuration list for PBXNativeTarget "RaceDayTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F51B7B41A58719E00471244 /* Debug */,
