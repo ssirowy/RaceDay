@@ -35,6 +35,7 @@
 		32D9EEFE1A58D53A00998A5B /* M2XStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF21A58D53A00998A5B /* M2XStream.m */; };
 		32D9EEFF1A58D53A00998A5B /* M2XTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF41A58D53A00998A5B /* M2XTrigger.m */; };
 		32D9EF001A58D53A00998A5B /* NSDate+M2X.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF61A58D53A00998A5B /* NSDate+M2X.m */; };
+		32D9EF031A58F12700998A5B /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EF021A58F12700998A5B /* UIColor+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		32D9EEF41A58D53A00998A5B /* M2XTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XTrigger.m; sourceTree = "<group>"; };
 		32D9EEF51A58D53A00998A5B /* NSDate+M2X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+M2X.h"; sourceTree = "<group>"; };
 		32D9EEF61A58D53A00998A5B /* NSDate+M2X.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+M2X.m"; sourceTree = "<group>"; };
+		32D9EF011A58F12700998A5B /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		32D9EF021A58F12700998A5B /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
 		B000BB9B71ECC88C713660F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B78DFDFE183A01252B4EF100 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE07BB706FAFF577EBA72D6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				32D9EED51A587E1100998A5B /* Models */,
 				0F327E341A587A9A00DDA422 /* APIManager.swift */,
 				0F327E361A587AB400DDA422 /* Constants.swift */,
+				32D9EF011A58F12700998A5B /* UIColor+Additions.h */,
+				32D9EF021A58F12700998A5B /* UIColor+Additions.m */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
@@ -391,6 +396,7 @@
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
 				32D9EEE01A58C70900998A5B /* DetailsViewController.m in Sources */,
+				32D9EF031A58F12700998A5B /* UIColor+Additions.m in Sources */,
 				0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */,
 				32D9EEF71A58D53A00998A5B /* M2XClient+HTTP.m in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
