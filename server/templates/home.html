@@ -176,13 +176,15 @@
                          map.addLayer(featureLayer);
 
                          setTimeout(function() {
-                             $('.dijitReset.dijitInputInner')[0].value = 'scottsirowy';
-                             $('.dijitReset.dijitInputInner')[1].value = 'Crowded2000';
-                             $($('.dijitReset.dijitInline.dijitButtonNode')[0]).click();
+                             if ($('.dijitReset.dijitInputInner')[0]) {
+                                 $('.dijitReset.dijitInputInner')[0].value = 'scottsirowy';
+                                 $('.dijitReset.dijitInputInner')[1].value = 'Crowded2000';
+                                 $($('.dijitReset.dijitInline.dijitButtonNode')[0]).click();
+                             }
 
                              setTimeout(function() {
                                  renderRacesList();
-                             }, 1700);
+                             }, 1000);
                          }, 1000);
                      }
 
