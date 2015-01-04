@@ -66,7 +66,7 @@
 		0F327E3F1A58962F00DDA422 /* RacesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RacesViewController.swift; sourceTree = "<group>"; };
 		0F327E411A589DDC00DDA422 /* RaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RaceViewController.swift; sourceTree = "<group>"; };
 		0F327E451A58E8BB00DDA422 /* JoinRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoinRaceViewController.swift; sourceTree = "<group>"; };
-		0F51B7911A58719D00471244 /* RaceDay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RaceDay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F51B7911A58719D00471244 /* Race Day.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Race Day.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F51B7951A58719D00471244 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F51B7961A58719D00471244 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F51B79B1A58719D00471244 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,7 +149,7 @@
 		0F51B7921A58719D00471244 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0F51B7911A58719D00471244 /* RaceDay.app */,
+				0F51B7911A58719D00471244 /* Race Day.app */,
 				0F51B7A61A58719E00471244 /* RaceDayTests.xctest */,
 			);
 			name = Products;
@@ -292,7 +292,7 @@
 			);
 			name = RaceDay;
 			productName = "Race Day";
-			productReference = 0F51B7911A58719D00471244 /* RaceDay.app */;
+			productReference = 0F51B7911A58719D00471244 /* Race Day.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0F51B7A51A58719E00471244 /* RaceDayTests */ = {
@@ -515,6 +515,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "Race Day";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -551,6 +552,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "Race Day";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -565,7 +567,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Race Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = RaceDay;
+				PRODUCT_NAME = "Race Day";
 				SWIFT_OBJC_BRIDGING_HEADER = "Race Day-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -579,7 +581,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = "Race Day/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = RaceDay;
+				PRODUCT_NAME = "Race Day";
 				SWIFT_OBJC_BRIDGING_HEADER = "Race Day-Bridging-Header.h";
 			};
 			name = Release;
