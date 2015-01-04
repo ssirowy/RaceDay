@@ -48,6 +48,9 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if self._myRaces.count == 0 && self._nearRaces.count == 0 {
+            return UIView()
+        }
         var cell = tableView.dequeueReusableCellWithIdentifier("Header") as RaceTableViewHeaderCell
         if section == 0 {
             cell.titleLabel!.text = "My Races"

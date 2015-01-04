@@ -16,5 +16,7 @@
 
 @property (nonatomic, strong) IBOutlet UILabel* timeLabel;
 @property (nonatomic, strong) IBOutlet UILabel* distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *overallLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ageGroupLabel;
 
 @end

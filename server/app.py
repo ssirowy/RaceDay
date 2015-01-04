@@ -79,13 +79,16 @@ def get_race(race_id):
     m2x_host = 'http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e'
     m2x_headers = { 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' }
 
+    print '1'
     r = requests.get(couchbase_host + '/default/' + race_id)
-
+    
+    print '--'
     race = r.json()
 
     users = []
     for user in race['users']:
         r = requests.get(couchbase_host + '/default/' + user['email'])
+        print '----'
         user_metadata = r.json()
 
         del user_metadata['password']
@@ -94,17 +97,21 @@ def get_race(race_id):
                        'data' : user['data'] })
 
     # Get the latest data on all M2X streams.
+    print '2'
     r = requests.get(m2x_host + '/streams', headers=m2x_headers).json()
     streams = {}
     for stream in r['streams']:
         streams[stream['name']] = stream['value']
 
     # Gather M2X info for each racer.
+    print users
     for user in users:
         # Generate the M2X stream name.
         stream_name = user['user']['email'] + '_race' + race_id
 
         # Get statistics for this stream.
+        print '3'
+        print user
         r = requests.get(m2x_host + '/streams/' + stream_name + '/stats', headers=m2x_headers).json()
         
         try:
@@ -116,7 +123,7 @@ def get_race(race_id):
             # Get a sampling of this stream.
             r = requests.get(m2x_host + '/streams/' + stream_name + '/values',
                              headers=m2x_headers,
-                             params={ 'limit' : '20' }).json()
+                             params={ 'limit' : '5' }).json()
             user['sampling'] = r['values']
         except:
             user['stats'] = { 'current' : 0,
