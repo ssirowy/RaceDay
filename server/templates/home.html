@@ -443,6 +443,8 @@
                          currentChart = new Chart(context).Line(data, { datasetStrokeWidth: 4, pointDotRadius: 1 });
                          
                          $('#chart-canvas').show();
+                         $('.list-element').attr('chart', false);
+                         $('#element' + _email).attr('chart', true);
                      }
                  }
              });
@@ -462,7 +464,7 @@
                      if (element.currentSpeed) {
                          $('#element' + element.id + ' .list-current-speed').text(element.sampling[element.sampling.length - 1].value.toFixed(1) + ' mph');
                      }
-                     if ($('#element' + element.id + ' .chart-canvas:visible').length !== 0) {
+                     if ($('#element' + element.id).attr('chart')) {
                          // This user has a chart, so update with the latest data.
                          currentChart.removeData();
                          currentChart.addData([element.sampling[0].value], getTime(new Date(element.sampling[0].timestamp)));
