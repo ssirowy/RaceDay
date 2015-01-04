@@ -8,6 +8,7 @@
 
 #import "Races.h"
 #import "Race.h"
+#import "SmiSdk.h"
 #import <ArcGIS/ArcGIS.h>
 
 static Races* sharedRaces = nil;
@@ -16,6 +17,8 @@ static Races* sharedRaces = nil;
 
 @property (nonatomic, strong) AGSQueryTask* queryTask;
 @property (nonatomic, copy) void (^completion)(NSArray*, NSError*);
+
+@property (nonatomic, strong) SmiResult* result;
 
 @end
 @implementation Races
@@ -26,6 +29,23 @@ static Races* sharedRaces = nil;
     if (self) {
         _credential = [[AGSCredential alloc] initWithUser:@"scottsirowy" password:@"Crowded2000"];
         _url   = [NSURL URLWithString:kRaceServerURL];
+        
+        
+        /*
+        _result = [SmiSdk getSDAuth:kRaceServerURL userId:@"ssirowy" appId:@"RaceDay"];
+        
+        
+        // get sponsored data url
+        NSString* sdUrl =  self.result.url;
+        if(self.result.state == SD_WIFI) {
+            //wifi connection
+        } else if (self.result.state == SD_AVAILABLE) {
+            
+            _url = [NSURL URLWithString:sdUrl];
+            //1. use 'http://s3.amazonaws.com/sdmsg/sponsored/msg.png' logo to display sponsored message
+            //2. use the 'sdUrl' for requesting the content } else if(sr.state == SD_NOT_AVAILABLE) {
+        }   */
+        
     }
     
     return self;
