@@ -80,6 +80,13 @@
               border: 1px solid #5780A6;
               cursor: pointer;
               padding: 5px;
+              position: relative;
+          }
+
+          .list-current-speed {
+              position: absolute;
+              right: 10px;
+              top: 8px;
           }
 
           .list-title {
@@ -110,8 +117,9 @@
                      infoTemplate.setTitle("${name}");
                      infoTemplate.setContent('<b>Distance: </b> ${distance}<br>' +
                                              '<b>Latitude: </b> ${latitude}<br>' +
-                                             '<b>Longitude: </b> ${longitude}<br>');
-
+                                             '<b>Longitude: </b> ${longitude}<br>' +
+                                             '<b>Current speed: </b> ${currentSpeed}<br>' +
+                                             '<b>Average speed: </b> ${averageSpeed}<br>');
                      
                      map = new Map("map", {
                          center: [-118, 34.5],
@@ -199,7 +207,9 @@
                          email: user.user.email,
                          distance: user.data[0].distance,
                          latitude: user.data[0].location.latitude,
-                         longitude: user.data[0].location.longitude
+                         longitude: user.data[0].location.longitude,
+                         currentSpeed: user.stats.current ? user.stats.current.toFixed(1) + ' mph' : '0 mph',
+                         averageSpeed: user.stats.average ? user.stats.average.toFixed(1) + ' mph' : '0 mph'
                      });
                      
                      graphicsLayer.add(user.graphic);
@@ -245,7 +255,7 @@
                  if (window.selectedRaceId) {
                      updateRace(window.selectedRaceId);
                  }
-             }, 1000);
+             }, 3000);
          }
 
          function renderRacesList() {
@@ -295,6 +305,7 @@
                  return {
                      title: user.name,
                      id: index,
+                     currentSpeed: _user.stats.current,
                      callback: function() {
                          var graphicGeometry = _user.graphic.geometry;
                          var infoPoint = new esri.geometry.Point(graphicGeometry.x, 
@@ -338,6 +349,10 @@
                      listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>'
                  } else {
                      listHtml += '<div class="list-detail"></div>'
+                 }
+
+                 if (element.currentSpeed) {
+                     listHtml += '<div class="list-current-speed">' + element.currentSpeed.toFixed(1) + ' mph</div>';
                  }
                  
                  listHtml += '</div>'

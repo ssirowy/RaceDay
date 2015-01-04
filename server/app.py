@@ -86,6 +86,7 @@ def get_race(race_id):
 
     couchbase_host = 'http://104.131.187.45:4984'
     m2x_host = 'http://api-m2x.att.com/v2/devices/22e4f54c8e379e17f89e7adc2ecebf9e'
+    m2x_headers = { 'X-M2X-KEY' : 'f778c23e3d8e5dec33674dd2fa21c5b1' }
 
     r = requests.get(couchbase_host + '/default/' + race_id)
 
@@ -101,8 +102,29 @@ def get_race(race_id):
         users.append({ 'user' : user_metadata,
                        'data' : user['data'] })
 
+    # Get the latest data on all M2X streams.
+    r = requests.get(m2x_host + '/streams', headers=m2x_headers).json()
+    streams = {}
+    for stream in r['streams']:
+        streams[stream['name']] = stream['value']
+
     # Gather M2X info for each racer.
-    
+    for user in users:
+        # Generate the M2X stream name.
+        stream_name = user['user']['email'] + '_race' + race_id
+
+        # Get statistics for this stream.
+        r = requests.get(m2x_host + '/streams/' + stream_name + '/stats').json()
+        
+        try:
+            stats = { 'current' : streams[stream_name],
+                      'max' : float(r['stats']['max']),
+                      'average' : float(r['stats']['avg']) }
+            user['stats'] = stats
+        except:
+            user['stats'] = { 'current' : 0,
+                              'max' : 0,
+                              'average' : 0 }
 
     return jsonify(users=users)
 
