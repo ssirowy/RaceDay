@@ -26,6 +26,17 @@
 		32D9EED81A587E3000998A5B /* Race.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EED71A587E3000998A5B /* Race.m */; };
 		32D9EEDD1A58AF6000998A5B /* RaceMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEDC1A58AF6000998A5B /* RaceMapView.m */; };
 		32D9EEE01A58C70900998A5B /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEDF1A58C70900998A5B /* DetailsViewController.m */; };
+		32D9EEF71A58D53A00998A5B /* M2XClient+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEE41A58D53A00998A5B /* M2XClient+HTTP.m */; };
+		32D9EEF81A58D53A00998A5B /* M2XClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEE61A58D53A00998A5B /* M2XClient.m */; };
+		32D9EEF91A58D53A00998A5B /* M2XDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEE81A58D53A00998A5B /* M2XDevice.m */; };
+		32D9EEFA1A58D53A00998A5B /* M2XDistribution.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEEA1A58D53A00998A5B /* M2XDistribution.m */; };
+		32D9EEFB1A58D53A00998A5B /* M2XKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEEC1A58D53A00998A5B /* M2XKey.m */; };
+		32D9EEFC1A58D53A00998A5B /* M2XResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEEE1A58D53A00998A5B /* M2XResource.m */; };
+		32D9EEFD1A58D53A00998A5B /* M2XResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF01A58D53A00998A5B /* M2XResponse.m */; };
+		32D9EEFE1A58D53A00998A5B /* M2XStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF21A58D53A00998A5B /* M2XStream.m */; };
+		32D9EEFF1A58D53A00998A5B /* M2XTrigger.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF41A58D53A00998A5B /* M2XTrigger.m */; };
+		32D9EF001A58D53A00998A5B /* NSDate+M2X.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EEF61A58D53A00998A5B /* NSDate+M2X.m */; };
+		32D9EF031A58F12700998A5B /* UIColor+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 32D9EF021A58F12700998A5B /* UIColor+Additions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +79,29 @@
 		32D9EEDC1A58AF6000998A5B /* RaceMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RaceMapView.m; sourceTree = "<group>"; };
 		32D9EEDE1A58C70900998A5B /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		32D9EEDF1A58C70900998A5B /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		32D9EEE21A58D53A00998A5B /* M2X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2X.h; sourceTree = "<group>"; };
+		32D9EEE31A58D53A00998A5B /* M2XClient+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "M2XClient+HTTP.h"; sourceTree = "<group>"; };
+		32D9EEE41A58D53A00998A5B /* M2XClient+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "M2XClient+HTTP.m"; sourceTree = "<group>"; };
+		32D9EEE51A58D53A00998A5B /* M2XClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XClient.h; sourceTree = "<group>"; };
+		32D9EEE61A58D53A00998A5B /* M2XClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XClient.m; sourceTree = "<group>"; };
+		32D9EEE71A58D53A00998A5B /* M2XDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XDevice.h; sourceTree = "<group>"; };
+		32D9EEE81A58D53A00998A5B /* M2XDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XDevice.m; sourceTree = "<group>"; };
+		32D9EEE91A58D53A00998A5B /* M2XDistribution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XDistribution.h; sourceTree = "<group>"; };
+		32D9EEEA1A58D53A00998A5B /* M2XDistribution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XDistribution.m; sourceTree = "<group>"; };
+		32D9EEEB1A58D53A00998A5B /* M2XKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XKey.h; sourceTree = "<group>"; };
+		32D9EEEC1A58D53A00998A5B /* M2XKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XKey.m; sourceTree = "<group>"; };
+		32D9EEED1A58D53A00998A5B /* M2XResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XResource.h; sourceTree = "<group>"; };
+		32D9EEEE1A58D53A00998A5B /* M2XResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XResource.m; sourceTree = "<group>"; };
+		32D9EEEF1A58D53A00998A5B /* M2XResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XResponse.h; sourceTree = "<group>"; };
+		32D9EEF01A58D53A00998A5B /* M2XResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XResponse.m; sourceTree = "<group>"; };
+		32D9EEF11A58D53A00998A5B /* M2XStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XStream.h; sourceTree = "<group>"; };
+		32D9EEF21A58D53A00998A5B /* M2XStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XStream.m; sourceTree = "<group>"; };
+		32D9EEF31A58D53A00998A5B /* M2XTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M2XTrigger.h; sourceTree = "<group>"; };
+		32D9EEF41A58D53A00998A5B /* M2XTrigger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M2XTrigger.m; sourceTree = "<group>"; };
+		32D9EEF51A58D53A00998A5B /* NSDate+M2X.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+M2X.h"; sourceTree = "<group>"; };
+		32D9EEF61A58D53A00998A5B /* NSDate+M2X.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+M2X.m"; sourceTree = "<group>"; };
+		32D9EF011A58F12700998A5B /* UIColor+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Additions.h"; sourceTree = "<group>"; };
+		32D9EF021A58F12700998A5B /* UIColor+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Additions.m"; sourceTree = "<group>"; };
 		B000BB9B71ECC88C713660F6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		B78DFDFE183A01252B4EF100 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE07BB706FAFF577EBA72D6F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -115,9 +149,12 @@
 		0F51B7931A58719D00471244 /* Race Day */ = {
 			isa = PBXGroup;
 			children = (
+				32D9EEE11A58D53A00998A5B /* M2x */,
 				32D9EED51A587E1100998A5B /* Models */,
 				0F327E341A587A9A00DDA422 /* APIManager.swift */,
 				0F327E361A587AB400DDA422 /* Constants.swift */,
+				32D9EF011A58F12700998A5B /* UIColor+Additions.h */,
+				32D9EF021A58F12700998A5B /* UIColor+Additions.m */,
 				0F579A3D1A58726B0043D31B /* Race Day-Bridging-Header.h */,
 				0F51B7961A58719D00471244 /* AppDelegate.swift */,
 				0F51B79A1A58719D00471244 /* Main.storyboard */,
@@ -175,6 +212,34 @@
 				32D9EED71A587E3000998A5B /* Race.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		32D9EEE11A58D53A00998A5B /* M2x */ = {
+			isa = PBXGroup;
+			children = (
+				32D9EEE21A58D53A00998A5B /* M2X.h */,
+				32D9EEE31A58D53A00998A5B /* M2XClient+HTTP.h */,
+				32D9EEE41A58D53A00998A5B /* M2XClient+HTTP.m */,
+				32D9EEE51A58D53A00998A5B /* M2XClient.h */,
+				32D9EEE61A58D53A00998A5B /* M2XClient.m */,
+				32D9EEE71A58D53A00998A5B /* M2XDevice.h */,
+				32D9EEE81A58D53A00998A5B /* M2XDevice.m */,
+				32D9EEE91A58D53A00998A5B /* M2XDistribution.h */,
+				32D9EEEA1A58D53A00998A5B /* M2XDistribution.m */,
+				32D9EEEB1A58D53A00998A5B /* M2XKey.h */,
+				32D9EEEC1A58D53A00998A5B /* M2XKey.m */,
+				32D9EEED1A58D53A00998A5B /* M2XResource.h */,
+				32D9EEEE1A58D53A00998A5B /* M2XResource.m */,
+				32D9EEEF1A58D53A00998A5B /* M2XResponse.h */,
+				32D9EEF01A58D53A00998A5B /* M2XResponse.m */,
+				32D9EEF11A58D53A00998A5B /* M2XStream.h */,
+				32D9EEF21A58D53A00998A5B /* M2XStream.m */,
+				32D9EEF31A58D53A00998A5B /* M2XTrigger.h */,
+				32D9EEF41A58D53A00998A5B /* M2XTrigger.m */,
+				32D9EEF51A58D53A00998A5B /* NSDate+M2X.h */,
+				32D9EEF61A58D53A00998A5B /* NSDate+M2X.m */,
+			);
+			path = M2x;
 			sourceTree = "<group>";
 		};
 		9BCAED718C980D035D361D09 /* Pods */ = {
@@ -335,14 +400,25 @@
 				32D9EED81A587E3000998A5B /* Race.m in Sources */,
 				32D9EED41A587D7B00998A5B /* Races.m in Sources */,
 				32D9EEE01A58C70900998A5B /* DetailsViewController.m in Sources */,
+				32D9EF031A58F12700998A5B /* UIColor+Additions.m in Sources */,
 				0F327E3E1A5894DB00DDA422 /* User-extension.swift in Sources */,
+				32D9EEF71A58D53A00998A5B /* M2XClient+HTTP.m in Sources */,
 				0F327E371A587AB400DDA422 /* Constants.swift in Sources */,
 				0F327E421A589DDC00DDA422 /* RaceViewController.swift in Sources */,
+				32D9EEFB1A58D53A00998A5B /* M2XKey.m in Sources */,
+				32D9EEFF1A58D53A00998A5B /* M2XTrigger.m in Sources */,
+				32D9EEFE1A58D53A00998A5B /* M2XStream.m in Sources */,
 				0F327E351A587A9A00DDA422 /* APIManager.swift in Sources */,
+				32D9EF001A58D53A00998A5B /* NSDate+M2X.m in Sources */,
 				32D9EEDD1A58AF6000998A5B /* RaceMapView.m in Sources */,
+				32D9EEFC1A58D53A00998A5B /* M2XResource.m in Sources */,
 				0F579A431A5875EF0043D31B /* MapViewController.m in Sources */,
+				32D9EEF81A58D53A00998A5B /* M2XClient.m in Sources */,
+				32D9EEF91A58D53A00998A5B /* M2XDevice.m in Sources */,
 				0F51B7971A58719D00471244 /* AppDelegate.swift in Sources */,
 				0F327E401A58962F00DDA422 /* RacesViewController.swift in Sources */,
+				32D9EEFD1A58D53A00998A5B /* M2XResponse.m in Sources */,
+				32D9EEFA1A58D53A00998A5B /* M2XDistribution.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
