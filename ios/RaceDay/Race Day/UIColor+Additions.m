@@ -16,6 +16,16 @@ alpha:       1.0]
 
 @implementation UIColor (Additions)
 
++ (UIColor*)darkGreenColor
+{
+    return UIColorFromRGB(0x738033);
+}
+
++ (UIColor*)darkRedColor
+{
+    return UIColorFromRGB(0xBB0404);
+}
+
 + (UIColor*)darkOrange
 {
     return UIColorFromRGB(0xAB4600);

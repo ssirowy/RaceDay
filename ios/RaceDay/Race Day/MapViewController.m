@@ -12,6 +12,7 @@
 #import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
 #import "DetailsViewController.h"
+#import "UIColor+Additions.h"
 
 #import "M2X.h"
 
@@ -26,6 +27,8 @@
 
 @property (nonatomic, strong) AGSGraphicsLayer* geofenceLayer;
 @property (nonatomic, assign) BOOL showingGeofences;
+
+@property (nonatomic, strong) AGSGraphicsLayer* startStopLayer;
 
 @property (nonatomic, assign) BOOL needToLoadRace;
 
@@ -61,6 +64,7 @@
                                                        credential:races.credential];
     
     [self.mapView addMapLayer:lines];
+    [self.mapView addMapLayer:self.geofenceLayer];
     
     
     if (self.small) {
@@ -107,11 +111,7 @@
         [me expandByFactor:self.small ? 1.8 : 1.4];
         [self.mapView zoomToEnvelope:me animated:YES];
         
-        /*
-        if (race) {
-            _showingGeofences = NO;
-            [self toggleGeofences];
-        }  */
+        [self addStartStopLayer];
     }
     else {
         self.needToLoadRace = YES;
@@ -120,44 +120,37 @@
     self.title = race.title;
 }
 
-- (void)toggleGeofences
+- (void)addStartStopLayer
 {
-    [self.mapView removeMapLayer:self.geofenceLayer];
+    [self.geofenceLayer removeAllGraphics];
     
-    // If not showing, add layer for visualization purposes
-    if (!self.showingGeofences) {
-        
-        AGSSimpleLineSymbol* sls1 = [AGSSimpleLineSymbol simpleLineSymbol];
-        sls1.color = [UIColor blueColor];
-        
-        AGSSimpleLineSymbol* sls2 = [AGSSimpleLineSymbol simpleLineSymbol];
-        sls2.color = [UIColor blueColor];
-        
-        
-        // Add geofences to map
-        AGSSimpleFillSymbol* sfs1 = [AGSSimpleFillSymbol simpleFillSymbol];
-        sfs1.color = [[UIColor blueColor] colorWithAlphaComponent:0.2];
-        sfs1.outline = sls1;
-        
-        AGSSimpleFillSymbol* sfs2 = [AGSSimpleFillSymbol simpleFillSymbol];
-        sfs2.color = [[UIColor blueColor] colorWithAlphaComponent:0.2];
-        sfs2.outline = sls2;
-        
-        AGSGraphic* fence1 = [AGSGraphic graphicWithGeometry:self.currentRace.startRaceGeofence
-                                                      symbol:sfs1
-                                                  attributes:nil];
-        
-        AGSGraphic* fence2 = [AGSGraphic graphicWithGeometry:self.currentRace.endRaceGeofence
-                                                      symbol:sfs2
-                                                  attributes:nil];
-        
-        [self.geofenceLayer removeAllGraphics];
-        [self.geofenceLayer addGraphics:@[fence1, fence2]];
-        
-        [self.mapView addMapLayer:self.geofenceLayer];
-    }
+    AGSSimpleLineSymbol* startLine = [AGSSimpleLineSymbol simpleLineSymbol];
+    startLine.color = [UIColor darkGreenColor];
     
-    _showingGeofences = !_showingGeofences;
+    AGSSimpleLineSymbol* finishLine = [AGSSimpleLineSymbol simpleLineSymbol];
+    finishLine.color = [UIColor darkRedColor];
+    
+    // Add geofences to map
+    AGSSimpleFillSymbol* startSymbol = [AGSSimpleFillSymbol simpleFillSymbol];
+    startSymbol.color = [[UIColor darkGreenColor] colorWithAlphaComponent:0.5];
+    startSymbol.outline = startLine;
+    
+    AGSSimpleFillSymbol* finishSymbol = [AGSSimpleFillSymbol simpleFillSymbol];
+    finishSymbol.color = [[UIColor darkRedColor] colorWithAlphaComponent:0.5];
+    finishSymbol.outline = finishLine;
+    
+    AGSGraphic* fence1 = [AGSGraphic graphicWithGeometry:self.currentRace.startRaceGeofence
+                                                  symbol:startSymbol
+                                              attributes:nil];
+    
+    AGSGraphic* fence2 = [AGSGraphic graphicWithGeometry:self.currentRace.endRaceGeofence
+                                                  symbol:finishSymbol
+                                              attributes:nil];
+    
+    [self.geofenceLayer removeAllGraphics];
+    [self.geofenceLayer addGraphics:@[fence1, fence2]];
+    
+    [self.mapView addMapLayer:self.geofenceLayer];
 }
 
 @end
