@@ -12,6 +12,8 @@
 
 @interface MapViewController : UIViewController
 
+@property (nonatomic, assign) BOOL small;
+
 - (void)showRace:(Race*)race;
 
 @end

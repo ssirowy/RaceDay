@@ -15,6 +15,9 @@
 
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, assign) NSTimeInterval startTime;
+@property (nonatomic, retain) UIPageViewController* pageViewController;
+@property (nonatomic, retain) MapViewController* mapPage;
+@property (nonatomic, retain) UIViewController* graphPage;
 
 @end
 
@@ -25,11 +28,50 @@
     
     self.timeLabel.text = @"";
     self.distanceLabel.text = @"";
+    
+    self.mapPage = [self.storyboard instantiateViewControllerWithIdentifier:@"mapViewController"];
+
+    [self.mapPage showRace:self.race];
+    self.mapPage.small = true;
+    
+    self.graphPage = [self.storyboard instantiateViewControllerWithIdentifier:@"graphViewController"];
+    
+    [self.pageViewController setViewControllers:@[self.mapPage] direction:UIPageViewControllerNavigationDirectionForward animated:false completion:NULL];
+    
+    
+}
+
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    if (viewController == self.mapPage) {
+        return NULL;
+    } else {
+        return self.mapPage;
+    }
+}
+
+- (UIViewController*)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    
+    if (viewController == self.graphPage) {
+        return NULL;
+    } else {
+        return self.graphPage;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"embedSegue"]) {
+        self.pageViewController = segue.destinationViewController;
+        self.pageViewController.dataSource = self;
+        self.pageViewController.delegate = self;
+    }
 }
 
 - (void)startTimer

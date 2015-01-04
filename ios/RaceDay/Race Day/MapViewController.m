@@ -11,6 +11,7 @@
 #import "Race.h"
 #import "RaceMapView.h"
 #import <ArcGIS/ArcGIS.h>
+#import "DetailsViewController.h"
 
 #import "M2X.h"
 
@@ -38,7 +39,7 @@
     
     _mapView = [RaceMapView sharedMapView];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.mapView.frame = self.view.bounds;
+    self.mapView.frame = CGRectMake(self.view.bounds.origin.x, 64, self.view.bounds.size.width, self.view.bounds.size.height-64);
     self.mapView.layerDelegate = self;
     
     [self.view addSubview:self.mapView];
@@ -46,7 +47,7 @@
     UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     button.backgroundColor = [UIColor whiteColor];
     [button setTitle:@"Start race" forState:UIControlStateNormal];
-    button.frame = CGRectMake(0, 0, 120, 40);
+    button.frame = CGRectMake(0, 64, 120, 40);
     [button addTarget:self action:@selector(startRace) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
@@ -56,11 +57,22 @@
     [self.mapView addMapLayer:tiledLayer withName:@"Basemap"];
     
     _geofenceLayer = [AGSGraphicsLayer graphicsLayer];
+    
+    if (self.small) {
+        self.mapView.userInteractionEnabled = false;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    DetailsViewController* dvc = segue.destinationViewController;
+    dvc.race = sender;
 }
      
 - (void)startRace
 {
-    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedFast];
+    [self.currentRace startRaceSimulatedSpeed:RaceSimulatedSpeedSlow];
+    [self performSegueWithIdentifier:@"showDetailsSegue" sender:self.currentRace];
 }
 
 - (void)viewDidAppear:(BOOL)animated

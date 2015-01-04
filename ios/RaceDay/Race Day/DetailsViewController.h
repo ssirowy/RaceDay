@@ -10,7 +10,7 @@
 
 @class Race;
 
-@interface DetailsViewController : UIViewController
+@interface DetailsViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (nonatomic, strong) Race* race;
 
