@@ -24,12 +24,17 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        hud.color = navy
         User.storedUser().getMyRaces({ races, err in
             self._myRaces = races
             
             User.storedUser().getNearbyRaces({ races, err in
                 self._nearRaces = races
                 self.racesTableView.reloadData()
+                
+                hud.hide(true)
             })
         })
     }

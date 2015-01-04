@@ -397,7 +397,7 @@
                         <viewControllerLayoutGuide type="top" id="sum-1y-npC"/>
                         <viewControllerLayoutGuide type="bottom" id="6cn-vw-BaZ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="kGx-QM-ArJ">
+                    <view key="view" contentMode="scaleToFill" horizontalHuggingPriority="270" verticalHuggingPriority="270" id="kGx-QM-ArJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="270"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
