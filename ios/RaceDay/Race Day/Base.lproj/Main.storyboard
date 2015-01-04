@@ -7,7 +7,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -67,7 +67,7 @@
         <!--Races View Controller-->
         <scene sceneID="ghP-hO-d74">
             <objects>
-                <viewController id="iXT-hG-b2v" customClass="RacesViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="iXT-hG-b2v" customClass="RacesViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bu9-rH-KGt"/>
                         <viewControllerLayoutGuide type="bottom" id="oo5-ue-fYb"/>
@@ -166,7 +166,7 @@
         <!--Join Race View Controller-->
         <scene sceneID="FPv-fj-DEc">
             <objects>
-                <viewController id="gAA-7l-eTT" customClass="JoinRaceViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gAA-7l-eTT" customClass="JoinRaceViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UpQ-5n-VNg"/>
                         <viewControllerLayoutGuide type="bottom" id="CrV-3m-maP"/>
@@ -204,7 +204,7 @@
         <!--Race View Controller-->
         <scene sceneID="auk-ky-F6Y">
             <objects>
-                <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="Race_Day" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5kS-bk-nCs" customClass="RaceViewController" customModule="RaceDay" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Iv-rv-okS"/>
                         <viewControllerLayoutGuide type="bottom" id="bf8-0C-La6"/>

@@ -8,6 +8,8 @@
 
 #import "DetailsViewController.h"
 #import "Race.h"
+#import <CouchbaseLite/CouchbaseLite.h>
+#import <RaceDay-Swift.h>
 
 @interface DetailsViewController ()
 
@@ -37,6 +39,8 @@
     [self updateTime];
     
     [self updateDistance];
+    
+    [self updateCouch];
 }
 
 - (void)updateTime
@@ -65,6 +69,42 @@
     self.distanceLabel.text = [NSString stringWithFormat:@"%.2f miles. %.1f percent complete", self.race.distanceCovered, self.race.percentageComplete];
     
     [self performSelector:@selector(updateDistance) withObject:self afterDelay:1.0];
+}
+
+- (void)updateCouch
+{
+    if (!self.running) return;
+    
+    AppDelegate* delegate = [UIApplication sharedApplication].delegate;
+    CBLDatabase* db = delegate.database;
+    
+    CBLDocument* doc = [db documentWithID: self.race.raceID.stringValue];
+    NSMutableDictionary* p = CFBridgingRelease(CFPropertyListCreateDeepCopy(kCFAllocatorDefault, (CFDictionaryRef)doc.properties, kCFPropertyListMutableContainers));
+    NSMutableArray* users = p[@"users"];
+    
+    for (int i = 0; i < users.count; i++) {
+        NSMutableDictionary* user = users[i];
+        if ([[[User storedUser] email] isEqualToString:user[@"email"]]) {
+            NSMutableArray* evts = user[@"data"];
+            
+            NSDictionary* event = @{
+                                    @"status": @"update",
+                                    @"timestamp": [[NSNumber alloc] initWithDouble:[[[NSDate alloc] init] timeIntervalSince1970]],
+                                    @"location": @{
+                                            @"latitude": [[NSNumber alloc] initWithDouble:self.race.currentLocation.y],
+                                            @"longitude": [[NSNumber alloc] initWithDouble:self.race.currentLocation.x]
+                                            }
+                                    };
+            
+            [evts addObject:event];
+            NSError* error;
+            if (![doc putProperties: p error: &error]) {
+            }
+        }
+    }
+    
+    
+    [self performSelector:@selector(updateCouch) withObject:self afterDelay:1];
 }
 
 - (void)stopTimer
