@@ -143,7 +143,7 @@
             bool inserted = false;
             while (j < places.count) {
                 NSNumber* place = places[j];
-                if (place > distance) {
+                if (place.doubleValue > distance.doubleValue) {
                     [places insertObject:distance atIndex:j];
                     inserted = true;
                     break;
@@ -156,7 +156,14 @@
         }
     }
     
-    NSUInteger place = [places indexOfObject:userDistance];
+    int place;
+    for(place = 0; place < places.count; place++) {
+        if (places[place] == userDistance) {
+            break;
+        }
+    }
+    
+    place = places.count - place;
     
     if (!place || place == 1) {
         self.overallLabel.text = @"1st";
