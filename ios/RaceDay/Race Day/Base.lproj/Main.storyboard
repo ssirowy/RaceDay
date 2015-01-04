@@ -35,7 +35,7 @@
                                     <constraint firstAttribute="height" constant="30" id="XS5-QO-o06"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2p-Ti-22w" customClass="BorderedButton" customModule="RaceDay" customModuleProvider="target">
                                 <rect key="frame" x="234" y="175" width="70" height="44"/>
