@@ -10,6 +10,7 @@ import UIKit
 
 class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var sdata: UIImageView!
     @IBOutlet weak var racesTableView: UITableView!
     var _myRaces: [Race] = []
     var _nearRaces: [Race] = []
@@ -25,6 +26,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        self.sdata.hidden = !Races.sharedRaces().usingSponsoredData;
         let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         hud.color = navy
         User.storedUser().getMyRaces({ races, err in
@@ -34,6 +36,7 @@ class RacesViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 self._nearRaces = races
                 self.racesTableView.reloadData()
                 
+                self.sdata.hidden = !Races.sharedRaces().usingSponsoredData;
                 hud.hide(true)
             })
         })

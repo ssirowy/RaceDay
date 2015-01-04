@@ -179,11 +179,20 @@
                                     <outlet property="delegate" destination="iXT-hG-b2v" id="ZVl-qg-hlz"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sponsored_data" translatesAutoresizingMaskIntoConstraints="NO" id="1X6-Nu-XPH">
+                                <rect key="frame" x="90" y="539" width="230" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="29" id="dC9-YD-d9M"/>
+                                    <constraint firstAttribute="width" constant="230" id="tYI-fS-h8e"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oo5-ue-fYb" firstAttribute="top" secondItem="Uh8-FC-p2h" secondAttribute="bottom" id="AoN-ar-Hnl"/>
                             <constraint firstItem="Uh8-FC-p2h" firstAttribute="leading" secondItem="89U-IU-rZR" secondAttribute="leading" id="KFA-0h-Q4U"/>
+                            <constraint firstItem="oo5-ue-fYb" firstAttribute="top" secondItem="1X6-Nu-XPH" secondAttribute="bottom" id="QRD-9i-dsA"/>
+                            <constraint firstAttribute="trailing" secondItem="1X6-Nu-XPH" secondAttribute="trailing" id="XjT-g6-Pnn"/>
                             <constraint firstItem="Uh8-FC-p2h" firstAttribute="top" secondItem="bu9-rH-KGt" secondAttribute="bottom" id="bRP-zL-Ejb"/>
                             <constraint firstAttribute="trailing" secondItem="Uh8-FC-p2h" secondAttribute="trailing" id="trN-wy-0Fe"/>
                         </constraints>
@@ -191,6 +200,7 @@
                     <navigationItem key="navigationItem" id="cA6-Tb-f4g"/>
                     <connections>
                         <outlet property="racesTableView" destination="Uh8-FC-p2h" id="fwB-0V-JcK"/>
+                        <outlet property="sdata" destination="1X6-Nu-XPH" id="mK5-Ld-Oqj"/>
                         <segue destination="gAA-7l-eTT" kind="presentation" identifier="joinRaceSegue" id="X2s-lp-ELl"/>
                         <segue destination="DoL-IV-sCJ" kind="show" identifier="mapSegue" id="LzJ-ne-tn5"/>
                     </connections>
@@ -504,6 +514,7 @@
     </scenes>
     <resources>
         <image name="launch-screen" width="320" height="568"/>
+        <image name="sponsored_data" width="230" height="29"/>
     </resources>
     <color key="tintColor" red="0.3411764706" green="0.43137254899999999" blue="0.56862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
