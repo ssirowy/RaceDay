@@ -367,9 +367,24 @@
                  var _index = index;
                  var _email = user.user.email;
                  user = user.user;
+                 var birthdate = new Date(user.birthdate * 1000);
+                 var age = (new Date()).getFullYear() - birthdate.getFullYear() - 1;
+                 
+                 if (age < 21) {
+                     age += ' <span style="font-size: 12px; font-style: italic; color: gray;">(Childrens age group)</span>';
+                 } else if (age >= 21 && age <= 25) {
+                     age += ' <span style="font-size: 12px; font-style: italic; color: gray;">(21 - 25 age group)</span>';
+                 } else if (age > 25 && age < 35) {
+                     age += ' <span style="font-size: 12px; font-style: italic; color: gray;">(26 - 34 age group)</span>';
+                 } else {
+                     age += ' <span style="font-size: 12px; font-style: italic; color: gray;">(Seniors age group)</span>';
+                 }
+
                  return {
                      title: user.name,
                      id: user.email,
+                     detailLabel: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Age',
+                     detail: age,
                      currentSpeed: _user.stats.current,
                      sampling: _user.sampling,
                      callback: function() {
