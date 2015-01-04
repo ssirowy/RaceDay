@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Race.h"
 
 @interface GraphViewController : UIViewController
+
+@property (nonatomic, strong) Race* race;
 
 @end

@@ -61,6 +61,8 @@
         _totalDistance = (lengthInMeters * kFeetPerMeter)/kFeetPerMile;
         
         _raceLine = (AGSPolyline*)race.geometry;
+        
+        _dataPoints = [NSMutableArray array];
     }
     
     return self;
@@ -276,13 +278,17 @@
     NSDate *now = [NSDate date];
     NSString *iso8601String = [dateFormatter stringFromDate:now];
     NSLog(@"%@", iso8601String);
-        
-    [self.stream updateValue:[self.speedDataSource nextSimulatedSpeed]
+    
+    NSNumber* number = [self.speedDataSource nextSimulatedSpeed];
+    [self.stream updateValue:number
                    timestamp:iso8601String
            completionHandler:^(M2XResponse* response){
                NSLog(@"Posted something");
            }];
-    
+
+    [self.dataPoints addObject:number];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kM2XDataPointsChanged object:self];
+
     [self performSelector:@selector(updateM2XStream) withObject:nil afterDelay:4.0];
 }
 

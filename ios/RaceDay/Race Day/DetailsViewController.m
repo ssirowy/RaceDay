@@ -8,6 +8,7 @@
 
 #import "DetailsViewController.h"
 #import "Race.h"
+#import "GraphViewController.h"
 #import <CouchbaseLite/CouchbaseLite.h>
 #import <RaceDay-Swift.h>
 
@@ -17,7 +18,7 @@
 @property (nonatomic, assign) NSTimeInterval startTime;
 @property (nonatomic, retain) UIPageViewController* pageViewController;
 @property (nonatomic, retain) MapViewController* mapPage;
-@property (nonatomic, retain) UIViewController* graphPage;
+@property (nonatomic, retain) GraphViewController* graphPage;
 
 @end
 
@@ -34,6 +35,7 @@
     self.mapPage.small = true;
     
     self.graphPage = [self.storyboard instantiateViewControllerWithIdentifier:@"graphViewController"];
+    self.graphPage.race = self.race;
     
     [self.pageViewController setViewControllers:@[self.mapPage] direction:UIPageViewControllerNavigationDirectionForward animated:false completion:NULL];
     

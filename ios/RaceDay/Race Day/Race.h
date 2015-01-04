@@ -11,6 +11,8 @@
 #define kRaceStartedNotification @"kRaceStartedNotification"
 #define kRaceEndedNotification @"kRaceEndedNotification"
 
+#define kM2XDataPointsChanged @"kM2XDataPointsChanged"
+
 @class AGSGraphic;
 @class AGSGeometry;
 @class AGSPoint;
@@ -42,6 +44,8 @@ typedef enum {
 
 @property (nonatomic, strong) AGSGeometry* startRaceGeofence;
 @property (nonatomic, strong) AGSGeometry* endRaceGeofence;
+
+@property (nonatomic, strong) NSMutableArray* dataPoints;
 
 // miles
 @property (nonatomic, assign) double totalDistance;
