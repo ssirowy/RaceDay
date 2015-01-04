@@ -288,7 +288,7 @@
                  if (window.selectedRaceId) {
                      updateRace(window.selectedRaceId);
                  }
-             }, 20000);
+             }, 1000);
 
              $('#race-title').text(raceGraphic.attributes.title);
              $('#app-title').hide();
@@ -338,11 +338,13 @@
              var userElements = users.map(function(user, index) {
                  var _user = user;
                  var _index = index;
+                 var _email = user.user.email;
                  user = user.user;
                  return {
                      title: user.name,
-                     id: index,
+                     id: user.email,
                      currentSpeed: _user.stats.current,
+                     sampling: _user.sampling,
                      callback: function() {
                          var graphicGeometry = _user.graphic.geometry;
                          var infoPoint = new esri.geometry.Point(graphicGeometry.x, 
@@ -363,10 +365,9 @@
                              return;
                          }
 
-                         var labels = _user.sampling.map(function(sample) {
-                             var date = new Date(sample.timestamp);
-                             var hours = date.getHours();
-                             var minutes = date.getMinutes();
+                         window.getTime = function(timestamp) {
+                             var hours = timestamp.getHours();
+                             var minutes = timestamp.getMinutes();
                              var suffix = '';
                              if (hours === 0) {
                                  hours = '12';
@@ -386,11 +387,26 @@
                              }
                              
                              return hours + ':' + minutes;
+                         }
+
+                         var labels = _user.sampling.map(function(sample) {
+                             var date = new Date(sample.timestamp);
+                             return getTime(date);
                          });
 
                          var data = _user.sampling.map(function(sample) {
                              return sample.value;
                          });
+
+                         if (data.length < 20) {
+                             while (data.length < 20) {
+                                 data.push(0);
+                                 labels.push('-');
+                             }
+                         }
+
+                         data.reverse();
+                         labels.reverse();
                          
                          var data = {
                              labels: labels,
@@ -408,16 +424,38 @@
                              ]
                          };
 
-                         var context = $('#element' + _index + ' .chart-canvas')[0].getContext('2d');
-                         var chart = new Chart(context).Line(data, {});
-
+                         var context = $('#element' + _email + ' .chart-canvas')[0].getContext('2d');
+                         currentChart = new Chart(context).Line(data, {});
                          
-                         $('#element' + _index + ' .chart-canvas').show();
+                         $('#element' + _email + ' .chart-canvas').show();
                      }
                  }
              });
+
+             // Check if the user list already exists. If so, manipulate it directly.
+             var usersExist = false;
+             if (userElements.length !== 0) {
+                 var email = userElements[0].id;
+                 if ($('#element' + email).length !== 0) {
+                     usersExist = true;
+                 }
+             }
              
-             renderList(userElements, 'Racers', true, true);
+             if (usersExist) {
+                 // Update each users's values manually.
+                 userElements.forEach(function(element) {
+                     if (element.currentSpeed) {
+                         $('#element' + element.id + ' .list-current-speed').text(element.currentSpeed.toFixed(1) + ' mph');
+                     }
+                     if ($('#element' + element.id + ' .chart-canvas:visible').length !== 0) {
+                         // This user has a chart, so update with the latest data.
+                         currentChart.removeData();
+                         currentChart.addData([element.sampling[element.sampling.length - 1].value], getTime(new Date(element.sampling[element.sampling.length - 1].timestamp)));
+                     }
+                 });
+             } else {
+                 renderList(userElements, 'Racers', true, true);
+             }
          }
 
          /*
@@ -434,17 +472,17 @@
              // Render a list of all races.
              var listHtml = '';
              elements.forEach(function(element, index) {
-                 listHtml += '<div class="list-item" id="element' + element.id + '">'
+                 listHtml += '<div class="list-item" id="element' + element.id + '">';
 
                  if (numbered) {
                      listHtml += '<div class="list-number">' + (index + 1) + '</div>';
                  }
                  
-                 listHtml += '<div class="list-title">' + element.title + '</div>'
+                 listHtml += '<div class="list-title">' + element.title + '</div>';
                  if (element.detail) {
-                     listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>'
+                     listHtml += '<div class="list-detail">' + element.detailLabel + ': ' + element.detail + '</div>';
                  } else {
-                     listHtml += '<div class="list-detail"></div>'
+                     listHtml += '<div class="list-detail"></div>';
                  }
 
                  if (element.currentSpeed) {
