@@ -179,7 +179,7 @@
                                     <outlet property="delegate" destination="iXT-hG-b2v" id="ZVl-qg-hlz"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sponsored_data" translatesAutoresizingMaskIntoConstraints="NO" id="1X6-Nu-XPH">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sponsored_data" translatesAutoresizingMaskIntoConstraints="NO" id="1X6-Nu-XPH">
                                 <rect key="frame" x="90" y="539" width="230" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="dC9-YD-d9M"/>
