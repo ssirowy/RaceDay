@@ -11,6 +11,7 @@
 #import <ArcGIS/ArcGIS.h>
 #import "M2X.h"
 #import "User.h"
+#import "SpeedDataSource.h"
 
 #define kFeetPerMeter 3.28084
 #define kFeetPerMile  5280
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) M2XStream* stream;
 
 @property (nonatomic, assign) BOOL racing;
+
+@property (nonatomic, strong) SpeedDataSource* speedDataSource;
 
 @end
 
@@ -128,6 +131,8 @@
         default:
             break;
     }
+    
+    _speedDataSource = [[SpeedDataSource alloc] initWithSimulateSpeed:speed];
     
     AGSPolyline* densifiedLine = (AGSPolyline*)[engine densifyGeometry:self.raceLine withMaxSegmentLength:maxLength];
     densifiedLine = (AGSPolyline*)[engine projectGeometry:densifiedLine toSpatialReference:[AGSSpatialReference wgs84SpatialReference]];
@@ -271,15 +276,8 @@
     NSDate *now = [NSDate date];
     NSString *iso8601String = [dateFormatter stringFromDate:now];
     NSLog(@"%@", iso8601String);
-    
-    
-    float low = 7.4;
-    float high = 8.7;
-    float diff = high - low;
-    CGFloat value = (((float) rand() / RAND_MAX) * diff) + low;
-    NSLog(@"%f", value);
-    
-    [self.stream updateValue:[NSNumber numberWithFloat:value]
+        
+    [self.stream updateValue:[self.speedDataSource nextSimulatedSpeed]
                    timestamp:iso8601String
            completionHandler:^(M2XResponse* response){
                NSLog(@"Posted something");
